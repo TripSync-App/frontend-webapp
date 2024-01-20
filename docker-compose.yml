@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  frontend:
+    container_name: "frontend-webapp"
+    build:
+      context: "."
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./pages:/app/pages
+      - ./public:/app/public
+      - ./styles:/app/styles
+
+networks:
+  traveling:
+    external: True
