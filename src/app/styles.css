@@ -1,0 +1,9 @@
+#Sidebar {
+    z-index: 0;
+}
+#Banner {
+    z-index: 1;
+}
+#Button {
+    z-index: 1;
+}
