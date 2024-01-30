@@ -1,10 +1,10 @@
 PHONY: stop remove build up
 
 stop:
-	docker stop frontend
+	docker stop frontend-webapp
 
 remove:
-	docker remove frontend
+	docker remove frontend-webapp
 
 build:
 	docker compose build --no-cache
