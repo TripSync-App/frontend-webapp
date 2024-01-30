@@ -7,9 +7,12 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./pages:/app/pages
       - ./public:/app/public
-      - ./styles:/app/styles
+      - ./src:/app/src
+      - ./jsconfig.json:/app/jsconfig.json
+      - ./next.config.mjs:/app/next.config.mjs
+      - ./postcss.config.js:/app/postcss.config.js
+      - ./tailwind.config.js:/app/tailwind.config.js
 
 networks:
   traveling:
