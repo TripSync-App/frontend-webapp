@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import CreateAccount from "./CreateAccount";
+import Snackbar from "@mui/material/Snackbar";
 import Image from "next/image";
 import logo from "../../../public/TS_LOGO.png";
 import "./styles.css";
@@ -14,6 +15,20 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [createUser, setCreateUser] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const updateOpen = (state) => {
+    setOpen(state);
+  };
+
+  const setSnackbarMessage = (message) => {
+    setMessage(message);
+  };
+
+  const updateCreateUser = (val) => {
+    setCreateUser(val);
+  };
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -63,7 +78,11 @@ const Login = () => {
           <Image src={logo} className="w-[60%]"></Image>
         </div>
         {createUser ? (
-          <CreateAccount />
+          <CreateAccount
+            openSnackbar={setOpen}
+            setSnackbarMessage={setMessage}
+            setCreateUser={updateCreateUser}
+          />
         ) : (
           <div className="form flex flex-row justify-center mb-[20%]">
             <form className="flex flex-col" onSubmit={handleSubmit}>
@@ -108,6 +127,16 @@ const Login = () => {
           </div>
         )}
       </div>
+      <Snackbar
+        open={open}
+        message={message}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+      />
     </div>
   );
 };
