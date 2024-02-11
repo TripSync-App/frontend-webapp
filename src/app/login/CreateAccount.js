@@ -3,7 +3,12 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
-const CreateAccount = ({ openSnackbar, setSnackbarMessage, setCreateUser }) => {
+const CreateAccount = ({
+  openSnackbar,
+  setSnackbarMessage,
+  setCreateUser,
+  setSeverity,
+}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -37,11 +42,13 @@ const CreateAccount = ({ openSnackbar, setSnackbarMessage, setCreateUser }) => {
         const result = await response.json();
         setCreateUser(false);
         openSnackbar(true);
+        setSeverity("success");
         setSnackbarMessage("Wow you made an account!");
       } else {
         console.error("Response status:", response.status);
         setCreateUser(false);
         openSnackbar(true);
+        setSeverity("error");
         setSnackbarMessage("Username already taken!");
       }
     } catch (error) {
@@ -68,7 +75,7 @@ const CreateAccount = ({ openSnackbar, setSnackbarMessage, setCreateUser }) => {
             required
           ></TextField>
         </div>
-        <div className="account flex justify-center space-x-4 w-[100%]">
+        <div className="account flex justify-center mt-[1vh] space-x-4 w-[100%]">
           <TextField
             className={"mt-[1vh] mb-[1vh] w-[45%]"}
             label="Username"

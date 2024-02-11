@@ -1,13 +1,14 @@
 "use client";
 import React from "react";
 import { useState } from "react";
+import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import CreateAccount from "./CreateAccount";
 import Snackbar from "@mui/material/Snackbar";
 import Image from "next/image";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import logo from "../../../public/TS_LOGO.png";
 import "./styles.css";
-
 import { useRouter } from "next/navigation";
 
 const Login = () => {
@@ -17,6 +18,8 @@ const Login = () => {
   const [createUser, setCreateUser] = useState(false);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [invalid, setInvalid] = useState(false);
+  const [severity, setSeverity] = useState("");
 
   const updateOpen = (state) => {
     setOpen(state);
@@ -26,16 +29,22 @@ const Login = () => {
     setMessage(message);
   };
 
+  const setSnackbarSeverity = (val) => {
+    setSeverity(val);
+  };
+
   const updateCreateUser = (val) => {
     setCreateUser(val);
   };
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
+    setInvalid(false);
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    setInvalid(false);
   };
 
   const handleSubmit = async (e) => {
@@ -62,6 +71,7 @@ const Login = () => {
         router.push("/");
       } else {
         console.error("Response status:", response.status);
+        setInvalid(true);
       }
     } catch (error) {
       console.error(error);
@@ -73,7 +83,20 @@ const Login = () => {
       id="login-wrapper"
       className="login-wrapper flex justify-center absolute  min-h-[100vh] min-w-[100vw]"
     >
-      <div className="login flex flex-col justify-center bg-white/75 rounded w-[20%] h-[50%]">
+      <div className="login flex flex-col bg-white/50 rounded w-[20%] h-[50%]">
+        {createUser ? (
+          <button
+            className="w-[5%]"
+            onClick={() => {
+              setCreateUser(false);
+            }}
+          >
+            <ArrowBackIcon
+              className={"m-[1%] text-black hover:text-white"}
+              sx={{ position: "relative", fontSize: "200%" }}
+            />
+          </button>
+        ) : null}
         <div className="image-wrapper flex justify-center  w-[100%]">
           <Image src={logo} className="w-[60%]"></Image>
         </div>
@@ -82,6 +105,7 @@ const Login = () => {
             openSnackbar={setOpen}
             setSnackbarMessage={setMessage}
             setCreateUser={updateCreateUser}
+            setSeverity={setSeverity}
           />
         ) : (
           <div className="form flex flex-row justify-center mb-[20%]">
@@ -102,6 +126,11 @@ const Login = () => {
                 onChange={handlePasswordChange}
                 placeholder="Password"
               />
+              {invalid && username && password ? (
+                <p className="mt-[0.5vh] p-[0.5%] text-white bg-red-500 rounded bold">
+                  Invalid username or password
+                </p>
+              ) : null}
               <Button
                 id="login-button"
                 className={"bg-logoBlue"}
@@ -118,7 +147,7 @@ const Login = () => {
                   }}
                   className="text-center w-[100%]"
                 >
-                  <span className="text-center text-black">
+                  <span className="p-[1%] text-center text-black hover:bg-logoBlue hover:text-white hover:rounded">
                     Create an account
                   </span>
                 </button>
@@ -129,14 +158,21 @@ const Login = () => {
       </div>
       <Snackbar
         open={open}
-        message={message}
         anchorOrigin={{
           vertical: "top",
           horizontal: "center",
         }}
         autoHideDuration={6000}
-        onClose={() => setOpen(false)}
-      />
+      >
+        <Alert
+          onClose={() => setOpen(false)}
+          variant="filled"
+          sx={{ width: "100%" }}
+          severity={severity}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
