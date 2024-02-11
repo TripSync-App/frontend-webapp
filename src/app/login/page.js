@@ -4,6 +4,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import Image from "next/image";
 import logo from "../../../public/TS_LOGO.png";
+import "../styles.css";
 
 import { useRouter } from "next/navigation";
 
@@ -53,35 +54,35 @@ const Login = () => {
   return (
     <div
       id="login-wrapper"
-      className="login-wrapper flex justify-center absolute top-[50%] left-[50%]"
+      className="login-wrapper flex justify-center absolute  min-h-[100vh] min-w-[100vw]"
     >
-      <div className="login flex flex-col justify-center">
-        <h1 className="text-center">Login Page</h1>
-        <div className="image-wrapper flex justify-center w-[100%]">
-          <Image src={logo} className="w-[10vw]"></Image>
+      <div className="login flex flex-col justify-center bg-white/75 rounded w-[20%] h-[50%]">
+        <div className="image-wrapper flex justify-center  w-[100%]">
+          <Image src={logo} className="w-[20vw]"></Image>
         </div>
-        <div className="form flex flex-row">
+        <div className="form flex flex-row justify-center mb-[20%]">
           <form className="flex flex-col" onSubmit={handleSubmit}>
-            <label>
-              Username:
-              <input
-                className="w-[100%] text-black"
-                type="text"
-                name="username"
-                onChange={handleUsernameChange}
-              />
-            </label>
-            <label>
-              Password:
-              <input
-                className="w-[100%] text-black"
-                type="text"
-                name="password"
-                onChange={handlePasswordChange}
-              />
-            </label>
-            <Button className="mt-[1vh]" type="submit" variant="contained">
-              Submit
+            <input
+              placeholder="Username"
+              className="w-[100%] mb-[1vh] text-black border border-black"
+              type="text"
+              name="username"
+              onChange={handleUsernameChange}
+            />
+            <input
+              className="w-[100%] text-black border border-black"
+              type="password"
+              name="password"
+              onChange={handlePasswordChange}
+              placeholder="Password"
+            />
+            <Button
+              id="login-button"
+              className={"mt-[1vh] bg-logoBlue"}
+              type="submit"
+              variant="contained"
+            >
+              Login
             </Button>
           </form>
         </div>
