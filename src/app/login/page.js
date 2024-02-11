@@ -2,9 +2,10 @@
 import React from "react";
 import { useState } from "react";
 import Button from "@mui/material/Button";
+import CreateAccount from "./CreateAccount";
 import Image from "next/image";
 import logo from "../../../public/TS_LOGO.png";
-import "../styles.css";
+import "./styles.css";
 
 import { useRouter } from "next/navigation";
 
@@ -12,6 +13,7 @@ const Login = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [createUser, setCreateUser] = useState(false);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -58,34 +60,53 @@ const Login = () => {
     >
       <div className="login flex flex-col justify-center bg-white/75 rounded w-[20%] h-[50%]">
         <div className="image-wrapper flex justify-center  w-[100%]">
-          <Image src={logo} className="w-[20vw]"></Image>
+          <Image src={logo} className="w-[60%]"></Image>
         </div>
-        <div className="form flex flex-row justify-center mb-[20%]">
-          <form className="flex flex-col" onSubmit={handleSubmit}>
-            <input
-              placeholder="Username"
-              className="w-[100%] mb-[1vh] text-black border border-black"
-              type="text"
-              name="username"
-              onChange={handleUsernameChange}
-            />
-            <input
-              className="w-[100%] text-black border border-black"
-              type="password"
-              name="password"
-              onChange={handlePasswordChange}
-              placeholder="Password"
-            />
-            <Button
-              id="login-button"
-              className={"mt-[1vh] bg-logoBlue"}
-              type="submit"
-              variant="contained"
-            >
-              Login
-            </Button>
-          </form>
-        </div>
+        {createUser ? (
+          <CreateAccount />
+        ) : (
+          <div className="form flex flex-row justify-center mb-[20%]">
+            <form className="flex flex-col" onSubmit={handleSubmit}>
+              <input
+                id="username-input"
+                placeholder="Username"
+                className="w-[100%] mb-[1vh] text-black border border-black rounded"
+                type="text"
+                name="username"
+                onChange={handleUsernameChange}
+              />
+              <input
+                id="password-input"
+                className="w-[100%] text-black border border-black rounded"
+                type="password"
+                name="password"
+                onChange={handlePasswordChange}
+                placeholder="Password"
+              />
+              <Button
+                id="login-button"
+                className={"bg-logoBlue"}
+                type="submit"
+                variant="contained"
+                disabled={!(username && password)}
+              >
+                Login
+              </Button>
+              <div className="create-wrapper mt-[1vh]">
+                <button
+                  onClick={() => {
+                    setCreateUser(true);
+                  }}
+                  className="text-center w-[100%]"
+                >
+                  <span className="text-center text-black">
+                    Create an account
+                  </span>
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );
