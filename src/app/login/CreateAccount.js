@@ -43,7 +43,7 @@ const CreateAccount = ({
         setCreateUser(false);
         openSnackbar(true);
         setSeverity("success");
-        setSnackbarMessage("Wow you made an account!");
+        setSnackbarMessage("Successful account creation!");
       } else {
         console.error("Response status:", response.status);
         setCreateUser(false);

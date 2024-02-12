@@ -17,10 +17,14 @@ module.exports = {
         logoGreen: "#138926",
         logoBlue: "#0779fc",
       },
+      animation: {
+        wiggle: "wiggle 1s ease-in-out infinite",
+      },
     },
   },
   plugins: [
     require("@tailwindcss/typography"),
+    require("tailwindcss-animated"),
     require("tailwind-scrollbar")({ nocompatible: true }),
     require("@tailwindcss/forms")({
       strategy: "class", // only generate classes
