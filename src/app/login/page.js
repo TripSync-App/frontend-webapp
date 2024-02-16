@@ -67,7 +67,7 @@ const Login = () => {
       const response = await fetch("http://localhost:8000/login", options);
       if (response.status === 200) {
         const result = await response.json();
-        sessionStorage.setItem("accessToken", result.access_token);
+        localStorage.setItem("accessToken", result.access_token);
         router.push("/");
       } else {
         console.error("Response status:", response.status);
