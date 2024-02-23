@@ -6,6 +6,7 @@ import "./styles.css";
 import { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { ThemeProvider, useMediaQuery, createTheme } from "@mui/material";
+import logo from './resources/TS_LOGO.png'
 
 
 export default function Home() {
@@ -37,7 +38,7 @@ export default function Home() {
       {!loading ? (
         <main className="min-h-screen items-center p-24">
           <ThemeProvider theme={theme}>
-          <NavBarComponent></NavBarComponent>
+          <NavBarComponent logo={logo}></NavBarComponent>
           <Banner className="Banner" />
           <ButtonComponent className="Button" />
           </ThemeProvider>

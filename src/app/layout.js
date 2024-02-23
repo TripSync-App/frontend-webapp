@@ -5,7 +5,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "TripSync",
-  description: "By Kai, Josh, Akshar, Neha & Jayden",
+  authors: [
+    {name: 'Kai Battle'},
+    {name: 'Josh Daughtery'},
+    {name: 'Akshar Patel'},
+    {name: 'Neha Moolchandani'},
+    {name: 'Jayden Pyles'}],
+  description: "Your Favorite Trip Assistant!",
+  keywords: ['Travel', 'React', 'Jira', 'Planning', 'Exploration']
 };
 
 export default function RootLayout({ children }) {
