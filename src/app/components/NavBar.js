@@ -1,4 +1,4 @@
-import { AppBar, Box, Toolbar, IconButton, Button, Menu, MenuItem, MenuList, Typography, Avatar } from "@mui/material";
+import { AppBar, Box, Toolbar, IconButton, Button, Menu, MenuItem, MenuList, Typography, Avatar, Divider } from "@mui/material";
 import { useState } from "react";
 
 
@@ -18,8 +18,10 @@ export default function NavBarComponent({logo}) {
         <Box sx={{ flexGrow: 1}}>
             <AppBar position="fixed">
                 <Toolbar sx={{ justifyItems: "right"}}>
-                    <Avatar alt="TripSync" src={logo}/>
+                    <Avatar alt="TripSync" src={logo.src} sx={{width: 80, height: 80}}/>
+                    <text className="text-2xl">TripSync</text>
                     <Box sx={{flexGrow: 1}}/>
+                    <Divider orientation="vertical" variant="middle" flexItem />
                     <Button
                         id="team-button"
                         color="inherit"
@@ -27,6 +29,7 @@ export default function NavBarComponent({logo}) {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                         onClick={handleClick}
+                        sx={{height: 75}}
                     >
                         Teams
                     </Button>
@@ -42,7 +45,6 @@ export default function NavBarComponent({logo}) {
                             <MenuItem onClick={handleClose}>Invite Team Member</MenuItem>
                         </MenuList>
                     </Menu>
-                    <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
         </Box>

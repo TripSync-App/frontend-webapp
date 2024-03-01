@@ -5,8 +5,9 @@ import NavBarComponent from "./components/NavBar";
 import "./styles.css";
 import { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { ThemeProvider, useMediaQuery, createTheme } from "@mui/material";
+import { ThemeProvider, useMediaQuery, createTheme, Divider } from "@mui/material";
 import logo from './resources/TS_LOGO.png'
+import FilterBox from "./components/FilterBox";
 
 
 export default function Home() {
@@ -39,8 +40,7 @@ export default function Home() {
         <main className="min-h-screen items-center p-24">
           <ThemeProvider theme={theme}>
           <NavBarComponent logo={logo}></NavBarComponent>
-          <Banner className="Banner" />
-          <ButtonComponent className="Button" />
+          <FilterBox/>
           </ThemeProvider>
         </main>
       ) : (
