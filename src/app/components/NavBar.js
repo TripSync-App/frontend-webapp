@@ -22,6 +22,7 @@ export default function NavBarComponent({logo}) {
                     <text className="text-2xl">TripSync</text>
                     <Box sx={{flexGrow: 1}}/>
                     <Divider orientation="vertical" variant="middle" flexItem />
+                    <span className="w-2"/>
                     <Button
                         id="team-button"
                         color="inherit"

@@ -22,6 +22,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>
         <link href="https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap" rel="stylesheet"></link>
+        <link rel="icon" href="/icon?favicon.png" type="image/" sizes="any" />
       </head>
       <body className={inter.className}>{children}</body>
     </html>

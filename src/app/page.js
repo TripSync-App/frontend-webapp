@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { ThemeProvider, useMediaQuery, createTheme, Divider } from "@mui/material";
 import logo from './resources/TS_LOGO.png'
 import FilterBox from "./components/FilterBox";
-
+import Thumbnail from "./components/Thumbnail";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -41,6 +41,7 @@ export default function Home() {
           <ThemeProvider theme={theme}>
           <NavBarComponent logo={logo}></NavBarComponent>
           <FilterBox/>
+          <Thumbnail styling={{width: 350}} title={"Test"} image={logo} description={"This is a test Thumbnail"} />
           </ThemeProvider>
         </main>
       ) : (
