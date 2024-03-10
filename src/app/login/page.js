@@ -7,7 +7,7 @@ import CreateAccount from "./CreateAccount";
 import Snackbar from "@mui/material/Snackbar";
 import Image from "next/image";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import logo from "../../../public/TS_LOGO.png";
+import logo from "../resources/TS_LOGO.png";
 import "./styles.css";
 import { useRouter } from "next/navigation";
 
@@ -68,6 +68,7 @@ const Login = () => {
       if (response.status === 200) {
         const result = await response.json();
         localStorage.setItem("accessToken", result.access_token);
+        localStorage.setItem("userData", JSON.stringify(result.userData));
         router.push("/");
       } else {
         console.error("Response status:", response.status);
