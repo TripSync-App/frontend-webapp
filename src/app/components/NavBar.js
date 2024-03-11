@@ -10,9 +10,11 @@ import {
   Typography,
   Avatar,
   Divider,
+  Tooltip,
 } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { AccountBox, Groups } from "@mui/icons-material";
 
 export default function NavBarComponent({ logo, pos }) {
   let [anchor, setAnchor] = useState(null);
@@ -47,29 +49,23 @@ export default function NavBarComponent({ logo, pos }) {
           <Box sx={{ flexGrow: 1 }} />
           <Divider orientation="vertical" variant="middle" flexItem />
           <span className="w-2" />
-          <Button
-            id="team-button"
-            color="inherit"
-            aria-controls={open ? "team-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleNavClick}
-            sx={{ height: 75 }}
-          >
-            Teams
-          </Button>
-          <Menu
-            id="team-menu"
-            anchorEl={anchor}
-            open={open}
-            onClose={handleClose}
-          >
-            <MenuList dense>
-              <MenuItem onClick={handleClose}>Manage Team Members</MenuItem>
-              <MenuItem onClick={handleClose}>Show Team Members</MenuItem>
-              <MenuItem onClick={handleClose}>Invite Team Member</MenuItem>
-            </MenuList>
-          </Menu>
+          <Tooltip title="Manage Teams">
+            <IconButton
+              id="team-button"
+              color="inherit"
+              aria-controls={open ? "team-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleNavClick}
+            >
+              <Groups fontSize="large"></Groups>
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Profile">
+            <IconButton>
+              <AccountBox fontSize="large"></AccountBox>
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
     </Box>
