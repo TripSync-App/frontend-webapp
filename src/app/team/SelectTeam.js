@@ -1,14 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { AddCircleOutline } from "@mui/icons-material";
 import { createTeam, fetchTeams } from "./lib";
+import CreateTeamModal from "./CreateTeamModal";
 
 const SelectTeam = ({ teams, selectedTeam, onSelectTeam }) => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,9 +50,12 @@ const SelectTeam = ({ teams, selectedTeam, onSelectTeam }) => {
             ))}
         </Select>
       </FormControl>
-      <IconButton className="ml-[1vw]" onClick={createTeam}>
-        <AddCircleOutline />
-      </IconButton>
+      <Tooltip title="Create New Team">
+        <IconButton className="ml-[1vw]" onClick={handleOpen}>
+          <AddCircleOutline fontSize="large" />
+        </IconButton>
+      </Tooltip>
+      <CreateTeamModal open={open} handleClose={handleClose}></CreateTeamModal>
     </Box>
   );
 };
