@@ -62,7 +62,11 @@ export default function NavBarComponent({ logo, pos }) {
             </IconButton>
           </Tooltip>
           <Tooltip title="Profile">
-            <IconButton>
+            <IconButton
+              onClick={() => {
+                router.push("/profile");
+              }}
+            >
               <AccountBox fontSize="large"></AccountBox>
             </IconButton>
           </Tooltip>
