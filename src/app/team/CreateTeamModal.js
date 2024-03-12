@@ -21,6 +21,24 @@ export default function CreateTeamModal({ open, handleClose }) {
   };
 
   const [teamName, setTeamName] = useState("");
+
+  const handleTeamCreate = async () => {
+    try {
+      const result = await createTeam(teamName);
+      const status = result.status;
+      const data = result.data;
+      console.log(`STATUS: ${status}`);
+      if (status === 200) {
+        handleClose();
+        location.reload();
+      } else if (status === 403) {
+        console.error("Can't do that");
+      }
+    } catch (error) {
+      console.error("Failed to create team:", error);
+    }
+  };
+
   return (
     <div>
       <Modal
@@ -44,7 +62,12 @@ export default function CreateTeamModal({ open, handleClose }) {
                   setTeamName(e.target.value);
                 }}
               ></TextField>
-              <Button className="!ml-[1vw]" variant="contained" size="small">
+              <Button
+                className="!ml-[1vw]"
+                variant="contained"
+                size="small"
+                onClick={handleTeamCreate}
+              >
                 Create
               </Button>
             </div>

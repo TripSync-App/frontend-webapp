@@ -13,13 +13,24 @@ export const fetchTeams = () => {
   });
 };
 
-export const createTeam = () => {
-  const result = fetch(`${API_URL}/teams`, {
+export const createTeam = async (name) => {
+  return fetch(`${API_URL}/teams`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ name: "test" }),
-  });
+    body: JSON.stringify({ name: name }),
+  })
+    .then((response) => {
+      console.log(response.status);
+
+      return response
+        .json()
+        .then((data) => ({ status: response.status, data }));
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      throw error;
+    });
 };
