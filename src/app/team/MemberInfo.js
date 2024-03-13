@@ -8,11 +8,24 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import { Box } from "@mui/system";
-import { Button } from "@mui/base";
+import { IconButton, Tooltip } from "@mui/material";
+import { PersonRemove } from "@mui/icons-material";
+import DeleteUserModal from "./DeleteUserModal";
 
-const MemberInfo = ({ members }) => {
+const MemberInfo = ({ team, members }) => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5); // Adjust the number of rows per page as needed
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [open, setOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState("");
+
+  const handleOpen = (username) => {
+    setOpen(true);
+    setSelectedUser(username);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -40,7 +53,7 @@ const MemberInfo = ({ members }) => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((member) => (
                   <TableRow
-                    key={member.name}
+                    key={member.username}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
@@ -48,7 +61,15 @@ const MemberInfo = ({ members }) => {
                     </TableCell>
                     <TableCell align="right">{member.username}</TableCell>
                     <TableCell align="right">
-                      <Button>Remove</Button>
+                      <Tooltip title="Remove User">
+                        <IconButton
+                          onClick={() => {
+                            handleOpen(member.username);
+                          }}
+                        >
+                          <PersonRemove></PersonRemove>
+                        </IconButton>
+                      </Tooltip>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -65,6 +86,12 @@ const MemberInfo = ({ members }) => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
+      <DeleteUserModal
+        open={open}
+        handleClose={handleClose}
+        user={selectedUser}
+        team={team}
+      ></DeleteUserModal>
     </Box>
   );
 };

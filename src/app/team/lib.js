@@ -34,3 +34,28 @@ export const createTeam = async (name) => {
       throw error;
     });
 };
+
+export const deleteUser = async (username, team) => {
+  return fetch(`${API_URL}/teams/remove-user`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      user: { username: username },
+      team: { team_id: team },
+    }),
+  })
+    .then((response) => {
+      console.log(response.status);
+
+      return response
+        .json()
+        .then((data) => ({ status: response.status, data }));
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      throw error;
+    });
+};

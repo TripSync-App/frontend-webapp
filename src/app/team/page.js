@@ -77,7 +77,7 @@ const Team = () => {
               <Typography sx={{ paddingLeft: 2, paddingTop: 2 }}>
                 Member Info
               </Typography>
-              <MemberInfo members={members}></MemberInfo>
+              <MemberInfo team={team} members={members}></MemberInfo>
             </div>
           </Paper>
         </div>
