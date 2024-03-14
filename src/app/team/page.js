@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useState, useMemo } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Icon, IconButton, Tooltip, Typography } from "@mui/material";
 import SelectTeam from "./SelectTeam";
 import MemberInfo from "./MemberInfo";
 import TeamInfo from "./TeamInfo";
-import { createTeam, fetchTeams } from "./lib";
+import { createTeam, fetchTeams, createInviteCode, getInviteCode } from "./lib";
 import NavBarComponent from "../components/NavBar";
 import logo from "../resources/TS_LOGO.png";
 import {
@@ -14,6 +14,7 @@ import {
   Divider,
   Paper,
 } from "@mui/material";
+import { ContentCopy } from "@mui/icons-material";
 
 const Team = () => {
   const [teams, setTeams] = useState([]);
@@ -53,6 +54,13 @@ const Team = () => {
     createTeam();
   };
 
+  const getInviteLink = async () => {
+    await createInviteCode(team.team_id);
+    const res = await getInviteCode(team.team_id);
+    const link = res.invite_link;
+    await navigator.clipboard.writeText(link);
+  };
+
   return (
     <main className="">
       <ThemeProvider theme={theme}>
@@ -74,9 +82,16 @@ const Team = () => {
               <Typography sx={{ paddingLeft: 2 }}>Team Info</Typography>
               <TeamInfo item={team}></TeamInfo>
               <Divider />
-              <Typography sx={{ paddingLeft: 2, paddingTop: 2 }}>
-                Member Info
-              </Typography>
+              <div className="flex flex-row">
+                <Typography sx={{ paddingLeft: 2, paddingTop: 2 }}>
+                  Member Info
+                </Typography>
+                <Tooltip title="Copy Invite Link">
+                  <IconButton onClick={getInviteLink}>
+                    <ContentCopy>Copy Invite Code</ContentCopy>
+                  </IconButton>
+                </Tooltip>
+              </div>
               <MemberInfo team={team} members={members}></MemberInfo>
             </div>
           </Paper>

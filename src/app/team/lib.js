@@ -59,3 +59,45 @@ export const deleteUser = async (username, team) => {
       throw error;
     });
 };
+
+export const createInviteCode = async (team) => {
+  return fetch(`${API_URL}/teams/create-invite`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      team_id: team,
+    }),
+  })
+    .then((response) => {
+      console.log(response.status);
+      return response.json();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      throw error;
+    });
+};
+
+export const getInviteCode = async (team) => {
+  return fetch(`${API_URL}/teams/get-invite`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      team_id: team,
+    }),
+  })
+    .then((response) => {
+      console.log(response.status);
+      return response.json();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      throw error;
+    });
+};
