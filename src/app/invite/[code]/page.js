@@ -7,9 +7,11 @@ import { useMediaQuery, createTheme } from "@mui/material";
 import Failure from "./Failure";
 import Success from "./Success";
 import "./style.css";
+import { useRouter } from "next/navigation"; // Import useRouter hook
 
 function InvitePage({ params }) {
   const inviteCode = params.code;
+  const router = useRouter(); // Initialize useRouter hook
   const token = localStorage.getItem("accessToken");
   const [error, setError] = useState(null);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -24,24 +26,30 @@ function InvitePage({ params }) {
   );
 
   useEffect(() => {
-    fetch(`${API_URL}/teams/redeem-invite`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ code: inviteCode }),
-    })
-      .then((response) => {
+    const redeemInvite = async () => {
+      try {
+        const response = await fetch(`${API_URL}/teams/redeem-invite`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ code: inviteCode }),
+        });
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         console.log(response.status);
-      })
-      .catch((error) => {
+      } catch (error) {
         setError(error.message);
-      });
-  }, []);
+      }
+    };
+
+    redeemInvite();
+    setTimeout(() => {
+      router.push("/");
+    }, 2000);
+  }, [inviteCode, router, token]);
 
   return (
     <main className="w-[100vw] h-[100vh]">
