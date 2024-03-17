@@ -39,7 +39,7 @@ const MemberInfo = ({ team, members }) => {
   return (
     <Box sx={{ padding: 2 }}>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: "25vh" }}>
+        <TableContainer sx={{ maxHeight: "75vh" }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>

@@ -82,9 +82,9 @@ const Login = () => {
   return (
     <div
       id="login-wrapper"
-      className="login-wrapper flex justify-center absolute  min-h-[100vh] min-w-[100vw]"
+      className="login-wrapper flex justify-center absolute min-h-[100vh] min-w-[100vw]"
     >
-      <div className="login flex flex-col bg-white/50 rounded w-[20%] h-[50%] animate-fade-down animate-once">
+      <div className="login flex flex-col bg-white/50 rounded max-w-[40%] animate-fade-down animate-once p-2">
         {createUser ? (
           <button
             className="w-[5%]"

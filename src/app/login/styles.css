@@ -51,3 +51,11 @@ input {
     background-position: 0% 50%;
   }
 }
+
+@media (max-width: 500px) {
+
+  /* Assuming you want to apply max-width to the body element */
+  .login {
+    max-width: 75% !important;
+  }
+}

@@ -20,7 +20,7 @@ const Failure = () => {
     <Paper
       elevation={0}
       style={styles.root}
-      className="border-2 border-green-500 w-[25vw] p-3"
+      className="border-2 border-red-500 w-[25vw] p-3"
     >
       <Typography variant="h4" gutterBottom style={{ color: "#ff1100" }}>
         Error!
