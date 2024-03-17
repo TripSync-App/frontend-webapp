@@ -16,6 +16,8 @@ import {
 } from "@mui/material";
 import { ContentCopy } from "@mui/icons-material";
 
+//TODO: delete team button
+
 const Team = () => {
   const [teams, setTeams] = useState([]);
   const [team, setTeam] = useState("");
