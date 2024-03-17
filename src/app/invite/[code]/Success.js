@@ -1,14 +1,39 @@
 import React from "react";
-import { Paper } from "@mui/material";
+import { Typography, Paper } from "@mui/material";
 
-const Success = () => {
+const styles = {
+  root: {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    textAlign: "center",
+    zIndex: 9999,
+    boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.1)",
+    borderRadius: "12px",
+  },
+
+  successIcon: {
+    fontSize: "60px",
+    color: "#4caf50",
+  },
+};
+
+const SuccessPage = () => {
   return (
-    <div id="info" className="flex justify-center translate-y-[25vh]">
-      <Paper elevation={3} className="min-w-[50%] min-h-[50vh] text-center">
-        <p>Success</p>
-      </Paper>
-    </div>
+    <Paper
+      elevation={0}
+      style={styles.root}
+      className="border-2 border-green-500 w-[25vw] p-3"
+    >
+      <Typography variant="h4" gutterBottom style={{ color: "#4caf50" }}>
+        Success!
+      </Typography>
+      <Typography variant="body1" style={{ color: "#333333" }}>
+        Joined team.
+      </Typography>
+    </Paper>
   );
 };
 
-export default Success;
+export default SuccessPage;

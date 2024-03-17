@@ -7,12 +7,13 @@ import { useMediaQuery, createTheme } from "@mui/material";
 import Failure from "./Failure";
 import Success from "./Success";
 import "./style.css";
-import { useRouter } from "next/navigation"; // Import useRouter hook
+import { useRouter } from "next/navigation";
 
 function InvitePage({ params }) {
   const inviteCode = params.code;
-  const router = useRouter(); // Initialize useRouter hook
+  const router = useRouter();
   const token = localStorage.getItem("accessToken");
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const theme = useMemo(
@@ -40,16 +41,21 @@ function InvitePage({ params }) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         console.log(response.status);
+        setLoading(false);
       } catch (error) {
         setError(error.message);
+        setLoading(false);
       }
     };
-
     redeemInvite();
     setTimeout(() => {
       router.push("/");
     }, 2000);
   }, [inviteCode, router, token]);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <main className="w-[100vw] h-[100vh]">

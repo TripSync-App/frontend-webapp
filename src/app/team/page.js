@@ -79,18 +79,30 @@ const Team = () => {
               />
             </Box>
             <div className="info flex flex-col justify-between">
-              <Typography sx={{ paddingLeft: 2 }}>Team Info</Typography>
+              <Typography
+                className="!text-lg !font-bold"
+                sx={{ paddingLeft: 2 }}
+              >
+                Team Info
+              </Typography>
               <TeamInfo item={team}></TeamInfo>
               <Divider />
               <div className="flex flex-row">
-                <Typography sx={{ paddingLeft: 2, paddingTop: 2 }}>
+                <Typography
+                  sx={{ paddingLeft: 2, paddingTop: 2 }}
+                  className="!text-lg !font-bold"
+                >
                   Member Info
                 </Typography>
-                <Tooltip title="Copy Invite Link">
-                  <IconButton onClick={getInviteLink}>
-                    <ContentCopy>Copy Invite Code</ContentCopy>
-                  </IconButton>
-                </Tooltip>
+                {team ? (
+                  <div className="pl-2 pt-2">
+                    <Tooltip title="Copy Invite Link">
+                      <IconButton onClick={getInviteLink}>
+                        <ContentCopy>Copy Invite Code</ContentCopy>
+                      </IconButton>
+                    </Tooltip>
+                  </div>
+                ) : null}
               </div>
               <MemberInfo team={team} members={members}></MemberInfo>
             </div>

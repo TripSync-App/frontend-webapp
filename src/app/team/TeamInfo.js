@@ -32,7 +32,7 @@ const TeamInfo = ({ item }) => {
           ></TextField>
         </div>
       ) : (
-        <h1>No member info available</h1>
+        <h1 className="text-gray-500 text-sm">Please select a team</h1>
       )}
     </Box>
   );
