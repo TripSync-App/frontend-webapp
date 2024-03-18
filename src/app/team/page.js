@@ -71,7 +71,7 @@ const Team = () => {
           id="team-wrapper"
           className="team flex justify-center min-h-[100vh] min-w-[100vw]"
         >
-          <Paper className="mt-[1vh] h-[75%] w-[95%]">
+          <Paper className="mt-[1vh] h-[75%] w-full ml-2 mr-2">
             <Box sx={{ width: "100%", padding: 2 }}>
               <SelectTeam
                 teams={teams}
