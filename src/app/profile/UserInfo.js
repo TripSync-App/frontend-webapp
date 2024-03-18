@@ -28,7 +28,7 @@ const UserInfo = () => {
 
   return (
     <Box
-      className="flex flex-col p-4 justify-between rounded-lg m-auto"
+      className="flex flex-col p-4 justify-between rounded-lg ml-2 h-full"
       sx={{ boxShadow: 4, bgcolor: "background.default", mt: 2 }}
     >
       <div className="flex justify-center">

@@ -26,12 +26,14 @@ const Profile = () => {
     [prefersDarkMode],
   );
   return (
-    <main className="h-[100vw] w-[100vw]">
+    <main className="h-[100vh] w-[100vw]">
       <ThemeProvider theme={theme}>
         <NavBarComponent logo={logo} pos={"static"}></NavBarComponent>
         <div className="flex flex-row">
           <UserInfo></UserInfo>
-          <div className="flex flex-row ml-4"></div>
+          <div className="flex flex-row ml-4">
+            <TeamInfo></TeamInfo>
+          </div>
         </div>
       </ThemeProvider>
     </main>
