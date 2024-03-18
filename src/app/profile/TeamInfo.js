@@ -36,12 +36,12 @@ const TeamInfo = () => {
 
   return (
     <Box
-      className="w-full mt-4 mr-2 p-2 overflow-scroll"
+      className="mt-4 mr-2 p-2 ml-auto h-[85vh] overflow-scroll"
       sx={{ bgcolor: "background.paper" }}
     >
       <Typography>Your Teams</Typography>
       {teams.map((team, index) => (
-        <Card sx={{ maxHeight: "50%", maxWidth: "20vw" }} key={index}>
+        <Card sx={{ maxHeight: "50%", maxWidth: "20vw", mb: 2 }} key={index}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {team.name}

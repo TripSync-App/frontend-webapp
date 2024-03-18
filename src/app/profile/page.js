@@ -31,7 +31,7 @@ const Profile = () => {
         <NavBarComponent logo={logo} pos={"static"}></NavBarComponent>
         <div className="flex flex-row">
           <UserInfo></UserInfo>
-          <div className="flex flex-row ml-4">
+          <div className="flex flex-row ml-4 w-full">
             <TeamInfo></TeamInfo>
           </div>
         </div>
