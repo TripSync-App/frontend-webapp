@@ -36,7 +36,7 @@ const TeamInfo = () => {
 
   return (
     <Box
-      className="mt-4 mr-2 p-2 ml-auto h-[85vh] overflow-scroll"
+      className="mt-4 mr-2 p-2 ml-auto h-[90vh] overflow-scroll"
       sx={{ bgcolor: "background.paper" }}
     >
       <Typography>Your Teams</Typography>
