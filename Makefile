@@ -1,3 +1,5 @@
+MONGO_USERNAME := $(shell docker-compose config | grep -oP "MONGO_INITDB_ROOT_USERNAME: \K([A-Za-z]*)" | awk '{print $2}')
+MONGO_PASSWORD := $(shell docker-compose config | grep -oP "MONGO_INITDB_ROOT_PASSWORD: \K([A-Za-z]*)" | awk '{print $2}')
 PHONY: stop remove build up migrate connect build-force
 
 stop:
@@ -21,3 +23,6 @@ up:
 
 connect:
 	docker exec -it edgedb edgedb -P 5656 --tls-security insecure
+
+connect-mongo:
+	docker exec -it tripsync-mongo mongosh mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@localhost

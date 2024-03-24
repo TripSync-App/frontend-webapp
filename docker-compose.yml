@@ -16,6 +16,9 @@ services:
 
   api:
     container_name: "site-api"
+    environment:
+      MONGO_USERNAME: pfpreader
+      MONGO_PASSWORD: pressxtodoubt
     build:
       context: "../site-api"
     ports:
@@ -31,6 +34,16 @@ services:
       context: "../edgedb"
     networks:
       - "traveling"
+
+  mongo:
+    image: mongo
+    container_name: tripsync-mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: pfpreader
+      MONGO_INITDB_ROOT_PASSWORD: pressxtodoubt
+    networks:
+      - traveling
 
 networks:
   traveling:
