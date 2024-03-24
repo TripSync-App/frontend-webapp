@@ -41,7 +41,10 @@ const TeamInfo = () => {
     >
       <Typography>Your Teams</Typography>
       {teams.map((team, index) => (
-        <Card sx={{ maxHeight: "50%", maxWidth: "20vw", mb: 2 }} key={index}>
+        <Card
+          sx={{ mt: 2, maxHeight: "50%", maxWidth: "20vw", mb: 2 }}
+          key={index}
+        >
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {team.name}
