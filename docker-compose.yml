@@ -14,6 +14,24 @@ services:
       - ./postcss.config.js:/app/postcss.config.js
       - ./tailwind.config.js:/app/tailwind.config.js
 
+  api:
+    container_name: "site-api"
+    build:
+      context: "../site-api"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../site-api/src/site_api:/project/site_api
+    networks:
+      - "traveling"
+
+  edgedb:
+    container_name: "edgedb"
+    build:
+      context: "../edgedb"
+    networks:
+      - "traveling"
+
 networks:
   traveling:
     external: True
