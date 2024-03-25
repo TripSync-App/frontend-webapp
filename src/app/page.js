@@ -53,28 +53,28 @@ export default function Home() {
       image: nightSample,
       description: "#NightLife",
       styling: { bgcolor: "black" },
-      page: "/CitySights"
+      tags: []
     },
     {
       title: "Wilderness",
       image: adventureSample,
       description: "A Fresh Breath of Air",
       styling: { bgcolor: "darkgreen" },
-      page: "/Wilderness"
+      tags: []
     },
     {
       title: "Ocean View",
       image: beachSample,
       description: "Surf's Up!",
       styling: { bgcolor: "teal" },
-      page: "/OceanView"
+      tags: []
     },
     {
       title: "Attractions",
       image: festvalSample,
       description: "Fun For the Whole Family",
       styling: { bgcolor: "purple" },
-      page: "/Attractions"
+      tags: []
     },
   ];
 
@@ -94,7 +94,6 @@ export default function Home() {
                     title={thumbnail.title}
                     image={thumbnail.image}
                     description={thumbnail.description}
-                    onClick={thumbnail.page}
                   />
                 );
               })}
