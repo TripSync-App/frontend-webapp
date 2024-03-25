@@ -34,14 +34,18 @@ export default function Home() {
     [prefersDarkMode],
   );
 
-  useEffect(() => {
-    const authToken = localStorage.getItem("accessToken");
-    if (!authToken) {
-      router.push("/login");
-    } else {
-      setLoading(true);
-    }
-  }, [router]);
+  // useEffect(() => {
+  //   const authToken = localStorage.getItem("accessToken");
+  //   if (!authToken) {
+  //     router.push("/login");
+  //   } else {
+  //     setLoading(true);
+  //   }
+  // }, [router]);
+
+  function openPage(url){
+    console.log(`${url}`);
+  }
 
   let thumbnailImages = [
     {
@@ -49,30 +53,34 @@ export default function Home() {
       image: nightSample,
       description: "#NightLife",
       styling: { bgcolor: "black" },
+      page: "/CitySights"
     },
     {
       title: "Wilderness",
       image: adventureSample,
       description: "A Fresh Breath of Air",
       styling: { bgcolor: "darkgreen" },
+      page: "/Wilderness"
     },
     {
       title: "Ocean View",
       image: beachSample,
       description: "Surf's Up!",
       styling: { bgcolor: "teal" },
+      page: "/OceanView"
     },
     {
       title: "Attractions",
       image: festvalSample,
       description: "Fun For the Whole Family",
       styling: { bgcolor: "purple" },
+      page: "/Attractions"
     },
   ];
 
   return (
     <div className="main ">
-      {loading ? (
+      {!loading ? (
         <main className="min-h-screen items-center p-24">
           <ThemeProvider theme={theme}>
             <NavBarComponent logo={logo} pos="fixed"></NavBarComponent>
@@ -81,10 +89,12 @@ export default function Home() {
               {thumbnailImages.map(function (thumbnail) {
                 return (
                   <Thumbnail
+                    key={thumbnailImages.indexOf(thumbnail)}
                     styling={thumbnail.styling}
                     title={thumbnail.title}
                     image={thumbnail.image}
                     description={thumbnail.description}
+                    onClick={thumbnail.page}
                   />
                 );
               })}

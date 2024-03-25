@@ -1,13 +1,18 @@
-import {Card, CardActions, CardActionArea, CardContent, CardMedia, Typography, Button, useIsFocusVisible} from '@mui/material';
+import {Card, CardActions, CardActionArea, CardContent, CardMedia, Typography, Button, useIsFocusVisible, Dialog, DialogTitle} from '@mui/material';
+import { useState } from 'react';
 
-export default function Thumbnail ({title, image, description, styling}){
+export default function Thumbnail ({title, image, description, styling, onClick}){
+    let [openPreview, setOpen] = useState(false);
     function onFocus(){ 
         
+    }
+    function handlePreviewClose(){
+        setOpen(false);
     }
     return(
         <div className='pt-2 pr-2 pb-2'>
         <Card sx={styling} raised>
-            <CardActionArea  >
+            <CardActionArea href={onClick}>
             <CardMedia
                 sx={{ height: 140 }}
                 image={image.src}
@@ -25,9 +30,9 @@ export default function Thumbnail ({title, image, description, styling}){
             <CardActions>
                 <Button size="small" variant='outlined' centerRipple
                     onClick={() => {
-                        alert("clicked");
+                        setOpen(true)
                     }}
-                >Browse This Trip</Button>
+                >Preview This Trip</Button>
                 <Button size="small" variant='outlined' centerRipple
                     onClick={() => {
                         alert("clicked");
@@ -36,6 +41,10 @@ export default function Thumbnail ({title, image, description, styling}){
             </CardActions>
             
         </Card>
+        <Dialog open={openPreview} onClose={handlePreviewClose}>
+            <DialogTitle variant='h4'>{title}</DialogTitle>
+            
+        </Dialog>
         </div>
     );
 }
