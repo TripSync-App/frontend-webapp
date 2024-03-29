@@ -11,6 +11,7 @@ import {
   Avatar,
   Divider,
   Tooltip,
+  useTheme,
 } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -23,6 +24,7 @@ export default function NavBarComponent({ logo, pos }) {
   const handleClick = (event) => {
     setAnchor(event.currentTarget);
   };
+  const theme = useTheme();
   const handleNavClick = () => {
     router.push("/team");
   };
