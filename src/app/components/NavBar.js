@@ -46,7 +46,7 @@ export default function NavBarComponent({ logo, pos }) {
               router.push("/");
             }}
           >
-            <text className="text-2xl">TripSync</text>
+            <text className="text-2xl font-protest">TripSync</text>
           </button>
           <Box sx={{ flexGrow: 1 }} />
           <Divider orientation="vertical" variant="middle" flexItem />
