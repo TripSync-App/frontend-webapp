@@ -88,6 +88,7 @@ const UserInfo = () => {
             height: "95%",
             aspectRatio: "1/1",
             mb: 2,
+            boxShadow: 2,
           }}
         />
       </div>
