@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { AccountBox, Groups } from "@mui/icons-material";
+import { AccountBox, Groups, Logout } from "@mui/icons-material";
 
 export default function NavBarComponent({ logo, pos }) {
   let [anchor, setAnchor] = useState(null);
@@ -70,6 +70,16 @@ export default function NavBarComponent({ logo, pos }) {
               }}
             >
               <AccountBox fontSize="large"></AccountBox>
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Logout">
+            <IconButton
+              onClick={() => {
+                localStorage.clear();
+                router.push("/login");
+              }}
+            >
+              <Logout fontSize="large"></Logout>
             </IconButton>
           </Tooltip>
         </Toolbar>

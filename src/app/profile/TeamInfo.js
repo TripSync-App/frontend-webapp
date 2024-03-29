@@ -36,7 +36,7 @@ const TeamInfo = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -66,6 +66,7 @@ const TeamInfo = () => {
       {teams.map((team, index) => (
         <Card
           sx={{ mt: 2, maxHeight: "50%", maxWidth: "20vw", mb: 2 }}
+          className="transition ease-in-out delay-50 hover:scale-105 duration-100"
           key={index}
         >
           <CardContent>

@@ -38,6 +38,7 @@ const UserInfo = () => {
 
       if (response.ok) {
         console.log("Profile picture uploaded successfully");
+        location.reload();
       } else {
         console.error("Error uploading profile picture:", response.statusText);
       }
