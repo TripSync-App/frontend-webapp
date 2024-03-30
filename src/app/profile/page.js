@@ -3,6 +3,7 @@ import React from "react";
 import UserPreview from "./UserPreview";
 import TeamInfo from "./TeamInfo";
 import UserInfo from "./UserInfo";
+import RecentActivity from "./RecentActivity";
 import NavBarComponent from "../components/NavBar";
 import { useEffect, useState, useMemo } from "react";
 import {
@@ -34,9 +35,10 @@ const Profile = () => {
     >
       <ThemeProvider theme={theme}>
         <NavBarComponent logo={logo} pos={"static"}></NavBarComponent>
-        <div className="flex flex-row h-full">
+        <div className="flex flex-row h-full overflow-hidden">
           <UserInfo></UserInfo>
           <div className="flex flex-row ml-4 w-full">
+            <RecentActivity></RecentActivity>
             <TeamInfo></TeamInfo>
           </div>
         </div>

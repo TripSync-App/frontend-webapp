@@ -32,6 +32,12 @@ services:
     container_name: "edgedb"
     build:
       context: "../edgedb"
+    environment:
+      EDGEDB_SERVER_SECURITY: insecure_dev_mode
+      EDGEDB_SERVER_ADMIN_UI: enabled
+      EDGEDB_SERVER_PASSWORD: edgedb
+    ports:
+      - 5656:5656
     networks:
       - "traveling"
 
