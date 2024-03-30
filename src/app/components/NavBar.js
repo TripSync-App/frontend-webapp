@@ -11,20 +11,33 @@ import {
   Avatar,
   Divider,
   Tooltip,
-  useTheme,
+  useMediaQuery,
+  createTheme,
+  ThemeProvider
 } from "@mui/material";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { AccountBox, Groups, Logout } from "@mui/icons-material";
 
 export default function NavBarComponent({ logo, pos }) {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+    const theme = useMemo(
+      () =>
+        createTheme({
+          palette: {
+            mode: prefersDarkMode ? "dark" : "light",
+            customBackground: prefersDarkMode ? "#131414" : "#f0ba7d",
+            color: prefersDarkMode ? "#FFFFFF": "#000000"
+          },
+        }),
+      [prefersDarkMode],
+  );
   let [anchor, setAnchor] = useState(null);
   const router = useRouter();
   const open = Boolean(anchor);
   const handleClick = (event) => {
     setAnchor(event.currentTarget);
   };
-  const theme = useTheme();
   const handleNavClick = () => {
     router.push("/team");
   };
@@ -33,8 +46,9 @@ export default function NavBarComponent({ logo, pos }) {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position={pos}>
+      <AppBar position={pos} sx={{backgroundColor: theme.palette.customBackground, color: theme.palette.color}}>
         <Toolbar sx={{ justifyItems: "right" }}>
           <Avatar
             alt="TripSync"
@@ -85,5 +99,6 @@ export default function NavBarComponent({ logo, pos }) {
         </Toolbar>
       </AppBar>
     </Box>
+    </ThemeProvider>
   );
 }

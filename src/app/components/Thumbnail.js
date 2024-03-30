@@ -1,8 +1,19 @@
 import {Card, CardActions, CardActionArea, CardContent, CardMedia, Typography, Button, useIsFocusVisible, Dialog, DialogTitle} from '@mui/material';
 import { useState } from 'react';
+import { useRouter } from "next/navigation";
 
-export default function Thumbnail ({title, image, description, styling, onClick}){
+export default function Thumbnail ({title, image, description, styling, discussionId}){
     let [openPreview, setOpen] = useState(false);
+    const discussionRouter = useRouter();
+    let discussionQuery = {
+        href: `/discussions/${discussionId}`,
+    } 
+    function onClick(){
+        discussionRouter.push(
+            discussionQuery.href
+        );
+        console.log("Test");
+    }
     function onFocus(){ 
         
     }
@@ -12,7 +23,7 @@ export default function Thumbnail ({title, image, description, styling, onClick}
     return(
         <div className='pt-2 pr-2 pb-2'>
         <Card sx={styling} raised>
-            <CardActionArea href={onClick}>
+            <CardActionArea onClick={onClick}>
             <CardMedia
                 sx={{ height: 140 }}
                 image={image.src}

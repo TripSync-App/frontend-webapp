@@ -29,7 +29,8 @@ const Team = () => {
       createTheme({
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
-          customBackground: prefersDarkMode ? "#131414" : "#FFFFFF",
+          customBackground: prefersDarkMode ? "#131414" : "#5ac465",
+          customComponentBackground: prefersDarkMode ? "inherit" : "#b5e1e6"
         },
       }),
     [prefersDarkMode],
@@ -71,9 +72,9 @@ const Team = () => {
         <div
           id="team-wrapper"
           className="team flex justify-center min-h-[100vh] min-w-[100vw]"
-          style={{ backgroundColor: theme.palette.customBackground }}
+          style={{ backgroundColor: theme.palette.customBackground}}
         >
-          <Paper className="mt-[1vh] h-[75%] w-full ml-2 mr-2">
+          <Paper sx={{backgroundColor: theme.palette.customComponentBackground}} className="mt-[1vh] h-[75%] w-full ml-2 mr-2">
             <Box sx={{ width: "100%", padding: 2 }}>
               <SelectTeam
                 teams={teams}
@@ -108,7 +109,11 @@ const Team = () => {
                   </div>
                 ) : null}
               </div>
-              <MemberInfo team={team} members={members}></MemberInfo>
+              <MemberInfo
+              team={team} 
+              members={members}
+              styling={{backgroundColor: theme.palette.customComponentBackground}}
+              ></MemberInfo>
             </div>
           </Paper>
         </div>

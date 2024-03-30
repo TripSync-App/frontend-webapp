@@ -99,7 +99,7 @@ const Login = () => {
           </button>
         ) : null}
         <div className="image-wrapper flex justify-center  w-[100%]">
-          <Image src={logo} className="w-[60%]"></Image>
+          <Image src={logo} alt="TripSync" className="w-[60%]"></Image>
         </div>
         {createUser ? (
           <CreateAccount

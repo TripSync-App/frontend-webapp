@@ -12,7 +12,7 @@ import { IconButton, Tooltip } from "@mui/material";
 import { PersonRemove } from "@mui/icons-material";
 import DeleteUserModal from "./DeleteUserModal";
 
-const MemberInfo = ({ team, members }) => {
+const MemberInfo = ({ team, members, styling }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [open, setOpen] = useState(false);
@@ -42,7 +42,7 @@ const MemberInfo = ({ team, members }) => {
         <TableContainer sx={{ maxHeight: "75vh" }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
-              <TableRow>
+              <TableRow sx={styling}>
                 <TableCell>Name</TableCell>
                 <TableCell align="right">Username</TableCell>
                 <TableCell align="right">Remove from Team</TableCell>

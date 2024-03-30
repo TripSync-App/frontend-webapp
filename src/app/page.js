@@ -1,6 +1,4 @@
 "use client";
-import ButtonComponent from "./components/Button";
-import Banner from "./components/Banner";
 import NavBarComponent from "./components/NavBar";
 import "./styles.css";
 import { useEffect, useState, useMemo } from "react";
@@ -17,7 +15,7 @@ import adventureSample from "./resources/adventure_scene.webp";
 import beachSample from "./resources/beach_scene.webp";
 import festvalSample from "./resources/festival_scene.webp";
 import FilterBox from "./components/FilterBox";
-import Thumbnail from "./components/Thumbnail";
+import ThumbNail from "./components/Thumbnail";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -43,38 +41,39 @@ export default function Home() {
   //   }
   // }, [router]);
 
-  function openPage(url){
-    console.log(`${url}`);
-  }
 
-  let thumbnailImages = [
+  let vacationList = [
     {
       title: "City Sights",
       image: nightSample,
       description: "#NightLife",
       styling: { bgcolor: "black", color: 'inherit' },
-      tags: []
+      tags: [],
+      discussionId: 1
     },
     {
       title: "Wilderness",
       image: adventureSample,
       description: "A Fresh Breath of Air",
       styling: { bgcolor: "darkgreen", color: 'inherit'  },
-      tags: []
+      tags: [],
+      discussionId: 2
     },
     {
       title: "Ocean View",
       image: beachSample,
       description: "Surf's Up!",
       styling: { bgcolor: "teal", color: 'inherit'  },
-      tags: []
+      tags: [],
+      discussionId: 3
     },
     {
       title: "Attractions",
       image: festvalSample,
       description: "Fun For the Whole Family",
       styling: { bgcolor: "purple", color: 'inherit'  },
-      tags: []
+      tags: [],
+      discussionId: 4
     },
   ];
 
@@ -86,14 +85,15 @@ export default function Home() {
             <NavBarComponent logo={logo} pos="fixed"></NavBarComponent>
             <FilterBox />
             <div className="flex flex-wrap">
-              {thumbnailImages.map(function (thumbnail) {
+              {vacationList.map(function (vacation) {
                 return (
-                  <Thumbnail
-                    key={thumbnailImages.indexOf(thumbnail)}
-                    styling={thumbnail.styling}
-                    title={thumbnail.title}
-                    image={thumbnail.image}
-                    description={thumbnail.description}
+                  <ThumbNail
+                    key={vacationList.indexOf(vacation)}
+                    styling={vacation.styling}
+                    title={vacation.title}
+                    image={vacation.image}
+                    description={vacation.description}
+                    discussionId={vacation.discussionId}
                   />
                 );
               })}
