@@ -52,28 +52,28 @@ export default function Home() {
       title: "City Sights",
       image: nightSample,
       description: "#NightLife",
-      styling: { bgcolor: "black" },
+      styling: { bgcolor: "black", color: 'inherit' },
       tags: []
     },
     {
       title: "Wilderness",
       image: adventureSample,
       description: "A Fresh Breath of Air",
-      styling: { bgcolor: "darkgreen" },
+      styling: { bgcolor: "darkgreen", color: 'inherit'  },
       tags: []
     },
     {
       title: "Ocean View",
       image: beachSample,
       description: "Surf's Up!",
-      styling: { bgcolor: "teal" },
+      styling: { bgcolor: "teal", color: 'inherit'  },
       tags: []
     },
     {
       title: "Attractions",
       image: festvalSample,
       description: "Fun For the Whole Family",
-      styling: { bgcolor: "purple" },
+      styling: { bgcolor: "purple", color: 'inherit'  },
       tags: []
     },
   ];

@@ -22,7 +22,7 @@ export default function Thumbnail ({title, image, description, styling, onClick}
                 <Typography gutterBottom variant="h5" component="div">
                 {title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color='palette.text.secondary'>
                 {description}
                 </Typography>
             </CardContent>
