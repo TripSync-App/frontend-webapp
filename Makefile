@@ -22,7 +22,7 @@ up:
 	docker compose up -d
 
 connect:
-	docker exec -it edgedb edgedb -P 5656 --tls-security insecure
+	docker exec -it edgedb edgedb --dsn edgedb://edgedb:edgedb@localhost --tls-security insecure 
 
 connect-mongo:
 	docker exec -it tripsync-mongo mongosh mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@localhost
