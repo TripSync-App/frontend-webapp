@@ -21,15 +21,20 @@ const Profile = () => {
       createTheme({
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
+          customBackground: prefersDarkMode ? "#131414" : "#FFFFFF",
+          cardColors: prefersDarkMode ? "#181a1c" : "#FFFFFF",
         },
       }),
     [prefersDarkMode],
   );
   return (
-    <main className="h-[100vh] w-[100vw]">
+    <main
+      className="h-[100%] w-[100%]"
+      style={{ backgroundColor: theme.palette.customBackground }}
+    >
       <ThemeProvider theme={theme}>
         <NavBarComponent logo={logo} pos={"static"}></NavBarComponent>
-        <div className="flex flex-row">
+        <div className="flex flex-row h-full">
           <UserInfo></UserInfo>
           <div className="flex flex-row ml-4 w-full">
             <TeamInfo></TeamInfo>

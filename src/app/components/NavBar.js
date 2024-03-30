@@ -11,10 +11,11 @@ import {
   Avatar,
   Divider,
   Tooltip,
+  useTheme,
 } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { AccountBox, Groups } from "@mui/icons-material";
+import { AccountBox, Groups, Logout } from "@mui/icons-material";
 
 export default function NavBarComponent({ logo, pos }) {
   let [anchor, setAnchor] = useState(null);
@@ -23,6 +24,7 @@ export default function NavBarComponent({ logo, pos }) {
   const handleClick = (event) => {
     setAnchor(event.currentTarget);
   };
+  const theme = useTheme();
   const handleNavClick = () => {
     router.push("/team");
   };
@@ -44,7 +46,7 @@ export default function NavBarComponent({ logo, pos }) {
               router.push("/");
             }}
           >
-            <text className="text-2xl">TripSync</text>
+            <text className="text-2xl font-protest">TripSync</text>
           </button>
           <Box sx={{ flexGrow: 1 }} />
           <Divider orientation="vertical" variant="middle" flexItem />
@@ -68,6 +70,16 @@ export default function NavBarComponent({ logo, pos }) {
               }}
             >
               <AccountBox fontSize="large"></AccountBox>
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Logout">
+            <IconButton
+              onClick={() => {
+                localStorage.clear();
+                router.push("/login");
+              }}
+            >
+              <Logout fontSize="large"></Logout>
             </IconButton>
           </Tooltip>
         </Toolbar>

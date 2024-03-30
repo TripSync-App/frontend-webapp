@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography, useTheme } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import { API_URL } from "../constants";
 
@@ -10,6 +10,7 @@ const UserInfo = () => {
   const [newPFP, setNewPFP] = useState("");
   const userData = JSON.parse(localStorage.getItem("userData"));
   const token = localStorage.getItem("accessToken");
+  const theme = useTheme();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -37,6 +38,7 @@ const UserInfo = () => {
 
       if (response.ok) {
         console.log("Profile picture uploaded successfully");
+        location.reload();
       } else {
         console.error("Error uploading profile picture:", response.statusText);
       }
@@ -73,17 +75,24 @@ const UserInfo = () => {
 
   return (
     <Box
-      className="flex flex-col p-4 rounded-lg ml-2 h-[90vh] max-w-[20vw]"
-      sx={{ boxShadow: 4, bgcolor: "background.default", mt: 2 }}
+      className="h-[90vh] flex flex-col p-4 rounded-lg ml-2 max-w-[20vw]"
+      style={{ backgroundColor: theme.palette.cardColors }}
+      sx={{ boxShadow: 4, mt: 2 }}
     >
       <div className="flex justify-center h-[25%]">
         <Avatar
           alt="Profile Picture"
           src={newPFP ? URL.createObjectURL(newPFP) : profilePic}
-          sx={{ width: "auto", height: "auto", aspectRatio: "1/1", mb: 2 }}
+          sx={{
+            width: "auto",
+            height: "95%",
+            aspectRatio: "1/1",
+            mb: 2,
+            boxShadow: 2,
+          }}
         />
       </div>
-      <Typography className="mb-2" variant="h5" gutterBottom align="center">
+      <Typography sx={{ mb: 2 }} variant="h5" gutterBottom align="center">
         @{userData.username}
       </Typography>
       <form onSubmit={handleSubmit} encType="multipart/form-data">

@@ -1,20 +1,43 @@
 import React from "react";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
-import { Typography } from "@mui/material";
-import { API_URL } from "../constants";
+import { Typography, Modal } from "@mui/material";
+import { API_URL, modal_style } from "../constants";
 import {
   Card,
   CardContent,
   CardMedia,
   Button,
   CardActions,
+  useTheme,
 } from "@mui/material";
 
 const TeamInfo = () => {
   const userData = JSON.parse(localStorage.getItem("userData"));
   const token = localStorage.getItem("accessToken");
   const [teams, setTeams] = useState([]);
+  const [selectedTeam, setSelectedTeam] = useState("");
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const handleOpen = (team) => {
+    setSelectedTeam(team);
+    setOpen(true);
+  };
+  const handleClose = () => setOpen(false);
+  const handleLeave = async (selectedTeam) => {
+    try {
+      await fetch(`${API_URL}/teams/remove-user`, {
+        method: "POST",
+        body: JSON.stringify({
+          team: { team_id: selectedTeam.team_id },
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) { }
+  };
 
   useEffect(() => {
     try {
@@ -37,12 +60,13 @@ const TeamInfo = () => {
   return (
     <Box
       className="mt-4 mr-2 p-2 ml-auto h-[90vh] overflow-scroll min-w-[20vw]"
-      sx={{ bgcolor: "background.paper" }}
+      style={{ backgroundColor: theme.palette.cardColors }}
     >
       <Typography>Your Teams</Typography>
       {teams.map((team, index) => (
         <Card
           sx={{ mt: 2, maxHeight: "50%", maxWidth: "20vw", mb: 2 }}
+          className="transition ease-in-out delay-50 hover:scale-105 duration-100"
           key={index}
         >
           <CardContent>
@@ -64,10 +88,41 @@ const TeamInfo = () => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Leave Team</Button>
+            <Button
+              size="small"
+              onClick={() => {
+                handleOpen(team);
+              }}
+            >
+              Leave Team
+            </Button>
           </CardActions>
         </Card>
       ))}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={modal_style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Leaving Team
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Are you sure you want to leave team: {selectedTeam.name}
+          </Typography>
+          <Button
+            onClick={async () => {
+              await handleLeave(selectedTeam);
+              location.reload();
+            }}
+          >
+            Leave
+          </Button>
+          <Button onClick={handleClose}>Close</Button>
+        </Box>
+      </Modal>
     </Box>
   );
 };

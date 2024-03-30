@@ -156,6 +156,7 @@ const Login = () => {
             </form>
           </div>
         )}
+        <p className="text-center text-gray-500">Copyright © 2024 Tripsync</p>
       </div>
       <Snackbar
         open={open}
