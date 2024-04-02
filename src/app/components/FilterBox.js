@@ -19,14 +19,25 @@ export default function FilterBox (){
           ...option,
         };
       });
-    return (
+    
+      return (
         <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
           groupBy={(option) => option.firstLetter}
           sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Filters" />}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Filters"
+              InputLabelProps={{ style: { color: 'white' } }} // Setting the color of the label text
+              InputProps={{
+                ...params.InputProps,
+                style: { color: 'white' } // Setting the color of the input text
+              }}
+            />
+          )}
         />
       );
-}
+    }

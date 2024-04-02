@@ -9,16 +9,25 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 20, 100;
   }
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  }
 }
 
+/* Light Mode */ 
 @media (prefers-color-scheme: light) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 200, 220;
-    --background-end-rgb: 243, 180, 108;
+    --background-start-rgb: 0, 0, 75;
+    --background-end-rgb: 4, 118, 208;
     background-color: #5ac465;
   }
-}
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -28,7 +37,8 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-}
+  }
+} 
 
 @layer utilities {
   .text-balance {

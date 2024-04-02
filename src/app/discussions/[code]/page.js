@@ -20,15 +20,15 @@ export default function Discussion({ params }){
     const token = localStorage.getItem("accessToken");
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
     const theme = useMemo(
-      () =>
+    () =>
         createTheme({
-          palette: {
+        palette: {
             mode: prefersDarkMode ? "dark" : "light",
             customBackground: prefersDarkMode ? "#131414" : "#5ac465",
             text: prefersDarkMode ? "#FFFFFF" : "#000000"
-          },
+        },
         }),
-      [prefersDarkMode],
+    [prefersDarkMode],
     );
     const getInfo = async () => {
         try {
@@ -54,8 +54,6 @@ export default function Discussion({ params }){
     }
     getInfo();
     console.log(discussionInfo)
-
-    
 
     return(
         <main id='discussion' className="overflow-hidden min-h-screen">

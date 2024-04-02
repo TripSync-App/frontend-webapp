@@ -17,16 +17,24 @@ import logo from "../resources/TS_LOGO.png";
 
 const Profile = () => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+    // Default to light mode if preference is not specified
+    const isDarkMode = prefersDarkMode || false;
   const theme = useMemo(
     () =>
       createTheme({
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
+          customBackground: isDarkMode ? "#131414" : "#F5F5F5", // Lighter background for light mode
           customBackground: prefersDarkMode ? "#131414" : "#FFFFFF",
           cardColors: prefersDarkMode ? "#181a1c" : "#FFFFFF",
+          // Add text colors for both modes
+          text: {
+            primary: isDarkMode ? "#FFFFFF" : "#000000",
+            secondary: isDarkMode ? "#C0C0C0" : "#444444",
+          },
         },
       }),
-    [prefersDarkMode],
+    [isDarkMode],
   );
   return (
     <main

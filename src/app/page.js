@@ -27,6 +27,12 @@ export default function Home() {
       createTheme({
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
+          primary: {
+            main: prefersDarkMode ? '#90caf9' : '#1976d2', // Adjust primary color for light and dark mode
+          },
+          background: {
+            default: prefersDarkMode ? '#121212' : '#f5f5f5', // Adjust background color for light and dark mode
+          },
         },
       }),
     [prefersDarkMode],
@@ -47,7 +53,7 @@ export default function Home() {
       title: "City Sights",
       image: nightSample,
       description: "#NightLife",
-      styling: { bgcolor: "black", color: 'inherit' },
+      styling: { bgcolor: prefersDarkMode ? "black" : "#000000", color: prefersDarkMode ? 'inherit' : '#FFFFFF' }, // Adjust bgcolor and text color for light and dark mode
       tags: [],
       discussionId: 1
     },
@@ -55,7 +61,7 @@ export default function Home() {
       title: "Wilderness",
       image: adventureSample,
       description: "A Fresh Breath of Air",
-      styling: { bgcolor: "darkgreen", color: 'inherit'  },
+      styling: { bgcolor: prefersDarkMode ? "darkgreen" : "#013220", color: prefersDarkMode ? 'inherit' : '#FFFFFF' }, // Adjust bgcolor and text color for light and dark mode
       tags: [],
       discussionId: 2
     },
@@ -63,7 +69,7 @@ export default function Home() {
       title: "Ocean View",
       image: beachSample,
       description: "Surf's Up!",
-      styling: { bgcolor: "teal", color: 'inherit'  },
+      styling: { bgcolor: prefersDarkMode ? "teal" : "#A7C7E7", color: prefersDarkMode ? 'inherit' : '#FFFFFF' }, // Adjust bgcolor and text color for light and dark mode
       tags: [],
       discussionId: 3
     },
@@ -71,7 +77,7 @@ export default function Home() {
       title: "Attractions",
       image: festvalSample,
       description: "Fun For the Whole Family",
-      styling: { bgcolor: "purple", color: 'inherit'  },
+      styling: { bgcolor: prefersDarkMode ? "purple" : "#483248", color: prefersDarkMode ? 'inherit' : '#FFFFFF' }, // Adjust bgcolor and text color for light and dark mode
       tags: [],
       discussionId: 4
     },

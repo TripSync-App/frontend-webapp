@@ -59,3 +59,4 @@ export default function Thumbnail ({title, image, description, styling, discussi
         </div>
     );
 }
+
