@@ -1,6 +1,6 @@
 MONGO_USERNAME := $(shell docker-compose config | grep -oP "MONGO_INITDB_ROOT_USERNAME: \K([A-Za-z]*)" | awk '{print $2}')
 MONGO_PASSWORD := $(shell docker-compose config | grep -oP "MONGO_INITDB_ROOT_PASSWORD: \K([A-Za-z]*)" | awk '{print $2}')
-PHONY: stop remove build up migrate connect build-force
+PHONY: stop remove build up migrate connect build-force pull
 
 stop:
 	docker stop frontend-webapp
@@ -17,6 +17,9 @@ build-force:
 
 migrate:
 	docker exec -it edgedb bash ./migrate.sh
+
+pull:
+	docker compose pull
 
 up:
 	docker compose up -d

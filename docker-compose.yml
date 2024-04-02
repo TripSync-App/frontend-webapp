@@ -2,6 +2,7 @@ version: "3.8"
 services:
   frontend:
     container_name: "frontend-webapp"
+    image: tripsync/frontend:latest
     build:
       context: "."
     ports:
@@ -16,6 +17,7 @@ services:
 
   api:
     container_name: "site-api"
+    image: tripsync/backend:latest
     environment:
       MONGO_USERNAME: pfpreader
       MONGO_PASSWORD: pressxtodoubt
@@ -30,6 +32,7 @@ services:
 
   edgedb:
     container_name: "edgedb"
+    image: tripsync/database:latest
     build:
       context: "../edgedb"
     environment:
