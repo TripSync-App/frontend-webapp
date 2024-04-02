@@ -2,7 +2,7 @@ import { API_URL } from "../constants";
 const token = localStorage.getItem("accessToken");
 
 export const fetchTeams = () => {
-  return fetch(`${API_URL}/teams/owned`, {
+  return fetch(`/api/teams/owned`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -14,7 +14,7 @@ export const fetchTeams = () => {
 };
 
 export const createTeam = async (name) => {
-  return fetch(`${API_URL}/teams`, {
+  return fetch(`/api/teams`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export const createTeam = async (name) => {
 };
 
 export const deleteUser = async (username, team) => {
-  return fetch(`${API_URL}/teams/remove-user`, {
+  return fetch(`/api/teams/remove-user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export const deleteUser = async (username, team) => {
 };
 
 export const createInviteCode = async (team) => {
-  return fetch(`${API_URL}/teams/create-invite`, {
+  return fetch(`/api/teams/create-invite`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export const createInviteCode = async (team) => {
 };
 
 export const getInviteCode = async (team) => {
-  return fetch(`${API_URL}/teams/get-invite`, {
+  return fetch(`/api/teams/get-invite`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

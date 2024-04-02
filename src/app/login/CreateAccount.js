@@ -37,7 +37,7 @@ const CreateAccount = ({
     };
 
     try {
-      const response = await fetch("http://localhost:8000/users", options);
+      const response = await fetch("/api/users", options);
       if (response.status === 200) {
         const result = await response.json();
         setCreateUser(false);

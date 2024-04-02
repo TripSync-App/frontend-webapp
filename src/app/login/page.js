@@ -64,7 +64,7 @@ const Login = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/login", options);
+      const response = await fetch("/api/login", options);
       if (response.status === 200) {
         const result = await response.json();
         localStorage.setItem("accessToken", result.access_token);

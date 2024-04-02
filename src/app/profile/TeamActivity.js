@@ -10,7 +10,7 @@ const TeamActivity = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`${API_URL}/messages/team`, {
+        const res = await fetch(`/api/messages/team`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

@@ -34,7 +34,7 @@ const MessageBlock = ({ message }) => {
       console.log(message.author.username);
       try {
         const response = await fetch(
-          `${API_URL}/users/pfp/${message.author.username}`,
+          `/api/users/pfp/${message.author.username}`,
           {
             method: "GET",
             headers: {

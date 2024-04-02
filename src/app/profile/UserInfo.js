@@ -28,7 +28,7 @@ const UserInfo = () => {
     formData.append("image", newPFP);
 
     try {
-      const response = await fetch(`${API_URL}/users/upload-pfp`, {
+      const response = await fetch(`/api/users/upload-pfp`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -50,7 +50,7 @@ const UserInfo = () => {
   useEffect(() => {
     const fetchProfilePic = async () => {
       try {
-        const response = await fetch(`${API_URL}/users/pfp`, {
+        const response = await fetch(`/api/users/pfp`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

@@ -29,7 +29,7 @@ function InvitePage({ params }) {
   useEffect(() => {
     const redeemInvite = async () => {
       try {
-        const response = await fetch(`${API_URL}/teams/redeem-invite`, {
+        const response = await fetch(`/api/teams/redeem-invite`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

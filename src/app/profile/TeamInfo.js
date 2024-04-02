@@ -26,7 +26,7 @@ const TeamInfo = () => {
   const handleClose = () => setOpen(false);
   const handleLeave = async (selectedTeam) => {
     try {
-      await fetch(`${API_URL}/teams/remove-user`, {
+      await fetch(`/api/teams/remove-user`, {
         method: "POST",
         body: JSON.stringify({
           team: { team_id: selectedTeam.team_id },
@@ -36,12 +36,12 @@ const TeamInfo = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
     try {
-      fetch(`${API_URL}/teams/member`, {
+      fetch(`/api/teams/member`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

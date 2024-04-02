@@ -10,7 +10,7 @@ const UserActivity = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`${API_URL}/messages`, {
+        const res = await fetch(`/api/messages`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
