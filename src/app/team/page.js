@@ -160,13 +160,13 @@ const Team = () => {
           >
             <Box sx={modal_style}>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Leaving Team
+                Deleting Team
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Are you sure you want to delete your account? This can NOT be
+                Are you sure you want to delete your team? This can NOT be
                 undone.
               </Typography>
-              <Button onClick={handleDelete}>Delete My Account</Button>
+              <Button onClick={handleDelete}>Delete My Team</Button>
               <Button onClick={handleClose}>Close</Button>
             </Box>
           </Modal>
