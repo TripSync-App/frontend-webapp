@@ -17,8 +17,8 @@ import logo from "../resources/TS_LOGO.png";
 
 const Profile = () => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-    // Default to light mode if preference is not specified
-    const isDarkMode = prefersDarkMode || false;
+  // Default to light mode if preference is not specified
+  const isDarkMode = prefersDarkMode || false;
   const theme = useMemo(
     () =>
       createTheme({

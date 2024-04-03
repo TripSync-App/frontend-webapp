@@ -1,19 +1,53 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, TextField, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  TextField,
+  Tooltip,
+  Typography,
+  useTheme,
+  Modal,
+} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import { API_URL } from "../constants";
+import { Delete } from "@mui/icons-material";
+import { modal_style } from "../constants";
+import { deleteAccount } from "../team/lib";
+import { useRouter } from "next/navigation";
 
 const UserInfo = () => {
-  const [name, setName] = useState("");
-  const [bio, setBio] = useState("");
+  const router = useRouter();
   const [profilePic, setProfilePic] = useState("");
   const [newPFP, setNewPFP] = useState("");
-  const userData = JSON.parse(localStorage.getItem("userData"));
+  let userData = JSON.parse(localStorage.getItem("userData"));
+  const [first, setFirst] = useState(userData.first_name);
+  const [last, setLast] = useState(userData.last_name);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const deleteSelf = async () => {
+    setOpen(false);
+    deleteAccount();
+    await new Promise((resolve) =>
+      router.push("/login", undefined, { shallow: true }, resolve),
+    );
+    localStorage.clear();
+  };
+
   const token = localStorage.getItem("accessToken");
   const theme = useTheme();
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
+  const handleFirstChange = (event) => {
+    setFirst(event.target.value);
+  };
+
+  const handleLastChange = (event) => {
+    setLast(event.target.value);
   };
 
   const handleProfilePicChange = (event) => {
@@ -26,9 +60,13 @@ const UserInfo = () => {
     const formData = new FormData();
 
     formData.append("image", newPFP);
+    console.log(first);
+    console.log(last);
+    formData.append("first_name", first);
+    formData.append("last_name", last);
 
     try {
-      const response = await fetch(`/api/users/upload-pfp`, {
+      const response = await fetch(`/api/users/update`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -38,6 +76,10 @@ const UserInfo = () => {
 
       if (response.ok) {
         console.log("Profile picture uploaded successfully");
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({ ...userData, first_name: first, last_name: last }),
+        );
         location.reload();
       } else {
         console.error("Error uploading profile picture:", response.statusText);
@@ -77,8 +119,16 @@ const UserInfo = () => {
     <Box
       className="h-[90vh] flex flex-col p-4 rounded-lg ml-2 max-w-[20vw]"
       style={{ backgroundColor: theme.palette.cardColors }}
-      sx={{ boxShadow: 4, mt: 2 }}
+      sx={{ boxShadow: 4, mt: 2, position: "relative" }}
     >
+      <Tooltip title="Delete Your Account">
+        <IconButton
+          onClick={handleOpen}
+          sx={{ position: "absolute", right: 0, top: -1, mb: 2 }}
+        >
+          <Delete></Delete>
+        </IconButton>
+      </Tooltip>
       <div className="flex justify-center h-[25%]">
         <Avatar
           alt="Profile Picture"
@@ -99,16 +149,16 @@ const UserInfo = () => {
         <TextField
           label="First Name"
           variant="outlined"
-          value={userData.first_name}
-          onChange={handleNameChange}
+          value={first}
+          onChange={handleFirstChange}
           fullWidth
           sx={{ mb: 2 }}
         />
         <TextField
           label="Last Name"
           variant="outlined"
-          value={userData.last_name}
-          onChange={handleNameChange}
+          value={last}
+          onChange={handleLastChange}
           fullWidth
           sx={{ mb: 2 }}
         />
@@ -133,6 +183,24 @@ const UserInfo = () => {
           Apply Changes
         </Button>
       </form>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={modal_style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Leaving Team
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Are you sure you want to delete your account? This can NOT be
+            undone.
+          </Typography>
+          <Button onClick={deleteSelf}>Delete My Account</Button>
+          <Button onClick={handleClose}>Close</Button>
+        </Box>
+      </Modal>
     </Box>
   );
 };

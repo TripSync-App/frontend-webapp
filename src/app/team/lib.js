@@ -101,3 +101,21 @@ export const getInviteCode = async (team) => {
       throw error;
     });
 };
+
+export const deleteAccount = async () => {
+  return fetch(`/api/users/delete`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      console.log(response.status);
+      return response.json();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      throw error;
+    });
+};
