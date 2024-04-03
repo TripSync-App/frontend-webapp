@@ -4,17 +4,26 @@ import { Box, Icon, IconButton, Tooltip, Typography } from "@mui/material";
 import SelectTeam from "./SelectTeam";
 import MemberInfo from "./MemberInfo";
 import TeamInfo from "./TeamInfo";
-import { createTeam, fetchTeams, createInviteCode, getInviteCode } from "./lib";
+import {
+  createTeam,
+  fetchTeams,
+  createInviteCode,
+  getInviteCode,
+  deleteTeam,
+} from "./lib";
 import NavBarComponent from "../components/NavBar";
 import logo from "../resources/TS_LOGO.png";
 import {
+  Modal,
   ThemeProvider,
   useMediaQuery,
   createTheme,
   Divider,
   Paper,
+  Button,
 } from "@mui/material";
-import { ContentCopy } from "@mui/icons-material";
+import { ContentCopy, Delete } from "@mui/icons-material";
+import { modal_style } from "../constants";
 
 //TODO: delete team button
 
@@ -22,6 +31,19 @@ const Team = () => {
   const [teams, setTeams] = useState([]);
   const [team, setTeam] = useState("");
   const [members, setMembers] = useState([]);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleDelete = () => {
+    deleteTeam(team.team_id);
+    location.reload();
+  };
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const theme = useMemo(
@@ -30,7 +52,7 @@ const Team = () => {
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
           customBackground: prefersDarkMode ? "#131414" : "#5ac465",
-          customComponentBackground: prefersDarkMode ? "inherit" : "#b5e1e6"
+          customComponentBackground: prefersDarkMode ? "inherit" : "#b5e1e6",
         },
       }),
     [prefersDarkMode],
@@ -72,9 +94,12 @@ const Team = () => {
         <div
           id="team-wrapper"
           className="team flex justify-center min-h-[100vh] min-w-[100vw]"
-          style={{ backgroundColor: theme.palette.customBackground}}
+          style={{ backgroundColor: theme.palette.customBackground }}
         >
-          <Paper sx={{backgroundColor: theme.palette.customComponentBackground}} className="mt-[1vh] h-[75%] w-full ml-2 mr-2">
+          <Paper
+            sx={{ backgroundColor: theme.palette.customComponentBackground }}
+            className="mt-[1vh] h-[75%] w-full ml-2 mr-2"
+          >
             <Box sx={{ width: "100%", padding: 2 }}>
               <SelectTeam
                 teams={teams}
@@ -84,12 +109,21 @@ const Team = () => {
               />
             </Box>
             <div className="info flex flex-col justify-between">
-              <Typography
-                className="!text-lg !font-bold"
-                sx={{ paddingLeft: 2 }}
-              >
-                Team Info
-              </Typography>
+              <div className="flex flex-row items-center">
+                <Typography
+                  className="text-lg font-bold"
+                  sx={{ pl: 2 }} // Use MUI's sx prop for padding left
+                >
+                  Team Info
+                </Typography>
+                {team ? (
+                  <Tooltip title="Delete your team">
+                    <IconButton onClick={handleOpen} className="p-0">
+                      <Delete />
+                    </IconButton>
+                  </Tooltip>
+                ) : null}
+              </div>
               <TeamInfo item={team}></TeamInfo>
               <Divider />
               <div className="flex flex-row">
@@ -110,12 +144,32 @@ const Team = () => {
                 ) : null}
               </div>
               <MemberInfo
-              team={team} 
-              members={members}
-              styling={{backgroundColor: theme.palette.customComponentBackground}}
+                team={team}
+                members={members}
+                styling={{
+                  backgroundColor: theme.palette.customComponentBackground,
+                }}
               ></MemberInfo>
             </div>
           </Paper>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={modal_style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Leaving Team
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                Are you sure you want to delete your account? This can NOT be
+                undone.
+              </Typography>
+              <Button onClick={handleDelete}>Delete My Account</Button>
+              <Button onClick={handleClose}>Close</Button>
+            </Box>
+          </Modal>
         </div>
       </ThemeProvider>
     </main>

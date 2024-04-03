@@ -119,3 +119,24 @@ export const deleteAccount = async () => {
       throw error;
     });
 };
+
+export const deleteTeam = async (team) => {
+  return fetch(`/api/teams/delete`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      team_id: team,
+    }),
+  })
+    .then((response) => {
+      console.log(response.status);
+      return response.json();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      throw error;
+    });
+};
