@@ -5,6 +5,7 @@ services:
     image: tripsync/frontend:latest
     build:
       context: "."
+    command: ["npm", "run", "start"]
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`beta.tripsync.fun`)"

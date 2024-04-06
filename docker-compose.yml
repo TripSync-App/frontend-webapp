@@ -5,6 +5,7 @@ services:
     image: tripsync/frontend:latest
     build:
       context: "."
+    command: ["npm", "run", "dev"]
     volumes:
       - ./public:/app/public
       - ./src:/app/src
