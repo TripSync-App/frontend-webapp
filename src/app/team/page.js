@@ -42,7 +42,7 @@ const Team = () => {
 
   const handleDelete = () => {
     deleteTeam(team.team_id);
-    location.reload();
+    window.location.reload();
   };
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -98,7 +98,7 @@ const Team = () => {
         >
           <Paper
             sx={{ backgroundColor: theme.palette.customComponentBackground }}
-            className="mt-[1vh] h-[75%] w-full ml-2 mr-2"
+            className="mt-[1vh] h-[75%] w-full ml-2 mr-2 animate-fade-down"
           >
             <Box sx={{ width: "100%", padding: 2 }}>
               <SelectTeam

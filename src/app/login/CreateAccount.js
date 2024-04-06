@@ -59,7 +59,7 @@ const CreateAccount = ({
   return (
     <div className="form flex flex-row justify-center mb-20">
       <form className="flex flex-col" onSubmit={handleSubmit}>
-        <div className="name flex justify-center space-x-4 w-[100%]">
+        <div className="name flex justify-center space-x-4 w-[100%] animate-fade">
           <TextField
             className={"mb-[1vh] w-[45%]"}
             label="First Name"

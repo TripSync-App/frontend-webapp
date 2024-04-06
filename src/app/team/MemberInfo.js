@@ -53,6 +53,7 @@ const MemberInfo = ({ team, members, styling }) => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((member) => (
                   <TableRow
+                    className="animate-fade-down animate-duration-500"
                     key={member.username}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >

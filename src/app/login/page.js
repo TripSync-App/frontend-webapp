@@ -109,7 +109,7 @@ const Login = () => {
             setSeverity={setSeverity}
           />
         ) : (
-          <div className="form flex flex-row justify-center mb-[20%]">
+          <div className="form flex flex-row justify-center mb-[20%] animate-fade">
             <form className="flex flex-col p-2" onSubmit={handleSubmit}>
               <input
                 id="username-input"

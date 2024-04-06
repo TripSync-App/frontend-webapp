@@ -9,7 +9,7 @@ const TeamInfo = ({ item }) => {
   return (
     <Box sx={{ padding: 2 }}>
       {item ? (
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 animate-fade animate-duration-1000">
           <TextField
             label="Name"
             defaultValue={item.name}
