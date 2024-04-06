@@ -1,0 +1,87 @@
+version: "3.8"
+services:
+  frontend:
+    container_name: "frontend-webapp"
+    image: tripsync/frontend:latest
+    build:
+      context: "."
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`beta.tripsync.fun`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls=true"
+      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.frontend-http.rule=Host(`beta.tripsync.fun`)"
+      - "traefik.http.routers.frontend-http.entrypoints=web"
+      - "traefik.http.routers.frontend-http.middlewares=redirect-to-https"
+    networks:
+      - "traveling"
+
+  api:
+    container_name: "site-api"
+    image: tripsync/backend:latest
+    environment:
+      MONGO_USERNAME: pfpreader
+      MONGO_PASSWORD: pressxtodoubt
+    build:
+      context: "../site-api"
+    volumes:
+      - ../site-api/src/site_api:/project/site_api
+    ports:
+      - "8000:8000"
+    networks:
+      - "traveling"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.api.loadbalancer.server.port=8000"
+      - "traefik.http.routers.api.entrypoints=web"
+      - "traefik.http.routers.api.rule=Host(`beta.tripsync.fun`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.tls=true"
+
+  edgedb:
+    container_name: "edgedb"
+    image: tripsync/database:latest
+    build:
+      context: "../edgedb"
+    environment:
+      EDGEDB_SERVER_SECURITY: insecure_dev_mode
+      EDGEDB_SERVER_ADMIN_UI: enabled
+      EDGEDB_SERVER_PASSWORD: edgedb
+    ports:
+      - 5656:5656
+    networks:
+      - "traveling"
+
+  tripsync-traefik:
+    image: traefik:v2.5
+    command:
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.websecure.http.tls.certificates.certfile=/certs/ssl-cert-tripsync.pem"
+      - "--entrypoints.websecure.http.tls.certificates.keyfile=/certs/ssl-cert-tripsync.key"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - /etc/ssl/private/ssl-cert-tripsync.key
+      - /etc/ssl/certs/ssl-cert-tripsync.pem
+    networks:
+      - traveling
+
+  mongo:
+    image: mongo
+    container_name: tripsync-mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: pfpreader
+      MONGO_INITDB_ROOT_PASSWORD: pressxtodoubt
+    networks:
+      - traveling
+
+networks:
+  traveling:
+    external: True
