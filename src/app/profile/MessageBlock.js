@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../constants";
 
@@ -13,8 +14,14 @@ import {
 } from "@mui/material";
 
 const MessageBlock = ({ message }) => {
-  const token = localStorage.getItem("accessToken");
-  const userData = JSON.parse(localStorage.getItem("userData"));
+  let userData = {};
+  let token = "";
+
+  try {
+    userData = JSON.parse(localStorage.getItem("userData"));
+    token = localStorage.getItem("accessToken");
+  } catch (e) {}
+
   const [profilePic, setProfilePic] = useState("");
   const MAX_TEXT_LENGTH = 30;
 

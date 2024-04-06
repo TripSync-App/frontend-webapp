@@ -1,20 +1,25 @@
+"use client";
 import React from "react";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { Typography, Modal } from "@mui/material";
-import { API_URL, modal_style } from "../constants";
+import { modal_style } from "../constants";
 import {
   Card,
   CardContent,
-  CardMedia,
   Button,
   CardActions,
   useTheme,
 } from "@mui/material";
 
 const TeamInfo = () => {
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  const token = localStorage.getItem("accessToken");
+  let userData = {};
+  let token = "";
+  try {
+    userData = JSON.parse(localStorage.getItem("userData"));
+    token = localStorage.getItem("accessToken");
+  } catch {}
+
   const [teams, setTeams] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState("");
   const [open, setOpen] = React.useState(false);

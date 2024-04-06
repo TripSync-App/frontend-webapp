@@ -2,7 +2,6 @@
 import React from "react";
 import { Box } from "@mui/system";
 import { Avatar, Divider, Typography } from "@mui/material";
-import { useState } from "react";
 
 const UserPreview = () => {
   const userData = JSON.parse(localStorage.getItem("userData"));
@@ -11,7 +10,7 @@ const UserPreview = () => {
       className="flex flex-col p-2 justify-evenly min-w-[25vw] min-h-[50vh ml-2]"
       sx={{ bgcolor: "background.default" }}
     >
-      <Typography className="m-auto text-center">
+      <Typography className="m-auto text-center" variant="h5">
         @{userData.username}
       </Typography>
       <Divider />

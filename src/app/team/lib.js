@@ -1,7 +1,4 @@
-import { API_URL } from "../constants";
-const token = localStorage.getItem("accessToken");
-
-export const fetchTeams = () => {
+export const fetchTeams = (token) => {
   return fetch(`/api/teams/owned`, {
     method: "GET",
     headers: {

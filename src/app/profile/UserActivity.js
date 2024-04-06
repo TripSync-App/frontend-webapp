@@ -4,7 +4,10 @@ import MessageBlock from "./MessageBlock";
 import { API_URL } from "../constants";
 
 const UserActivity = () => {
-  const token = localStorage.getItem("accessToken");
+  let token = "";
+  try {
+    token = localStorage.getItem("accessToken");
+  } catch {}
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {

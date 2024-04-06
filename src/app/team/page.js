@@ -32,6 +32,10 @@ const Team = () => {
   const [team, setTeam] = useState("");
   const [members, setMembers] = useState([]);
   const [open, setOpen] = useState(false);
+  let token = "";
+  try {
+    token = localStorage.getItem("accessToken");
+  } catch (e) {}
 
   const handleOpen = () => {
     setOpen(true);
@@ -61,7 +65,7 @@ const Team = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const teamsData = await fetchTeams();
+        const teamsData = await fetchTeams(token);
         setTeams(teamsData.teams);
       } catch (error) {
         console.error("Error fetching teams:", error);

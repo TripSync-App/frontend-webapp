@@ -14,4 +14,6 @@ COPY jsconfig.json next.config.mjs postcss.config.js tailwind.config.js /app
 
 EXPOSE 3000
 
+RUN npm run build
+
 CMD ["npm", "run", "dev"]

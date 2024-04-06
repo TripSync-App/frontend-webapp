@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import {
   Box,
@@ -16,10 +17,17 @@ import { deleteAccount } from "../team/lib";
 import { useRouter } from "next/navigation";
 
 const UserInfo = () => {
+  let userData = {};
+  let token = "";
+
+  try {
+    userData = JSON.parse(localStorage.getItem("userData"));
+    token = localStorage.getItem("accessToken");
+  } catch {}
+
   const router = useRouter();
   const [profilePic, setProfilePic] = useState("");
   const [newPFP, setNewPFP] = useState("");
-  let userData = JSON.parse(localStorage.getItem("userData"));
   const [first, setFirst] = useState(userData.first_name);
   const [last, setLast] = useState(userData.last_name);
   const [open, setOpen] = useState(false);
@@ -39,7 +47,6 @@ const UserInfo = () => {
     localStorage.clear();
   };
 
-  const token = localStorage.getItem("accessToken");
   const theme = useTheme();
 
   const handleFirstChange = (event) => {
@@ -142,7 +149,13 @@ const UserInfo = () => {
           }}
         />
       </div>
-      <Typography sx={{ mb: 2 }} variant="h5" gutterBottom align="center">
+      <Typography
+        sx={{ mb: 2 }}
+        variant="h5"
+        gutterBottom
+        align="center"
+        suppressHydrationWarning
+      >
         @{userData.username}
       </Typography>
       <form onSubmit={handleSubmit} encType="multipart/form-data">

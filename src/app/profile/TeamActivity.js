@@ -1,10 +1,13 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { Box, List } from "@mui/material";
 import MessageBlock from "./MessageBlock";
-import { API_URL } from "../constants";
 
 const TeamActivity = () => {
-  const token = localStorage.getItem("accessToken");
+  let token = "";
+  try {
+    token = localStorage.getItem("accessToken");
+  } catch {}
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
