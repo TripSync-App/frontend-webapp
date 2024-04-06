@@ -61,15 +61,15 @@ services:
       - "--providers.docker=true"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
-      - "--entrypoints.websecure.http.tls.certificates.certfile=/certs/ssl-cert-tripsync.pem"
-      - "--entrypoints.websecure.http.tls.certificates.keyfile=/certs/ssl-cert-tripsync.key"
+      - "--providers.file.filename=/etc/traefik/dynamic_conf.yaml"
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - /etc/ssl/private/ssl-cert-tripsync.key
-      - /etc/ssl/certs/ssl-cert-tripsync.pem
+      - "./dynamic_conf.yaml:/etc/traefik/dynamic_conf.yaml"
+      - "/etc/ssl/private/ssl-cert-tripsync.key:/etc/certs/ssl-cert-tripsync.key"
+      - "/etc/ssl/certs/ssl-cert-tripsync.pem:/etc/certs/ssl-cert-tripsync.pem"
     networks:
       - traveling
 
