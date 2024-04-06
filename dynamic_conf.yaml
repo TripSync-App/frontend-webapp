@@ -1,4 +1,4 @@
 tls:
   certificates:
-    - certFile: /etc/certs/ssl-cert-tripsync.pem
-      keyFile: /etc/certs/ssl-cert-tripsync.key
+    - certFile: /etc/ssl/certs/ssl-cert-tripsync.pem
+      keyFile: /etc/ssl/private/ssl-cert-tripsync.key
