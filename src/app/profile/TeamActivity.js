@@ -4,15 +4,11 @@ import { Box, List, Typography, useTheme } from "@mui/material";
 import MessageBlock from "./MessageBlock";
 
 const TeamActivity = () => {
-<<<<<<< HEAD
   let token = "";
   try {
     token = localStorage.getItem("accessToken");
   } catch {}
-=======
-  const theme = useTheme ();
-  const token = localStorage.getItem("accessToken");
->>>>>>> 4b6005b (light and dark)
+  const theme = useTheme();
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {

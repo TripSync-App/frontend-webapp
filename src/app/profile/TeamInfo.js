@@ -2,19 +2,9 @@
 import React from "react";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
-import { Typography, Modal } from "@mui/material";
 import { modal_style } from "../constants";
-=======
 import { Typography, Modal, useTheme } from "@mui/material";
-import { API_URL, modal_style } from "../constants";
->>>>>>> 4b6005b (light and dark)
-import {
-  Card,
-  CardContent,
-  Button,
-  CardActions,
-} from "@mui/material";
+import { Card, CardContent, Button, CardActions } from "@mui/material";
 
 const TeamInfo = () => {
   let userData = {};
@@ -83,7 +73,6 @@ const TeamInfo = () => {
       >
         Your Teams
       </Typography>
-
 
       {teams.map((team, index) => (
         <Card

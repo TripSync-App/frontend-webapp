@@ -28,14 +28,8 @@ const UserInfo = () => {
   const router = useRouter();
   const [profilePic, setProfilePic] = useState("");
   const [newPFP, setNewPFP] = useState("");
-<<<<<<< HEAD
-  const [first, setFirst] = useState(userData.first_name);
-  const [last, setLast] = useState(userData.last_name);
-=======
-  const userData = JSON.parse(localStorage.getItem("userData")) || {}; // Default to empty object if null
   const [first, setFirst] = useState(userData.first_name || "");
   const [last, setLast] = useState(userData.last_name || "");
->>>>>>> 4b6005b (light and dark)
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -137,7 +131,13 @@ const UserInfo = () => {
       <Tooltip title="Delete Your Account">
         <IconButton
           onClick={handleOpen}
-          sx={{ color: "#FFFFFF", position: "absolute", right: 0, top: -1, mb: 2 }}
+          sx={{
+            color: "#FFFFFF",
+            position: "absolute",
+            right: 0,
+            top: -1,
+            mb: 2,
+          }}
         >
           <Delete />
         </IconButton>
@@ -160,11 +160,10 @@ const UserInfo = () => {
         variant="h5"
         gutterBottom
         align="center"
-<<<<<<< HEAD
         suppressHydrationWarning
-=======
-        color={theme.palette.mode === "light" ? "text.primary" : "text.secondary"}
->>>>>>> 4b6005b (light and dark)
+        color={
+          theme.palette.mode === "light" ? "text.primary" : "text.secondary"
+        }
       >
         @{userData.username}
       </Typography>
@@ -196,7 +195,8 @@ const UserInfo = () => {
           <Button
             sx={{
               mb: 2,
-              backgroundColor: theme.palette.mode === "light" ? "#1E88E5" : "#0D47A1",
+              backgroundColor:
+                theme.palette.mode === "light" ? "#1E88E5" : "#0D47A1",
               color: "#FFFFFF",
             }}
             variant="contained"
@@ -210,7 +210,8 @@ const UserInfo = () => {
           type="submit"
           sx={{
             mb: 2,
-            backgroundColor: theme.palette.mode === "light" ? "#1E88E5" : "#0D47A1",
+            backgroundColor:
+              theme.palette.mode === "light" ? "#1E88E5" : "#0D47A1",
             color: "#FFFFFF",
           }}
           variant="contained"
@@ -240,4 +241,4 @@ const UserInfo = () => {
     </Box>
   );
 };
-export default UserInfo; 
+export default UserInfo;

@@ -4,15 +4,11 @@ import MessageBlock from "./MessageBlock";
 import { API_URL } from "../constants";
 
 const UserActivity = () => {
-<<<<<<< HEAD
   let token = "";
   try {
     token = localStorage.getItem("accessToken");
   } catch {}
-=======
   const theme = useTheme();
-  const token = localStorage.getItem("accessToken");
->>>>>>> 4b6005b (light and dark)
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -36,7 +32,7 @@ const UserActivity = () => {
   }, [token]);
 
   return (
-      <Box className="w-full overflow-scroll">
+    <Box className="w-full overflow-scroll">
       <Typography
         variant="h6"
         align="center"
@@ -49,7 +45,6 @@ const UserActivity = () => {
       >
         Your Activity
       </Typography>
-
 
       <List>
         {messages.map((message, index) => (
