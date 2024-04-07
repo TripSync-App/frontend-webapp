@@ -18,27 +18,43 @@ const Profile = () => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   // Default to light mode if preference is not specified
   const isDarkMode = prefersDarkMode || false;
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? "dark" : "light",
-          customBackground: isDarkMode ? "#131414" : "#F5F5F5", // Lighter background for light mode
-          customBackground: prefersDarkMode ? "#131414" : "#FFFFFF",
-          cardColors: prefersDarkMode ? "#181a1c" : "#FFFFFF",
-          // Add text colors for both modes
-          text: {
-            primary: isDarkMode ? "#FFFFFF" : "#000000",
-            secondary: isDarkMode ? "#C0C0C0" : "#444444",
-          },
-        },
-      }),
-    [isDarkMode],
-  );
+
+    // Define colors for both light and dark mode
+    const lightModeColors = {
+      customBackground: "",
+      cardColors: "",
+      text: {
+        primary: "#FFFFFF",
+        secondary: "#FFFFFF",
+      },
+    };
+  
+    const darkModeColors = {
+      customBackground: "#",
+      cardColors: "#",
+      text: {
+        primary: "#FFFFFF",
+        secondary: "#C0C0C0",
+      },
+    }; 
+
+
+  // Create theme based on the mode and colors
+  const theme = createTheme({
+    palette: {
+      mode: isDarkMode ? "dark" : "light",
+      ...(isDarkMode ? darkModeColors : lightModeColors), // Corrected spread syntax
+    },
+  });
+
   return (
     <main
       className="h-[100%] w-[100%]"
-      style={{ backgroundColor: theme.palette.customBackground }}
+      style={{
+        backgroundColor: isDarkMode
+          ? darkModeColors.customBackground
+          : lightModeColors.customBackground,
+      }}
     >
       <ThemeProvider theme={theme}>
         <NavBarComponent logo={logo} pos={"static"}></NavBarComponent>

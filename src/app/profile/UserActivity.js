@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Box, List } from "@mui/material";
+import { Box, List, Typography, useTheme } from "@mui/material";
 import MessageBlock from "./MessageBlock";
 import { API_URL } from "../constants";
 
 const UserActivity = () => {
+<<<<<<< HEAD
   let token = "";
   try {
     token = localStorage.getItem("accessToken");
   } catch {}
+=======
+  const theme = useTheme();
+  const token = localStorage.getItem("accessToken");
+>>>>>>> 4b6005b (light and dark)
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -31,8 +36,21 @@ const UserActivity = () => {
   }, [token]);
 
   return (
-    <Box className="w-full overflow-scroll">
-      <h1>Your Activity</h1>
+      <Box className="w-full overflow-scroll">
+      <Typography
+        variant="h6"
+        align="center"
+        style={{
+          color: theme.palette.mode === "light" ? "#FFFFFF" : "#000000",
+          color: theme.palette.mode === "dark" ? "#FFFFFF" : "#FFFFFF",
+          fontSize: "1.2rem",
+          marginBottom: "1rem",
+        }}
+      >
+        Your Activity
+      </Typography>
+
+
       <List>
         {messages.map((message, index) => (
           <MessageBlock message={message} key={index}></MessageBlock>

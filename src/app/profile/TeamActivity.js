@@ -1,13 +1,18 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Box, List } from "@mui/material";
+import { Box, List, Typography, useTheme } from "@mui/material";
 import MessageBlock from "./MessageBlock";
 
 const TeamActivity = () => {
+<<<<<<< HEAD
   let token = "";
   try {
     token = localStorage.getItem("accessToken");
   } catch {}
+=======
+  const theme = useTheme ();
+  const token = localStorage.getItem("accessToken");
+>>>>>>> 4b6005b (light and dark)
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -30,9 +35,21 @@ const TeamActivity = () => {
     fetchData();
   }, [token]);
 
+  const textColor = theme.palette.mode === "light" ? "#000000" : "#FFFFFF";
   return (
     <Box className="w-full overflow-scroll">
-      <h1>Activity for Teams you are in</h1>
+      <Typography
+        variant="h6"
+        align="center"
+        style={{
+          color: theme.palette.mode === "light" ? "#FFFFFF" : "#000000",
+          color: theme.palette.mode === "dark" ? "#FFFFFF" : "#FFFFFF",
+          fontSize: "1.2rem",
+          marginBottom: "1rem",
+        }}
+      >
+        Activity for Teams you are in
+      </Typography>
       <List>
         {messages.map((message, index) => (
           <MessageBlock message={message} key={index}></MessageBlock>

@@ -2,14 +2,18 @@
 import React from "react";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
+<<<<<<< HEAD
 import { Typography, Modal } from "@mui/material";
 import { modal_style } from "../constants";
+=======
+import { Typography, Modal, useTheme } from "@mui/material";
+import { API_URL, modal_style } from "../constants";
+>>>>>>> 4b6005b (light and dark)
 import {
   Card,
   CardContent,
   Button,
   CardActions,
-  useTheme,
 } from "@mui/material";
 
 const TeamInfo = () => {
@@ -67,7 +71,20 @@ const TeamInfo = () => {
       className="mt-4 mr-2 p-2 ml-auto h-[90vh] overflow-scroll min-w-[20vw]"
       style={{ backgroundColor: theme.palette.cardColors }}
     >
-      <Typography>Your Teams</Typography>
+      <Typography
+        variant="h6"
+        align="center"
+        style={{
+          color: theme.palette.mode === "light" ? "#FFFFFF" : "#000000",
+          color: theme.palette.mode === "dark" ? "#FFFFFF" : "#FFFFFF",
+          fontSize: "1.2rem",
+          marginBottom: "1rem",
+        }}
+      >
+        Your Teams
+      </Typography>
+
+
       {teams.map((team, index) => (
         <Card
           sx={{ mt: 2, maxHeight: "50%", maxWidth: "20vw", mb: 2 }}
