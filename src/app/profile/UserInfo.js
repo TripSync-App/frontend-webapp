@@ -200,7 +200,7 @@ const UserInfo = () => {
               color: "#FFFFFF",
             }}
             variant="contained"
-            //component="span"
+            component={"span"}
             fullWidth
           >
             Update Profile Picture
