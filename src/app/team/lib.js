@@ -57,7 +57,7 @@ export const deleteUser = async (username, team) => {
     });
 };
 
-export const createInviteCode = async (team) => {
+export const createInviteCode = async (team, token) => {
   return fetch(`/api/teams/create-invite`, {
     method: "POST",
     headers: {
@@ -78,7 +78,7 @@ export const createInviteCode = async (team) => {
     });
 };
 
-export const getInviteCode = async (team) => {
+export const getInviteCode = async (team, token) => {
   return fetch(`/api/teams/get-invite`, {
     method: "POST",
     headers: {

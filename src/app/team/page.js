@@ -85,8 +85,8 @@ const Team = () => {
   };
 
   const getInviteLink = async () => {
-    await createInviteCode(team.team_id);
-    const res = await getInviteCode(team.team_id);
+    await createInviteCode(team.team_id, token);
+    const res = await getInviteCode(team.team_id, token);
     const link = res.invite_link;
     await navigator.clipboard.writeText(link);
   };
