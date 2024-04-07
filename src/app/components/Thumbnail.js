@@ -2,17 +2,16 @@ import {Card, CardActions, CardActionArea, CardContent, CardMedia, Typography, B
 import { useState } from 'react';
 import { useRouter } from "next/navigation";
 
-export default function Thumbnail ({title, image, description, styling, discussionId}){
+export default function Thumbnail ({title, image, description, styling, vacationId}){
     let [openPreview, setOpen] = useState(false);
     const discussionRouter = useRouter();
     let discussionQuery = {
-        href: `/discussions/${discussionId}`,
+        href: `/discussions/${vacationId}`,
     } 
     function onClick(){
         discussionRouter.push(
             discussionQuery.href
         );
-        console.log("Test");
     }
     function onFocus(){ 
         
@@ -26,7 +25,7 @@ export default function Thumbnail ({title, image, description, styling, discussi
             <CardActionArea onClick={onClick}>
             <CardMedia
                 sx={{ height: 140 }}
-                image={image.src}
+                image={image ? image.src : ""}
                 title={title}
             />
             <CardContent>

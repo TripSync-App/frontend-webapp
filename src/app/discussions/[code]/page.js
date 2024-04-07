@@ -11,11 +11,12 @@ import {
   Box,
   Container,
   Typography,
+  List,
 } from "@mui/material";
 import React, { useMemo, useEffect, useState } from "react";
 
-export default function Discussion({ params }) {
-  let [discussionInfo, setInfo] = useState(null);
+export default function Discussions({ params }) {
+  let [vacationInfo, setInfo] = useState(null);
   const id = params.code;
   const token = localStorage.getItem("accessToken");
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -30,20 +31,21 @@ export default function Discussion({ params }) {
       }),
     [prefersDarkMode],
   );
-  const getInfo = async () => {
+  const getVacationInfo = async () => {
     try {
-      await fetch(`/api/discussions/${id}`, {
+      await fetch(`/api/vacations/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-      }).then((e) => {
-        if (e.ok) {
-          const discussion = e.json();
-          setInfo(discussion.discussion);
+      }).then((response) => {
+        console.log(response)
+        if (response.ok) {
+          let vacation = response.json()
+          setInfo(vacation.discussions);
         } else {
-          throw e.status;
+          throw response.status;
         }
       });
     } catch (err) {
@@ -52,8 +54,7 @@ export default function Discussion({ params }) {
     }
   };
   useEffect(() => {
-    getInfo();
-    console.log(discussionInfo);
+    getVacationInfo();
   }, []);
 
   return (
@@ -74,8 +75,11 @@ export default function Discussion({ params }) {
             }}
           >
             <Typography variant="h2" gutterBottom>
-              {discussionInfo}
+              {vacationInfo}
             </Typography>
+            <List>
+              {}
+            </List>
           </Box>
         </div>
       </ThemeProvider>
