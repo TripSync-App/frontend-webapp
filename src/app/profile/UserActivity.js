@@ -32,7 +32,7 @@ const UserActivity = () => {
   }, [token]);
 
   return (
-    <Box className="w-full overflow-scroll">
+    <Box className="w-full overflow-scroll max-sm:max-h-[50vh] max-sm:mb-4">
       <Typography
         variant="h6"
         align="center"
@@ -45,7 +45,6 @@ const UserActivity = () => {
       >
         Your Activity
       </Typography>
-
       <List>
         {messages.map((message, index) => (
           <MessageBlock message={message} key={index}></MessageBlock>

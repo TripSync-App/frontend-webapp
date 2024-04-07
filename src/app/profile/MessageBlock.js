@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../constants";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 import {
   Box,
@@ -23,6 +24,8 @@ const MessageBlock = ({ message }) => {
   } catch (e) {}
 
   const [profilePic, setProfilePic] = useState("");
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const MAX_TEXT_LENGTH = 30;
 
   const formatText = (text) => {
@@ -67,7 +70,10 @@ const MessageBlock = ({ message }) => {
   }, []);
 
   return (
-    <ListItem className="rounded-md mb-2" sx={{ bgcolor: "background.paper" }}>
+    <ListItem
+      className="rounded-md mb-2 max-sm:h-24"
+      sx={{ bgcolor: "background.paper" }}
+    >
       <ListItemAvatar>
         <Avatar
           alt={`${message.author.first_name} ${message.author.last_name}`}
@@ -75,7 +81,14 @@ const MessageBlock = ({ message }) => {
         />
       </ListItemAvatar>
       <ListItemText
-        primary={message.vacation.name}
+        primary={
+          <Typography
+            variant="body1"
+            className={isSmallScreen ? "text-xs" : "text-base"}
+          >
+            {message.vacation.name}
+          </Typography>
+        }
         secondary={
           <React.Fragment>
             <Typography
@@ -83,20 +96,33 @@ const MessageBlock = ({ message }) => {
               component="span"
               variant="body2"
               color="text.primary"
+              className={isSmallScreen ? "text-xs" : "text-sm"}
             >
               {message.discussion.title} -{" "}
               {userData.username === message.author.username
                 ? "You"
                 : `${message.author.first_name} ${message.author.last_name}`}
             </Typography>
-            <Typography>{formatText(message.text)}</Typography>
+            <Typography
+              variant="body2"
+              className={isSmallScreen ? "text-xs" : "text-sm"}
+            >
+              {formatText(message.text)}
+            </Typography>
           </React.Fragment>
         }
       />
       <Typography
         variant="body2"
         color="gray"
-        sx={{ position: "absolute", top: 0, right: 0, mr: 2, mt: 2 }}
+        sx={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          mr: 2,
+          mt: 2,
+          fontSize: isSmallScreen ? "0.75rem" : "0.875rem",
+        }}
       >
         {formatDate(message.timestamp)}
       </Typography>

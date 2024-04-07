@@ -58,7 +58,7 @@ const TeamInfo = () => {
 
   return (
     <Box
-      className="mt-4 mr-2 p-2 ml-auto h-[90vh] overflow-scroll min-w-[20vw]"
+      className="mt-4 mr-2 p-2 ml-auto h-[90vh] overflow-scroll min-w-[20vw] max-sm:mt-0 max-sm:mr-0"
       style={{ backgroundColor: theme.palette.cardColors }}
     >
       <Typography
@@ -77,7 +77,7 @@ const TeamInfo = () => {
       {teams.map((team, index) => (
         <Card
           sx={{ mt: 2, maxHeight: "50%", maxWidth: "20vw", mb: 2 }}
-          className="transition ease-in-out delay-50 hover:scale-105 duration-100"
+          className="transition ease-in-out delay-50 hover:scale-105 duration-100 max-sm:max-w-fit"
           key={index}
         >
           <CardContent>

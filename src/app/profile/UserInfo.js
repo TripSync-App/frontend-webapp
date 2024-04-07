@@ -124,7 +124,7 @@ const UserInfo = () => {
 
   return (
     <Box
-      className="h-[90vh] flex flex-col p-4 rounded-lg ml-2 max-w-[20vw]"
+      className="h-[90vh] flex flex-col p-4 rounded-lg ml-2 max-w-[20vw] max-sm:max-w-[100%] max-sm:max-h-[75vh]"
       style={{ backgroundColor: theme.palette.cardColors }}
       sx={{ boxShadow: 4, mt: 2, position: "relative" }}
     >

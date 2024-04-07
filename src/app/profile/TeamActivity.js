@@ -33,7 +33,7 @@ const TeamActivity = () => {
 
   const textColor = theme.palette.mode === "light" ? "#000000" : "#FFFFFF";
   return (
-    <Box className="w-full overflow-scroll">
+    <Box className="w-full overflow-scroll max-sm:max-h-[50vh]">
       <Typography
         variant="h6"
         align="center"
