@@ -23,8 +23,6 @@ services:
       MONGO_PASSWORD: pressxtodoubt
     build:
       context: "../site-api"
-    volumes:
-      - ../site-api/src/site_api:/project/site_api
     ports:
       - "8000:8000"
     networks:
