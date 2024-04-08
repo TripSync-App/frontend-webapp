@@ -13,6 +13,7 @@ body {
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 20, 100;
   }
+
   body {
     color: rgb(var(--foreground-rgb));
     background: linear-gradient(
@@ -48,4 +49,8 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+#googleMap div:first-child {
+  position: relative !important;
 }

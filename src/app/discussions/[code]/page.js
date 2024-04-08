@@ -55,7 +55,7 @@ export default function Discussions({ params }) {
         <NavBarComponent logo={logo} pos="static" />
         <div
           id="discussionBoard"
-          className="flex flex-col justify-center"
+          className="flex flex-col justify-center h-100 w-100"
           style={{ backgroundColor: theme.palette.customBackground }}
         >
           {discussions.map((discussion, index) => (

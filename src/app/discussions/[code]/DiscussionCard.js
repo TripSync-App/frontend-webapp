@@ -23,7 +23,7 @@ const DiscussionCard = ({ discussion }) => {
   const theme = useTheme();
   return (
     <>
-      <Dialog fullScreen open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose}>
         <Discussion discussion={discussion}></Discussion>
       </Dialog>
       <Card>
