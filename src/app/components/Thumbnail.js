@@ -21,6 +21,8 @@ export default function Thumbnail({
   vacationId,
 }) {
   let [openPreview, setOpen] = useState(false);
+  const [thumbnailImage, setThumbnailImage] = "";
+
   const discussionRouter = useRouter();
   let discussionQuery = {
     href: `/discussions/${vacationId}`,
@@ -33,10 +35,9 @@ export default function Thumbnail({
     setOpen(false);
   }
 
-  console.log(description);
   return (
     <div className="pt-2 pr-2 pb-2">
-      <Card sx={styling} raised>
+      <Card sx={styling} className="animate-fade-down" raised>
         <CardActionArea onClick={onClick}>
           <CardMedia
             sx={{ height: 140 }}
