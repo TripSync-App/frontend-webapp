@@ -1,24 +1,17 @@
 "use client";
-import { API_URL } from "@/app/constants";
 import NavBarComponent from "../../components/NavBar";
 import logo from "../../resources/TS_LOGO.png";
-import {
-  ThemeProvider,
-  useMediaQuery,
-  createTheme,
-  Divider,
-  Paper,
-  Box,
-  Container,
-  Typography,
-  List,
-} from "@mui/material";
+import { ThemeProvider, useMediaQuery, createTheme, Box } from "@mui/material";
 import React, { useMemo, useEffect, useState } from "react";
+import DiscussionCard from "./DiscussionCard";
 
 export default function Discussions({ params }) {
-  let [vacationInfo, setInfo] = useState(null);
+  let [discussions, setDiscussions] = useState([]);
   const id = params.code;
-  const token = localStorage.getItem("accessToken");
+  let token = "";
+  try {
+    token = localStorage.getItem("accessToken");
+  } catch {}
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const theme = useMemo(
     () =>
@@ -31,6 +24,7 @@ export default function Discussions({ params }) {
       }),
     [prefersDarkMode],
   );
+
   const getVacationInfo = async () => {
     try {
       await fetch(`/api/vacations/${id}`, {
@@ -39,20 +33,18 @@ export default function Discussions({ params }) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-      }).then((response) => {
-        console.log(response)
-        if (response.ok) {
-          let vacation = response.json()
-          setInfo(vacation.discussions);
-        } else {
-          throw response.status;
-        }
-      });
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setDiscussions(data.discussions);
+          console.log(data.discussions);
+        });
     } catch (err) {
-      setInfo("Whoops, Something Went Wrong :(");
+      setDiscussions("Whoops, Something Went Wrong :(");
       console.log(err);
     }
   };
+
   useEffect(() => {
     getVacationInfo();
   }, []);
@@ -63,9 +55,15 @@ export default function Discussions({ params }) {
         <NavBarComponent logo={logo} pos="static" />
         <div
           id="discussionBoard"
-          className="flex justify-center"
+          className="flex flex-col justify-center"
           style={{ backgroundColor: theme.palette.customBackground }}
         >
+          {discussions.map((discussion, index) => (
+            <DiscussionCard
+              discussion={discussion}
+              key={index}
+            ></DiscussionCard>
+          ))}
           <Box
             sx={{
               bgcolor: "theme.palette.customBackground",
@@ -73,14 +71,7 @@ export default function Discussions({ params }) {
               justifyContent: "center",
               flex: "flex-grow",
             }}
-          >
-            <Typography variant="h2" gutterBottom>
-              {vacationInfo}
-            </Typography>
-            <List>
-              {}
-            </List>
-          </Box>
+          ></Box>
         </div>
       </ThemeProvider>
     </main>
