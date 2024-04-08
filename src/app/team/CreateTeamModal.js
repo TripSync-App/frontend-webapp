@@ -3,11 +3,19 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { TextField } from "@mui/material";
+import { TextField, useTheme, Alert } from "@mui/material";
 import { createTeam } from "./lib";
 import { useState } from "react";
 
 export default function CreateTeamModal({ open, handleClose }) {
+  let token = "";
+  try {
+    token = localStorage.getItem("accessToken");
+  } catch {}
+
+  const theme = useTheme();
+  const [error, setError] = useState("");
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -24,7 +32,7 @@ export default function CreateTeamModal({ open, handleClose }) {
 
   const handleTeamCreate = async () => {
     try {
-      const result = await createTeam(teamName);
+      const result = await createTeam(teamName, token);
       const status = result.status;
       const data = result.data;
       console.log(`STATUS: ${status}`);
@@ -32,7 +40,7 @@ export default function CreateTeamModal({ open, handleClose }) {
         handleClose();
         location.reload();
       } else if (status === 403) {
-        console.error("Can't do that");
+        setError("You can't create a team with the same name!");
       }
     } catch (error) {
       console.error("Failed to create team:", error);
@@ -48,11 +56,16 @@ export default function CreateTeamModal({ open, handleClose }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Create a New Team
           </Typography>
           <div className="flex flex-col">
-            <div className="flex">
+            <div className="flex align-middle">
               <TextField
                 className="!mt-[1vh]"
                 label="Team Name"
@@ -63,15 +76,28 @@ export default function CreateTeamModal({ open, handleClose }) {
                 }}
               ></TextField>
               <Button
-                className="!ml-[1vw]"
+                className="!ml-[1vw] !mt-[1vh]"
                 variant="contained"
                 size="small"
                 onClick={handleTeamCreate}
+                sx={{
+                  backgroundColor: (theme) =>
+                    `${theme.palette.secondaryColor} !important`,
+                  color: "white",
+                }}
               >
                 Create
               </Button>
             </div>
-            <Button className="!mt-[1vh] max-w-10" onClick={handleClose}>
+            <Button
+              sx={{
+                backgroundColor: (theme) =>
+                  `${theme.palette.secondaryColor} !important`,
+                color: "white",
+              }}
+              className="!mt-[1vh] max-w-10"
+              onClick={handleClose}
+            >
               Close
             </Button>
           </div>

@@ -10,7 +10,7 @@ export const fetchTeams = (token) => {
   });
 };
 
-export const createTeam = async (name) => {
+export const createTeam = async (name, token) => {
   return fetch(`/api/teams`, {
     method: "POST",
     headers: {
@@ -99,7 +99,7 @@ export const getInviteCode = async (team, token) => {
     });
 };
 
-export const deleteAccount = async () => {
+export const deleteAccount = async (token) => {
   return fetch(`/api/users/delete`, {
     method: "GET",
     headers: {
@@ -117,7 +117,7 @@ export const deleteAccount = async () => {
     });
 };
 
-export const deleteTeam = async (team) => {
+export const deleteTeam = async (team, token) => {
   return fetch(`/api/teams/delete`, {
     method: "POST",
     headers: {

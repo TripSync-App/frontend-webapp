@@ -40,7 +40,7 @@ const UserInfo = () => {
 
   const deleteSelf = async () => {
     setOpen(false);
-    deleteAccount();
+    deleteAccount(token);
     await new Promise((resolve) =>
       router.push("/login", undefined, { shallow: true }, resolve),
     );
@@ -211,10 +211,11 @@ const UserInfo = () => {
           sx={{
             mb: 2,
             backgroundColor:
-              theme.palette.mode === "light" ? "#1E88E5" : "#0D47A1",
+              theme.palette.mode === "light" ? "#1E88E5" : "#0D47A1 !important",
             color: "#FFFFFF",
           }}
           variant="contained"
+          componet={"span"}
           fullWidth
         >
           Apply Changes
@@ -227,15 +228,41 @@ const UserInfo = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={modal_style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Leaving Team
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            className="font-bold"
+          >
+            Delete your account
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Typography id="modal-modal-description" sx={{ mt: 1 }}>
             Are you sure you want to delete your account? This can NOT be
             undone.
           </Typography>
-          <Button onClick={deleteSelf}>Delete My Account</Button>
-          <Button onClick={handleClose}>Close</Button>
+          <Button
+            sx={{
+              backgroundColor: "red !important",
+              color: "white",
+              mr: 1,
+              mt: 1,
+            }}
+            onClick={deleteSelf}
+          >
+            Delete My Account
+          </Button>
+          <Button
+            sx={{
+              backgroundColor: (theme) =>
+                `${theme.palette.secondaryColor} !important`,
+              color: "white",
+              mr: 1,
+              mt: 1,
+            }}
+            onClick={handleClose}
+          >
+            Close
+          </Button>
         </Box>
       </Modal>
     </Box>

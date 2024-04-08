@@ -43,6 +43,7 @@ const Profile = () => {
     palette: {
       mode: isDarkMode ? "dark" : "light",
       ...(isDarkMode ? darkModeColors : lightModeColors), // Corrected spread syntax
+      secondaryColor: prefersDarkMode ? "grey" : "#grey",
     },
   });
 
