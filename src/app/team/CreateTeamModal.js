@@ -61,7 +61,12 @@ export default function CreateTeamModal({ open, handleClose }) {
               {error}
             </Alert>
           )}
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            sx={{ color: theme.palette.fontColor }}
+          >
             Create a New Team
           </Typography>
           <div className="flex flex-col">
@@ -83,7 +88,7 @@ export default function CreateTeamModal({ open, handleClose }) {
                 sx={{
                   backgroundColor: (theme) =>
                     `${theme.palette.secondaryColor} !important`,
-                  color: "white",
+                  color: theme.palette.fontColor,
                 }}
               >
                 Create
@@ -93,7 +98,7 @@ export default function CreateTeamModal({ open, handleClose }) {
               sx={{
                 backgroundColor: (theme) =>
                   `${theme.palette.secondaryColor} !important`,
-                color: "white",
+                color: theme.palette.fontColor,
               }}
               className="!mt-[1vh] max-w-10"
               onClick={handleClose}

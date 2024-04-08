@@ -3,11 +3,7 @@ import NavBarComponent from "./components/NavBar";
 import "./styles.css";
 import React, { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import {
-  ThemeProvider,
-  useMediaQuery,
-  createTheme,
-} from "@mui/material";
+import { ThemeProvider, useMediaQuery, createTheme } from "@mui/material";
 import logo from "./resources/TS_LOGO.png";
 import FilterBox from "./components/FilterBox";
 import ThumbNail from "./components/Thumbnail";
@@ -24,11 +20,12 @@ export default function Home() {
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
           primary: {
-            main: prefersDarkMode ? '#90caf9' : '#1976d2', // Adjust primary color for light and dark mode
+            main: prefersDarkMode ? "#90caf9" : "#1976d2", // Adjust primary color for light and dark mode
           },
           background: {
-            default: prefersDarkMode ? '#121212' : '#f5f5f5', // Adjust background color for light and dark mode
+            default: prefersDarkMode ? "#121212" : "#f5f5f5", // Adjust background color for light and dark mode
           },
+          fontColor: prefersDarkMode ? "inherit" : "black",
         },
       }),
     [prefersDarkMode],
@@ -41,22 +38,22 @@ export default function Home() {
     } else {
       setLoading(true);
       const getThumbnails = async () => {
-        try{
+        try {
           let result = await fetch(`/api/vacations`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${authToken}`,
             },
-          })
+          });
           if (result.ok) {
-            const data = await result.json()
-            setThumbnails(data)
+            const data = await result.json();
+            setThumbnails(data);
           }
-        } catch (error){
-          console.log("Fetch error: ", error)
+        } catch (error) {
+          console.log("Fetch error: ", error);
         }
-      }
+      };
       getThumbnails();
     }
   }, [router]);
@@ -70,15 +67,16 @@ export default function Home() {
             <FilterBox />
             <div className="flex flex-wrap">
               {thumbnails.map(function (vacation) {
-
                 // Set Description Default
-                if (!("description" in vacation)){
-                  vacation['description'] = "Description not provided";
+                if (!("description" in vacation)) {
+                  vacation["description"] = "Description not provided";
                 }
 
                 // Set Style Default
-                if ("styling" in vacation){
-                  vacation.styling["color"] = prefersDarkMode ? 'inherit' : '#FFFFFF';
+                if ("styling" in vacation) {
+                  vacation.styling["color"] = prefersDarkMode
+                    ? "inherit"
+                    : "#00000";
                 } else {
                   vacation.styling = {};
                 }

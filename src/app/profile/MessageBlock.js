@@ -85,6 +85,7 @@ const MessageBlock = ({ message }) => {
           <Typography
             variant="body1"
             className={isSmallScreen ? "text-xs" : "text-base"}
+            sx={{ color: theme.palette.fontColor }}
           >
             {message.vacation.name}
           </Typography>
@@ -92,10 +93,9 @@ const MessageBlock = ({ message }) => {
         secondary={
           <React.Fragment>
             <Typography
-              sx={{ display: "inline" }}
+              sx={{ display: "inline", color: theme.palette.fontColor }}
               component="span"
               variant="body2"
-              color="text.primary"
               className={isSmallScreen ? "text-xs" : "text-sm"}
             >
               {message.discussion.title} -{" "}
@@ -106,6 +106,7 @@ const MessageBlock = ({ message }) => {
             <Typography
               variant="body2"
               className={isSmallScreen ? "text-xs" : "text-sm"}
+              sx={{ color: theme.palette.fontColor }}
             >
               {formatText(message.text)}
             </Typography>

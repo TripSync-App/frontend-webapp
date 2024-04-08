@@ -4,14 +4,7 @@ import TeamInfo from "./TeamInfo";
 import UserInfo from "./UserInfo";
 import RecentActivity from "./RecentActivity";
 import NavBarComponent from "../components/NavBar";
-import { useEffect, useState, useMemo } from "react";
-import {
-  ThemeProvider,
-  useMediaQuery,
-  createTheme,
-  Divider,
-  Paper,
-} from "@mui/material";
+import { ThemeProvider, useMediaQuery, createTheme } from "@mui/material";
 import logo from "../resources/TS_LOGO.png";
 
 const Profile = () => {
@@ -22,7 +15,7 @@ const Profile = () => {
   // Define colors for both light and dark mode
   const lightModeColors = {
     customBackground: "",
-    cardColors: "",
+    cardColors: "rgba(255 ,255 ,255 , 0.25)",
     text: {
       primary: "#FFFFFF",
       secondary: "#FFFFFF",
@@ -43,7 +36,8 @@ const Profile = () => {
     palette: {
       mode: isDarkMode ? "dark" : "light",
       ...(isDarkMode ? darkModeColors : lightModeColors), // Corrected spread syntax
-      secondaryColor: prefersDarkMode ? "grey" : "#grey",
+      secondaryColor: prefersDarkMode ? "grey" : "rgb(30, 136, 229)",
+      fontColor: prefersDarkMode ? "inherit" : "black",
     },
   });
 
@@ -58,7 +52,7 @@ const Profile = () => {
     >
       <ThemeProvider theme={theme}>
         <NavBarComponent logo={logo} pos={"static"}></NavBarComponent>
-        <div className="flex flex-row max-sm:flex-col h-full overflow-hidden">
+        <div className="flex flex-row max-sm:flex-col overflow-hidden">
           <div className="animate-fade-right">
             <UserInfo></UserInfo>
           </div>

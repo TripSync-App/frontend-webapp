@@ -57,7 +57,8 @@ const Team = () => {
           mode: prefersDarkMode ? "dark" : "light",
           customBackground: prefersDarkMode ? "#131414" : "#5ac465",
           customComponentBackground: prefersDarkMode ? "inherit" : "#b5e1e6",
-          secondaryColor: prefersDarkMode ? "grey" : "#grey",
+          secondaryColor: prefersDarkMode ? "grey" : "rgb(30, 136, 229)",
+          fontColor: prefersDarkMode ? "inherit" : "black",
         },
       }),
     [prefersDarkMode],
@@ -169,10 +170,14 @@ const Team = () => {
                 variant="h6"
                 component="h2"
                 className="font-bold"
+                sx={{ color: theme.palette.fontColor }}
               >
                 Deleting Team
               </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 1 }}>
+              <Typography
+                id="modal-modal-description"
+                sx={{ mt: 1, color: theme.palette.fontColor }}
+              >
                 Are you sure you want to delete your team? This can NOT be
                 undone.
               </Typography>
@@ -180,7 +185,7 @@ const Team = () => {
                 onClick={handleDelete}
                 sx={{
                   backgroundColor: "red !important",
-                  color: "white",
+                  color: theme.palette.fontColor,
                   mr: 1,
                   mt: 1,
                 }}
@@ -192,7 +197,7 @@ const Team = () => {
                 sx={{
                   backgroundColor: (theme) =>
                     `${theme.palette.secondaryColor} !important`,
-                  color: "white",
+                  color: theme.palette.fontColor,
                   mr: 1,
                   mt: 1,
                 }}

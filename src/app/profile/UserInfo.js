@@ -211,7 +211,9 @@ const UserInfo = () => {
           sx={{
             mb: 2,
             backgroundColor:
-              theme.palette.mode === "light" ? "#1E88E5" : "#0D47A1 !important",
+              theme.palette.mode === "light"
+                ? "#1E88E5 !important"
+                : "#0D47A1 !important",
             color: "#FFFFFF",
           }}
           variant="contained"
@@ -233,17 +235,21 @@ const UserInfo = () => {
             variant="h6"
             component="h2"
             className="font-bold"
+            sx={{ color: theme.palette.fontColor }}
           >
             Delete your account
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 1 }}>
+          <Typography
+            id="modal-modal-description"
+            sx={{ mt: 1, color: theme.palette.fontColor }}
+          >
             Are you sure you want to delete your account? This can NOT be
             undone.
           </Typography>
           <Button
             sx={{
               backgroundColor: "red !important",
-              color: "white",
+              color: theme.palette.fontColor,
               mr: 1,
               mt: 1,
             }}
@@ -255,7 +261,7 @@ const UserInfo = () => {
             sx={{
               backgroundColor: (theme) =>
                 `${theme.palette.secondaryColor} !important`,
-              color: "white",
+              color: theme.palette.fontColor,
               mr: 1,
               mt: 1,
             }}

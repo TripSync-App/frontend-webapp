@@ -58,7 +58,7 @@ const TeamInfo = () => {
 
   return (
     <Box
-      className="mt-4 mr-2 p-2 ml-auto h-[90vh] overflow-scroll min-w-[20vw] max-sm:mt-0 max-sm:mr-0"
+      className="mt-4 mr-2 p-2 ml-auto rounded-lg h-full overflow-scroll min-w-[20vw] max-sm:mt-0 max-sm:mr-0"
       style={{ backgroundColor: theme.palette.cardColors }}
     >
       <Typography
@@ -81,13 +81,18 @@ const TeamInfo = () => {
           key={index}
         >
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              sx={{ color: theme.palette.fontColor }}
+            >
               {team.name}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" sx={{ color: theme.palette.fontColor }}>
               Owned by: @{team.admin_user.username}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" sx={{ color: theme.palette.fontColor }}>
               {team.members.slice(0, 4).map((member, index) => (
                 <span key={index}>
                   {member.first_name} {member.last_name}
@@ -117,21 +122,47 @@ const TeamInfo = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={modal_style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            sx={{ color: theme.palette.fontColor }}
+            className="font-bold"
+          >
             Leaving Team
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Are you sure you want to leave team: {selectedTeam.name}
+          <Typography
+            id="modal-modal-description"
+            sx={{ mt: 1, color: theme.palette.fontColor }}
+          >
+            Are you sure you want to leave team: <b>{selectedTeam.name}</b>
           </Typography>
           <Button
             onClick={async () => {
               await handleLeave(selectedTeam);
               location.reload();
             }}
+            sx={{
+              backgroundColor: "red !important",
+              color: theme.palette.fontColor,
+              mr: 1,
+              mt: 1,
+            }}
           >
             Leave
           </Button>
-          <Button onClick={handleClose}>Close</Button>
+          <Button
+            onClick={handleClose}
+            sx={{
+              backgroundColor: (theme) =>
+                `${theme.palette.secondaryColor} !important`,
+              color: theme.palette.fontColor,
+              mr: 1,
+              mt: 1,
+            }}
+          >
+            Close
+          </Button>
         </Box>
       </Modal>
     </Box>
