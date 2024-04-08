@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { formatDate } from "@/app/lib";
 import Map from "./Map";
+import Message from "./Message";
 
 const Discussion = ({ discussion }) => {
   let token = "";
@@ -21,7 +22,7 @@ const Discussion = ({ discussion }) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          setMessages(data.messages);
+          setMessages(data);
         });
     } catch (err) {
       console.log(err);
@@ -40,10 +41,10 @@ const Discussion = ({ discussion }) => {
           <div className="p-4 h-[50%] w-full">
             <Map></Map>
           </div>
-          <div id="messages">
-            <Typography className="mt-4" variant="h4">
-              Messages
-            </Typography>
+          <div id="messages" className="mt-4">
+            {messages.map((message, index) => (
+              <Message message={message} key={index}></Message>
+            ))}
           </div>
         </div>
         <div id="sideBar" className="p-2">
