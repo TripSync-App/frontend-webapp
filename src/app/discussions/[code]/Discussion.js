@@ -1,22 +1,56 @@
 import { Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import { formatDate } from "@/app/lib";
 import Map from "./Map";
 
 const Discussion = ({ discussion }) => {
-  //TODO: load messages using useEffect
+  let token = "";
+  try {
+    token = localStorage.getItem("accessToken");
+  } catch {}
+  const [messages, setMessages] = useState([]);
+
+  const getMessages = async () => {
+    try {
+      await fetch(`/api/discussions/messages/${discussion.discussion_id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setMessages(data.messages);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getMessages();
+  }, []);
+
   return (
     <>
-      <div className="flex flex-row mr-auto ml-auto h-[75vh] w-[75vw]">
-        <div id="mainContent">
+      <div className="flex flex-row mr-auto ml-auto h-[75vh]">
+        <div id="mainContent" className="p-2 mr-4">
           <Typography variant="h3">{discussion.title}</Typography>
           <div className="p-4 h-[50%] w-full">
             <Map></Map>
           </div>
           <div id="messages">
-            <Typography variant="h4">Messages</Typography>
+            <Typography className="mt-4" variant="h4">
+              Messages
+            </Typography>
           </div>
         </div>
-        <div id="sideBar">Test</div>
+        <div id="sideBar" className="p-2">
+          <p>Sidebar</p>
+          <p>Created At: {formatDate(discussion.timestamp)}</p>
+          <p>Last Updated: {formatDate(discussion.last_updated)}</p>
+        </div>
       </div>
     </>
   );
