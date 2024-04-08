@@ -68,10 +68,9 @@ export default function Home() {
             <div className="flex flex-wrap">
               {thumbnails.map(function (vacation) {
                 // Set Description Default
-                if (!("description" in vacation)) {
+                if (vacation.description == null) {
                   vacation["description"] = "Description not provided";
                 }
-
                 // Set Style Default
                 if ("styling" in vacation) {
                   vacation.styling["color"] = prefersDarkMode
