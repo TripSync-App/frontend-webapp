@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { formatDate } from "@/app/lib";
 import Map from "./Map";
@@ -14,6 +14,7 @@ const Discussion = ({ discussion }) => {
 
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const theme = useTheme();
 
   const getMessages = async () => {
     try {
@@ -85,6 +86,7 @@ const Discussion = ({ discussion }) => {
               onChange={handleNewMessageChange}
               placeholder="Type your message here..."
               className="input"
+              style={{ color: "black" }}
             />
             <button type="submit" className="btn">
               Send
