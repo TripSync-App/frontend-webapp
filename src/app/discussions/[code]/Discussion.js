@@ -82,20 +82,22 @@ const Discussion = ({ discussion }) => {
           <Typography variant="h5" sx={{ color: theme.palette.fontColor }}>
             {discussion.title}
           </Typography>
-          <Divider></Divider>
+          <Divider sx={{ backgroundColor: theme.palette.lighten }}></Divider>
           <Typography variant="h5" sx={{ color: theme.palette.fontColor }}>
             Map
           </Typography>
-          <Divider></Divider>
+          <Divider sx={{ backgroundColor: theme.palette.lighten }}></Divider>
           <div className="p-4 h-[50%] w-full">
             <Map></Map>
           </div>
-          <Divider className="mt-4"></Divider>
+          <Divider sx={{ backgroundColor: theme.palette.lighten }}></Divider>
           <div id="messages" className="mt-4">
             <Typography variant="h5" sx={{ color: theme.palette.fontColor }}>
               Messages
             </Typography>
-            <Divider></Divider>
+            <Divider
+              sx={{ backgroundColor: theme.palette.lighten, mb: 2 }}
+            ></Divider>
             {messages.map((message, index) => (
               <Message message={message} key={index}></Message>
             ))}
