@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import Discussion from "./Discussion";
 
-const DiscussionCard = ({ discussion }) => {
+const DiscussionCard = ({ discussion = false, OverwrittenDialog }) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -34,7 +34,11 @@ const DiscussionCard = ({ discussion }) => {
           },
         }}
       >
-        <Discussion discussion={discussion}></Discussion>
+        {!OverwrittenDialog ? ( // return normal discussion or an OverwrittenDialog
+          <Discussion discussion={discussion}></Discussion>
+        ) : (
+          OverwrittenDialog
+        )}
       </Dialog>
       <Card>
         <CardActionArea onClick={handleClickOpen}>
@@ -45,7 +49,7 @@ const DiscussionCard = ({ discussion }) => {
               component="div"
               sx={{ color: theme.palette.fontColor }}
             >
-              {discussion.title}
+              {discussion ? discussion.title : "Create a new discussion"}
             </Typography>
           </CardContent>
         </CardActionArea>

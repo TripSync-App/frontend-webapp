@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { formatDate } from "@/app/lib";
 import Map from "./Map";
 import Message from "./Message";
+import BasicDateCalendar from "@/app/components/BasicDateCalendar";
 
 const Discussion = ({ discussion }) => {
   let token = "";
@@ -130,6 +131,7 @@ const Discussion = ({ discussion }) => {
           </div>
         </div>
         <div id="sideBar" className="p-2">
+          <BasicDateCalendar />
           <Typography
             variant="subtitle1"
             sx={{ color: theme.palette.fontColor }}

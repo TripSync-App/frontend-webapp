@@ -4,14 +4,25 @@ import logo from "../../resources/TS_LOGO.png";
 import { ThemeProvider, useMediaQuery, createTheme, Box } from "@mui/material";
 import React, { useMemo, useEffect, useState } from "react";
 import DiscussionCard from "./DiscussionCard";
+import CreateNewDiscussionDialog from "./CreateNewDiscussionDialog";
 
 export default function Discussions({ params }) {
   let [discussions, setDiscussions] = useState([]);
+  let [adminUser, setAdminUser] = useState({});
+  let [vacation, setVacation] = useState({});
   const id = params.code;
   let token = "";
+  let userData = "";
+
+  const CreateDialog = (
+    <CreateNewDiscussionDialog vacation={vacation}></CreateNewDiscussionDialog>
+  );
+
   try {
     token = localStorage.getItem("accessToken");
+    userData = JSON.parse(localStorage.getItem("userData"));
   } catch {}
+
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const theme = useMemo(
     () =>
@@ -41,8 +52,9 @@ export default function Discussions({ params }) {
       })
         .then((response) => response.json())
         .then((data) => {
+          setVacation(data);
           setDiscussions(data.discussions);
-          console.log(data.discussions);
+          setAdminUser(data.admin_user);
         });
     } catch (err) {
       setDiscussions("Whoops, Something Went Wrong :(");
@@ -69,6 +81,9 @@ export default function Discussions({ params }) {
               key={index}
             ></DiscussionCard>
           ))}
+          {userData.username === adminUser.username ? (
+            <DiscussionCard OverwrittenDialog={CreateDialog}></DiscussionCard>
+          ) : null}
           <Box
             sx={{
               bgcolor: "theme.palette.customBackground",
