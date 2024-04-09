@@ -8,6 +8,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import { formatDate } from "@/app/lib";
 
 const Message = ({ message }) => {
   let token = "";
@@ -62,16 +63,23 @@ const Message = ({ message }) => {
         </ListItemAvatar>
         <ListItemText
           primary={
-            <Typography
-              sx={{ display: "inline", color: theme.palette.fontColor }}
-              component="span"
-              variant="body1"
-              className={isSmallScreen ? "text-xs" : "text-sm"}
-            >
-              {userData.username === message.author.username
-                ? "You"
-                : `${message.author.first_name} ${message.author.last_name}`}
-            </Typography>
+            <>
+              <div className="flex justify-between">
+                <Typography
+                  sx={{ display: "inline", color: theme.palette.fontColor }}
+                  component="span"
+                  variant="body1"
+                  className={isSmallScreen ? "text-xs" : "text-sm"}
+                >
+                  {userData.username === message.author.username
+                    ? "You"
+                    : `${message.author.first_name} ${message.author.last_name}`}
+                </Typography>
+                <Typography variant="body2">
+                  {formatDate(message.timestamp)}
+                </Typography>
+              </div>
+            </>
           }
           secondary={
             <React.Fragment>

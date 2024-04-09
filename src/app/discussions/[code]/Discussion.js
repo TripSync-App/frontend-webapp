@@ -1,4 +1,4 @@
-import { Typography, useTheme } from "@mui/material";
+import { Typography, useTheme, Divider } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { formatDate } from "@/app/lib";
 import Map from "./Map";
@@ -79,6 +79,7 @@ const Discussion = ({ discussion }) => {
           <div className="p-4 h-[50%] w-full">
             <Map></Map>
           </div>
+          <Divider className="mt-4"></Divider>
           <form id="create-message" className="mt-4" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -88,7 +89,7 @@ const Discussion = ({ discussion }) => {
               className="input"
               style={{ color: "black" }}
             />
-            <button type="submit" className="btn">
+            <button type="submit" className="btn ml-2">
               Send
             </button>
           </form>
