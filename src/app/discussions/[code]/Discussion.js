@@ -73,9 +73,12 @@ const Discussion = ({ discussion }) => {
 
   return (
     <>
-      <div className="flex flex-row mr-auto ml-auto h-[75vh]">
-        <div id="mainContent" className="p-2 mr-4">
-          <Typography variant="h3">{discussion.title}</Typography>
+      <div className="flex flex-row mr-auto ml-auto h-[85vh]">
+        <div id="mainContent" className="p-2 mr-4 w-[75%]">
+          <div id="title" className="w-full flex justify-center">
+            <Typography variant="h3">{discussion.title}</Typography>
+          </div>
+          <Divider></Divider>
           <div className="p-4 h-[50%] w-full">
             <Map></Map>
           </div>
@@ -100,7 +103,7 @@ const Discussion = ({ discussion }) => {
             ))}
           </div>
         </div>
-        <div id="sideBar" className="p-2">
+        <div id="sideBar" className="p-2 w-[25%]">
           <p>Sidebar</p>
           <p>Created At: {formatDate(discussion.timestamp)}</p>
           <p>Last Updated: {formatDate(discussion.last_updated)}</p>

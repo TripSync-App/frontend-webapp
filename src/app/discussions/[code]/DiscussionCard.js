@@ -23,7 +23,17 @@ const DiscussionCard = ({ discussion }) => {
   const theme = useTheme();
   return (
     <>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        fullWidth
+        PaperProps={{
+          sx: {
+            width: "100%",
+            maxWidth: "50% !important",
+          },
+        }}
+      >
         <Discussion discussion={discussion}></Discussion>
       </Dialog>
       <Card>
