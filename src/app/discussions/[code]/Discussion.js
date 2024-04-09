@@ -88,9 +88,10 @@ const Discussion = ({ discussion }) => {
             />
             <button type="submit" className="btn">
               Send
-            </button>{" "}
+            </button>
           </form>
           <div id="messages" className="mt-4">
+            <Typography variant="h4">Messages</Typography>
             {messages.map((message, index) => (
               <Message message={message} key={index}></Message>
             ))}
