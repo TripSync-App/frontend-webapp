@@ -20,6 +20,11 @@ export default function Discussions({ params }) {
           mode: prefersDarkMode ? "dark" : "light",
           customBackground: prefersDarkMode ? "#131414" : "#5ac465",
           text: prefersDarkMode ? "#FFFFFF" : "#000000",
+          fontColor: prefersDarkMode ? "inherit" : "#000000",
+          hueShift: prefersDarkMode
+            ? "rgba(0, 0, 0, 0.25)"
+            : "rgba(4, 118, 208, 0.75)",
+          lighten: "rgba(255, 255, 255, 0.5)",
         },
       }),
     [prefersDarkMode],

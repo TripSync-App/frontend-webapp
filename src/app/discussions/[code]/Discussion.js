@@ -1,4 +1,4 @@
-import { Typography, useTheme, Divider } from "@mui/material";
+import { Typography, useTheme, Divider, Avatar } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { formatDate } from "@/app/lib";
 import Map from "./Map";
@@ -73,40 +73,94 @@ const Discussion = ({ discussion }) => {
 
   return (
     <>
-      <div className="flex flex-row mr-auto ml-auto h-[85vh]">
-        <div id="mainContent" className="p-2 mr-4 w-[75%]">
-          <div id="title" className="w-full flex justify-center">
-            <Typography variant="h3">{discussion.title}</Typography>
-          </div>
+      <div className="flex flex-row mr-4 ml-4 h-auto">
+        <div
+          id="mainContent"
+          className="p-2 mr-4 mt-2 mb-2 w-[75%] h-full rounded-md"
+          style={{ backgroundColor: theme.palette.hueShift }}
+        >
+          <Typography variant="h5" sx={{ color: theme.palette.fontColor }}>
+            {discussion.title}
+          </Typography>
+          <Divider></Divider>
+          <Typography variant="h5" sx={{ color: theme.palette.fontColor }}>
+            Map
+          </Typography>
           <Divider></Divider>
           <div className="p-4 h-[50%] w-full">
             <Map></Map>
           </div>
           <Divider className="mt-4"></Divider>
-          <form id="create-message" className="mt-4" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              value={newMessage}
-              onChange={handleNewMessageChange}
-              placeholder="Type your message here..."
-              className="input"
-              style={{ color: "black" }}
-            />
-            <button type="submit" className="btn ml-2">
-              Send
-            </button>
-          </form>
           <div id="messages" className="mt-4">
-            <Typography variant="h4">Messages</Typography>
+            <Typography variant="h5" sx={{ color: theme.palette.fontColor }}>
+              Messages
+            </Typography>
+            <Divider></Divider>
             {messages.map((message, index) => (
               <Message message={message} key={index}></Message>
             ))}
+            <form
+              id="create-message"
+              className="p-2 mb-4"
+              onSubmit={handleSubmit}
+            >
+              <div className="flex flex-row p-2">
+                <Avatar className="mr-2"></Avatar>
+                <input
+                  type="text"
+                  value={newMessage}
+                  onChange={handleNewMessageChange}
+                  placeholder="Type your message here..."
+                  className="input w-1/2 h-auto p-2 rounded-md"
+                  style={{ color: "black" }}
+                />
+                <button
+                  type="submit"
+                  className="btn ml-2"
+                  sx={{ color: theme.palette.fontColor }}
+                >
+                  Send
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-        <div id="sideBar" className="p-2 w-[25%]">
-          <p>Sidebar</p>
-          <p>Created At: {formatDate(discussion.timestamp)}</p>
-          <p>Last Updated: {formatDate(discussion.last_updated)}</p>
+        <div id="sideBar" className="p-2">
+          <Typography sx={{ color: theme.palette.fontColor }}>
+            Sidebar
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            sx={{ color: theme.palette.fontColor }}
+          >
+            Created At
+          </Typography>
+          <Typography
+            variant="body2"
+            className="rounded-sm p-1"
+            sx={{
+              color: theme.palette.fontColor,
+              backgroundColor: theme.palette.hueShift,
+            }}
+          >
+            {formatDate(discussion.timestamp)}
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            sx={{ color: theme.palette.fontColor }}
+          >
+            Last Updated
+          </Typography>
+          <Typography
+            variant="body2"
+            className="rounded-sm p-1"
+            sx={{
+              color: theme.palette.fontColor,
+              backgroundColor: theme.palette.hueShift,
+            }}
+          >
+            {formatDate(discussion.last_updated)}
+          </Typography>
         </div>
       </div>
     </>

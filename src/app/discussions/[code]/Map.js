@@ -8,9 +8,9 @@ const Map = ({ locationParams }) => {
     lng: -122.08427,
   };
   return (
-    <div style={{ height: "100%", width: "100%" }}>
+    <div style={{ height: "25vh", width: "100%" }}>
       <h2 className="map-h2">Come Visit Us At Our Campus</h2>
-      <div id="googleMap" className="google-map h-full w-full">
+      <div id="googleMap" className="google-map h-[100%] w-[100%]">
         <GoogleMapReact
           className="google-map"
           style={{

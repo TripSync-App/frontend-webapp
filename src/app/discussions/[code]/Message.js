@@ -54,7 +54,10 @@ const Message = ({ message }) => {
 
   return (
     <>
-      <ListItem>
+      <ListItem
+        sx={{ backgroundColor: theme.palette.lighten, mb: 1 }}
+        className="rounded-md"
+      >
         <ListItemAvatar>
           <Avatar
             alt={`${message.author.first_name} ${message.author.last_name}`}
@@ -64,9 +67,15 @@ const Message = ({ message }) => {
         <ListItemText
           primary={
             <>
-              <div className="flex justify-between">
+              <div className="flex">
                 <Typography
-                  sx={{ display: "inline", color: theme.palette.fontColor }}
+                  sx={{
+                    display: "inline",
+                    color: theme.palette.fontColor,
+                    mr: 1,
+                    alignItems: "center",
+                    fontWeight: "bold",
+                  }}
                   component="span"
                   variant="body1"
                   className={isSmallScreen ? "text-xs" : "text-sm"}
@@ -75,7 +84,11 @@ const Message = ({ message }) => {
                     ? "You"
                     : `${message.author.first_name} ${message.author.last_name}`}
                 </Typography>
-                <Typography variant="body2">
+                <Typography
+                  variant="subtitle1"
+                  style={{ color: theme.palette.fontColor }}
+                  className={isSmallScreen ? "text-xs" : "text-sm"}
+                >
                   {formatDate(message.timestamp)}
                 </Typography>
               </div>

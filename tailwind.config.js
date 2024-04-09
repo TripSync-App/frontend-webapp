@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        "protest": ['Protest Strike', 'sans']
+        protest: ["Protest Strike", "sans"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -19,6 +19,7 @@ module.exports = {
       colors: {
         logoGreen: "#138926",
         logoBlue: "#0779fc",
+        hueShiftLight: "rgba(255, 255, 255, 0.25)",
       },
       animation: {
         wiggle: "wiggle 1s ease-in-out infinite",
