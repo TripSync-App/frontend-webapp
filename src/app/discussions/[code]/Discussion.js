@@ -105,7 +105,10 @@ const Discussion = ({ discussion }) => {
               className="p-2 mb-4"
               onSubmit={handleSubmit}
             >
-              <div className="flex flex-row p-2">
+              <div
+                className="flex flex-row p-2"
+                style={{ backgroundColor: theme.palette.hueShift }}
+              >
                 <Avatar className="mr-2"></Avatar>
                 <input
                   type="text"
@@ -127,9 +130,6 @@ const Discussion = ({ discussion }) => {
           </div>
         </div>
         <div id="sideBar" className="p-2">
-          <Typography sx={{ color: theme.palette.fontColor }}>
-            Sidebar
-          </Typography>
           <Typography
             variant="subtitle1"
             sx={{ color: theme.palette.fontColor }}
