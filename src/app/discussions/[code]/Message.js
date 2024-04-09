@@ -55,7 +55,7 @@ const Message = ({ message }) => {
   return (
     <>
       <ListItem
-        sx={{ backgroundColor: theme.palette.lighten, mb: 1 }}
+        sx={{ backgroundColor: theme.palette.hueShift, mb: 1 }}
         className="rounded-md"
       >
         <ListItemAvatar>

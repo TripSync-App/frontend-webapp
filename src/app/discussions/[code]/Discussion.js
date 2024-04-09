@@ -90,7 +90,6 @@ const Discussion = ({ discussion }) => {
           <div className="p-4 h-[50%] w-full">
             <Map></Map>
           </div>
-          <Divider sx={{ backgroundColor: theme.palette.lighten }}></Divider>
           <div id="messages" className="mt-4">
             <Typography variant="h5" sx={{ color: theme.palette.fontColor }}>
               Messages

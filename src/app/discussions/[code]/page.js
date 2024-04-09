@@ -24,7 +24,7 @@ export default function Discussions({ params }) {
           hueShift: prefersDarkMode
             ? "rgba(0, 0, 0, 0.25)"
             : "rgba(4, 118, 208, 0.75)",
-          lighten: "rgba(255, 255, 255, 0.5)",
+          lighten: "rgba(255, 255, 255, 0.25)",
         },
       }),
     [prefersDarkMode],
