@@ -1,15 +1,4 @@
-import {
-  Card,
-  CardActions,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Typography,
-  Button,
-  useIsFocusVisible,
-  Dialog,
-  DialogTitle,
-} from "@mui/material";
+import { Card, CardActionArea, CardContent, Dialog } from "@mui/material";
 import { useState } from "react";
 import CreateNewVacationDialog from "../discussions/[code]/CreateNewVacationDialog";
 

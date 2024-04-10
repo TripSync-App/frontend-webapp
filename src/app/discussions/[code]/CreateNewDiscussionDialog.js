@@ -62,7 +62,7 @@ const CreateNewDiscussionDialog = ({ vacation }) => {
       <div className="flex flex-row mr-4 ml-4 h-auto">
         <div
           id="mainContent"
-          className="p-2 mr-4 mt-2 mb-2 w-[75%] h-full rounded-md"
+          className="p-2 mt-2 mb-2 w-full h-full rounded-md"
           style={{ backgroundColor: theme.palette.hueShift }}
         >
           <TextField
@@ -73,9 +73,7 @@ const CreateNewDiscussionDialog = ({ vacation }) => {
             variant="outlined"
             margin="normal"
           />
-          <List
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-          >
+          <List sx={{ width: "100%", bgcolor: "background.paper" }}>
             {vacation.members.map((member, value) => {
               return (
                 <ListItem key={member.user_id} disablePadding>
@@ -100,10 +98,11 @@ const CreateNewDiscussionDialog = ({ vacation }) => {
               );
             })}
           </List>
+          <button className="mt-2" type="submit">
+            Submit
+          </button>
         </div>
       </div>
-
-      <button type="submit">Submit</button>
     </form>
   );
 };

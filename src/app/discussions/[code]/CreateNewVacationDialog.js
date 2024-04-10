@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Box, useTheme } from "@mui/system";
-import { Typography, TextField, Button, Select, MenuItem } from "@mui/material";
+import {
+  Typography,
+  TextField,
+  Button,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@mui/material";
 import { fetchTeams } from "@/app/team/lib";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -80,10 +87,10 @@ const CreateNewVacationDialog = () => {
       <div className="flex flex-row mr-4 ml-4 h-auto">
         <div
           id="mainContent"
-          className="flex flex-row p-2 mr-4 mt-2 mb-2 w-[75%] h-full rounded-md"
+          className="flex flex-row p-2 mt-2 mb-2 h-full rounded-md"
           style={{ backgroundColor: theme.palette.hueShift }}
         >
-          <div id="selectors">
+          <div id="selectors" className="w-full">
             <TextField
               fullWidth
               label="Vacation Title"
@@ -92,10 +99,14 @@ const CreateNewVacationDialog = () => {
               variant="outlined"
               margin="normal"
             />
+
             <Select // Select your team
               labelId="demo-simple-select-label"
               id="demo-simple-select"
+              aria-label="Select your Team"
               value={selectedTeam}
+              className="w-full"
+              sx={{ color: theme.palette.fontColor }}
               onChange={(e) => {
                 handleSelectTeam(e.target.value);
               }}
@@ -108,11 +119,12 @@ const CreateNewVacationDialog = () => {
                   ))
                 : null}
             </Select>
+            <button className="mt-2" type="submit">
+              Submit
+            </button>
           </div>
           {members.length > 0 ? (
-            <List
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            >
+            <List sx={{ width: "100%", ml: 2, bgcolor: "background.paper" }}>
               {members.map((member) => {
                 return (
                   <ListItem key={member.user_id} disablePadding>
@@ -140,8 +152,6 @@ const CreateNewVacationDialog = () => {
           ) : null}
         </div>
       </div>
-
-      <button type="submit">Submit</button>
     </form>
   );
 };
