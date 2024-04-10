@@ -3,10 +3,10 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 
-export default function BasicDateCalendar() {
+export default function BasicDateCalendar({ disabled }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DateCalendar />
+      <DateCalendar disabled={disabled} />
     </LocalizationProvider>
   );
 }

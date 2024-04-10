@@ -1,5 +1,14 @@
-import { Typography, useTheme, Divider, Avatar } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import {
+  Typography,
+  useTheme,
+  Divider,
+  Avatar,
+  FormGroup,
+  FormLabel,
+  FormControlLabel,
+  Switch,
+} from "@mui/material";
+import React, { useState, useEffect, useRef } from "react";
 import { formatDate } from "@/app/lib";
 import Map from "./Map";
 import Message from "./Message";
@@ -13,9 +22,26 @@ const Discussion = ({ discussion }) => {
     userData = JSON.parse(localStorage.getItem("userData"));
   } catch {}
 
+  console.log(`Discussion: ${JSON.stringify(discussion)}`);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [checked, setChecked] = useState(discussion.finalized);
+  const userActionRef = useRef(false); // Ref to track user-initiated action
+  const [isAdmin, setIsAdmin] = useState(
+    userData.username == discussion.admin_user,
+  );
+
+  console.log(`is admin :${isAdmin}`);
   const theme = useTheme();
+
+  const handleChange = () => {
+    setChecked(!checked);
+    userActionRef.current = true; // Mark this change as user-initiated
+  };
+
+  const handleNewMessageChange = (event) => {
+    setNewMessage(event.target.value);
+  };
 
   const getMessages = async () => {
     try {
@@ -57,20 +83,44 @@ const Discussion = ({ discussion }) => {
     }
   };
 
-  useEffect(() => {
-    getMessages();
-  }, [discussion.discussion_id]);
-
-  const handleNewMessageChange = (event) => {
-    setNewMessage(event.target.value);
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!newMessage.trim()) return;
     await createMessage(newMessage);
     setNewMessage("");
   };
+
+  const finalize = async () => {
+    const messageBody = {
+      discussion: discussion.discussion_id,
+      is_finalized: checked,
+    };
+
+    try {
+      await fetch(`/api/discussions/finalize`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(messageBody),
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getMessages();
+  }, [discussion.discussion_id]);
+
+  useEffect(() => {
+    if (userActionRef.current) {
+      finalize();
+      discussion.finalized = !discussion.finalized;
+      userActionRef.current = false;
+    }
+  }, [checked]);
 
   return (
     <>
@@ -118,11 +168,13 @@ const Discussion = ({ discussion }) => {
                   placeholder="Type your message here..."
                   className="input w-1/2 h-auto p-2 rounded-md"
                   style={{ color: "black" }}
+                  disabled={checked}
                 />
                 <button
                   type="submit"
                   className="btn ml-2"
                   sx={{ color: theme.palette.fontColor }}
+                  disabled={checked}
                 >
                   Send
                 </button>
@@ -131,7 +183,7 @@ const Discussion = ({ discussion }) => {
           </div>
         </div>
         <div id="sideBar" className="p-2">
-          <BasicDateCalendar />
+          <BasicDateCalendar disabled={!isAdmin} />
           <Typography
             variant="subtitle1"
             sx={{ color: theme.palette.fontColor }}
@@ -164,6 +216,19 @@ const Discussion = ({ discussion }) => {
           >
             {formatDate(discussion.last_updated)}
           </Typography>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={checked}
+                  onChange={handleChange}
+                  inputProps={{ "aria-label": "controlled" }}
+                  disabled={!isAdmin}
+                />
+              }
+              label="Finalized"
+            />
+          </FormGroup>
         </div>
       </div>
     </>
