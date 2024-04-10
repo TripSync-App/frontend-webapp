@@ -7,6 +7,8 @@ import { ThemeProvider, useMediaQuery, createTheme } from "@mui/material";
 import logo from "./resources/TS_LOGO.png";
 import FilterBox from "./components/FilterBox";
 import ThumbNail from "./components/Thumbnail";
+import CreateNewVacationThumbnail from "./components/CreateNewVacationThumbnail";
+import { Create } from "@mui/icons-material";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -90,6 +92,7 @@ export default function Home() {
                   />
                 );
               })}
+              <CreateNewVacationThumbnail></CreateNewVacationThumbnail>
             </div>
           </ThemeProvider>
         </main>
