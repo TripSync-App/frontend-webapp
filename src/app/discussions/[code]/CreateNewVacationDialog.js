@@ -119,9 +119,11 @@ const CreateNewVacationDialog = () => {
                   ))
                 : null}
             </Select>
-            <button className="mt-2" type="submit">
-              Submit
-            </button>
+            {selectedTeam && title ? ( // fill out both
+              <button className="mt-2" type="submit">
+                Submit
+              </button>
+            ) : null}
           </div>
           {members.length > 0 ? (
             <List sx={{ width: "100%", ml: 2, bgcolor: "background.paper" }}>
