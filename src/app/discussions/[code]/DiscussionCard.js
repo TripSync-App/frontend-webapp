@@ -40,7 +40,7 @@ const DiscussionCard = ({ discussion = false, OverwrittenDialog }) => {
           OverwrittenDialog
         )}
       </Dialog>
-      <Card>
+      <Card className="mb-2 animate-fade-left">
         <CardActionArea onClick={handleClickOpen}>
           <CardContent>
             <Typography
