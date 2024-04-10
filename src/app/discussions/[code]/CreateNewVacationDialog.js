@@ -113,18 +113,18 @@ const CreateNewVacationDialog = () => {
             <List
               sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
             >
-              {members.map((member, value) => {
+              {members.map((member) => {
                 return (
                   <ListItem key={member.user_id} disablePadding>
                     <ListItemButton
                       role={undefined}
-                      onClick={handleToggle(value)}
+                      onClick={handleToggle(member.user_id)}
                       dense
                     >
                       <ListItemIcon>
                         <Checkbox
                           edge="start"
-                          checked={checked.indexOf(value) !== -1}
+                          checked={checked.indexOf(member.user_id) !== -1}
                           tabIndex={-1}
                           disableRipple
                         />
