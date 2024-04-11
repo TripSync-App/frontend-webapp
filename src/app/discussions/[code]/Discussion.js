@@ -10,9 +10,11 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
 import { formatDate } from "@/app/lib";
-import Map from "./Map";
+import GoogleMap from "./Map";
 import Message from "./Message";
 import BasicDateCalendar from "@/app/components/BasicDateCalendar";
+import SearchBar from "@/app/components/SearchBar";
+import BasicTimePicker from "@/app/components/BasicTimePicker";
 
 const Discussion = ({ discussion }) => {
   let token = "";
@@ -26,10 +28,10 @@ const Discussion = ({ discussion }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [checked, setChecked] = useState(discussion.finalized);
-  const userActionRef = useRef(false); // Ref to track user-initiated action
-  const [isAdmin, setIsAdmin] = useState(
-    userData.username == discussion.admin_user,
-  );
+  const userActionRef = useRef(false);
+  const [isAdmin, _] = useState(userData.username == discussion.admin_user);
+  const [locationData, setLocationData] = useState([]);
+  const [eventDate, setEventDate] = useState("");
 
   console.log(`is admin :${isAdmin}`);
   const theme = useTheme();
@@ -122,6 +124,8 @@ const Discussion = ({ discussion }) => {
     }
   }, [checked]);
 
+  console.log(`Location Data: ${JSON.stringify(locationData)}`);
+
   return (
     <>
       <div className="flex flex-row mr-4 ml-4 h-auto">
@@ -134,12 +138,19 @@ const Discussion = ({ discussion }) => {
             {discussion.title}
           </Typography>
           <Divider sx={{ backgroundColor: theme.palette.lighten }}></Divider>
-          <Typography variant="h5" sx={{ color: theme.palette.fontColor }}>
-            Map
-          </Typography>
+          <div className="flex flex-row mb-2 mt-2 justify-between">
+            <Typography
+              variant="h5"
+              className="h-full"
+              sx={{ color: theme.palette.fontColor }}
+            >
+              Map
+            </Typography>
+            <SearchBar setLocationData={setLocationData}></SearchBar>
+          </div>
           <Divider sx={{ backgroundColor: theme.palette.lighten }}></Divider>
           <div className="p-4 h-[50%] w-full">
-            <Map></Map>
+            <GoogleMap locationParams={locationData}></GoogleMap>
           </div>
           <div id="messages" className="mt-4">
             <Typography variant="h5" sx={{ color: theme.palette.fontColor }}>
@@ -184,6 +195,7 @@ const Discussion = ({ discussion }) => {
         </div>
         <div id="sideBar" className="p-2">
           <BasicDateCalendar disabled={!isAdmin} />
+          <BasicTimePicker disabled={!isAdmin}></BasicTimePicker>
           <Typography
             variant="subtitle1"
             sx={{ color: theme.palette.fontColor }}

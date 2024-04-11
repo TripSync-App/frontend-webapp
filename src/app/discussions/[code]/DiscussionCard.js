@@ -24,7 +24,7 @@ const DiscussionCard = ({ discussion = false, OverwrittenDialog }) => {
   return (
     <>
       <Dialog
-        className="animate-fade-down"
+        className="animate-fade-down animate-duration-500"
         open={open}
         onClose={handleClose}
         fullWidth

@@ -1,15 +1,18 @@
 import React from "react";
-import GoogleMapReact from "google-map-react";
 
-const Map = ({ locationParams }) => {
+import GoogleMapReact from "google-map-react";
+import { Typography } from "@mui/material";
+
+const GoogleMap = ({ locationParams }) => {
   const location = {
-    address: "1600 Amphitheatre Parkway, Mountain View, california.",
-    lat: 37.42216,
-    lng: -122.08427,
+    address: locationParams.address || "",
+    lat: locationParams.lat || 1,
+    lng: locationParams.lng || 1,
   };
+
   return (
     <div style={{ height: "25vh", width: "100%" }}>
-      <h2 className="map-h2">Come Visit Us At Our Campus</h2>
+      <Typography className="mb-1">Viewing: {location.address}</Typography>
       <div id="googleMap" className="google-map h-[100%] w-[100%]">
         <GoogleMapReact
           className="google-map"
@@ -19,12 +22,12 @@ const Map = ({ locationParams }) => {
             position: "relative",
           }}
           bootstrapURLKeys={{ key: "AIzaSyBOTr7B5SUxk0GIIhWt3mAWYJe3KXBy3Fk" }}
-          defaultCenter={location}
-          defaultZoom={17}
+          center={location}
+          zoom={17}
         ></GoogleMapReact>
       </div>
     </div>
   );
 };
 
-export default Map;
+export default GoogleMap;

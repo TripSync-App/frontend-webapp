@@ -22,6 +22,10 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>
         <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+        <script
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOTr7B5SUxk0GIIhWt3mAWYJe3KXBy3Fk&libraries=places&callback=initMap"
+          async
+        ></script>
         <link
           href="https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap"
           rel="stylesheet"
