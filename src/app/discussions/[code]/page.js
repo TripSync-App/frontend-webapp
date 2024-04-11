@@ -9,6 +9,7 @@ import {
   List,
   ListItem,
   Typography,
+  Button,
 } from "@mui/material";
 import React, { useMemo, useEffect, useState } from "react";
 import DiscussionCard from "./DiscussionCard";
@@ -74,6 +75,37 @@ export default function Discussions({ params }) {
     }
   };
 
+  const exportVacation = async () => {
+    const body = {
+      vacation: vacation.vacation_id,
+    };
+    try {
+      // Using await to wait for the fetch call to complete
+      const response = await fetch(`/api/vacations/export`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Assuming token is defined elsewhere
+        },
+        body: JSON.stringify(body),
+      });
+      // Again using await to wait for the blob
+      const blob = await response.blob();
+      // Create a new URL pointing to the blob object
+      const url = window.URL.createObjectURL(blob);
+      // Create a temporary anchor element
+      const a = document.createElement("a");
+      a.href = url;
+      // Set the filename
+      a.download = "export.csv";
+      document.body.appendChild(a); // Append the anchor to body
+      a.click(); // Trigger a click on the element
+      a.remove(); // Clean up
+      window.URL.revokeObjectURL(url); // Release the object URL
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
     getVacationInfo();
   }, []);
@@ -94,6 +126,7 @@ export default function Discussions({ params }) {
             >
               Welcome to the {vacation.name} vacation!
             </Box>
+            <Button onClick={exportVacation}>Export</Button>
             <Box
               sx={{
                 backgroundColor: theme.palette.customBackground,

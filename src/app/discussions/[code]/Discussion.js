@@ -31,7 +31,8 @@ const Discussion = ({ discussion }) => {
   const userActionRef = useRef(false);
   const [isAdmin, _] = useState(userData.username == discussion.admin_user);
   const [locationData, setLocationData] = useState([]);
-  const [eventDate, setEventDate] = useState("");
+  const [selectedDate, setSelectedDate] = React.useState(null); // State to hold the selected date
+  const [selectedTime, setSelectedTime] = React.useState(null); // State to hold the selected date
 
   console.log(`is admin :${isAdmin}`);
   const theme = useTheme();
@@ -96,6 +97,10 @@ const Discussion = ({ discussion }) => {
     const messageBody = {
       discussion: discussion.discussion_id,
       is_finalized: checked,
+      discussion_title: discussion.title,
+      date: selectedDate,
+      time: selectedTime,
+      address: locationData.address,
     };
 
     try {
@@ -194,8 +199,16 @@ const Discussion = ({ discussion }) => {
           </div>
         </div>
         <div id="sideBar" className="p-2">
-          <BasicDateCalendar disabled={!isAdmin} />
-          <BasicTimePicker disabled={!isAdmin}></BasicTimePicker>
+          <BasicDateCalendar
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+            disabled={!isAdmin}
+          />
+          <BasicTimePicker
+            selectedTime={selectedTime}
+            setSelectedTime={setSelectedTime}
+            disabled={!isAdmin}
+          ></BasicTimePicker>
           <Typography
             variant="subtitle1"
             sx={{ color: theme.palette.fontColor }}
