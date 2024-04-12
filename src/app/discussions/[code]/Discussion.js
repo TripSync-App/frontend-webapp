@@ -15,6 +15,9 @@ import Message from "./Message";
 import BasicDateCalendar from "@/app/components/BasicDateCalendar";
 import SearchBar from "@/app/components/SearchBar";
 import BasicTimePicker from "@/app/components/BasicTimePicker";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs";
+dayjs.extend(customParseFormat);
 
 const Discussion = ({ discussion }) => {
   let token = "";
@@ -34,12 +37,11 @@ const Discussion = ({ discussion }) => {
   const [selectedDate, setSelectedDate] = React.useState(null); // State to hold the selected date
   const [selectedTime, setSelectedTime] = React.useState(null); // State to hold the selected date
 
-  console.log(`is admin :${isAdmin}`);
   const theme = useTheme();
 
   const handleChange = () => {
     setChecked(!checked);
-    userActionRef.current = true; // Mark this change as user-initiated
+    userActionRef.current = true;
   };
 
   const handleNewMessageChange = (event) => {
@@ -98,12 +100,14 @@ const Discussion = ({ discussion }) => {
       discussion: discussion.discussion_id,
       is_finalized: checked,
       discussion_title: discussion.title,
-      date: new Date(selectedDate).toLocaleDateString("en-US"), // Adjust format as needed
+      date: new Date(selectedDate).toLocaleDateString("en-US"),
       time: new Date(selectedTime).toLocaleTimeString("en-US", {
         hour: "2-digit",
         minute: "2-digit",
-      }), // Shows only hour and minute
+      }),
       address: locationData.address,
+      lat: locationData.lat,
+      lng: locationData.lng,
     };
 
     console.log(messageBody);
@@ -133,6 +137,26 @@ const Discussion = ({ discussion }) => {
       userActionRef.current = false;
     }
   }, [checked]);
+
+  useEffect(() => {
+    if (discussion.event) {
+      const date = discussion.event.date;
+      const time = discussion.event.time;
+      const format = "M/D/YYYY hh:mm A";
+      const combinedDateTime = `${date} ${time}`;
+      const combinedTime = dayjs(combinedDateTime, format);
+
+      const eventLocation = {
+        address: discussion.event.address,
+        lat: discussion.event.lat,
+        lng: discussion.event.lng,
+      };
+
+      setSelectedDate(dayjs(date));
+      setSelectedTime(combinedTime);
+      setLocationData(eventLocation);
+    }
+  }, [discussion.event]);
 
   console.log(`Location Data: ${JSON.stringify(locationData)}`);
 
