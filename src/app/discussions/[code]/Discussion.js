@@ -98,10 +98,15 @@ const Discussion = ({ discussion }) => {
       discussion: discussion.discussion_id,
       is_finalized: checked,
       discussion_title: discussion.title,
-      date: selectedDate,
-      time: selectedTime,
+      date: new Date(selectedDate).toLocaleDateString("en-US"), // Adjust format as needed
+      time: new Date(selectedTime).toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+      }), // Shows only hour and minute
       address: locationData.address,
     };
+
+    console.log(messageBody);
 
     try {
       await fetch(`/api/discussions/finalize`, {
