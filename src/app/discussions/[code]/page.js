@@ -10,6 +10,7 @@ import {
   ListItem,
   Typography,
   Button,
+  Divider,
 } from "@mui/material";
 import React, { useMemo, useEffect, useState } from "react";
 import DiscussionCard from "./DiscussionCard";
@@ -111,28 +112,33 @@ export default function Discussions({ params }) {
   }, []);
 
   return (
-    <main id="discussion" className="overflow-hidden min-h-screen">
+    <main id="discussion" className="overflow-hidden h-full">
       <ThemeProvider theme={theme}>
         <NavBarComponent logo={logo} pos="static" />
-        <div className="flex flex-row min-h-full justify-between">
-          <div id="left-bar" className="p-4 w-[50%] h-full">
-            <Box
-              id="vacation-information"
-              sx={{
-                backgroundColor: theme.palette.customBackground,
-                padding: 2,
-              }}
-              className="rounded-md mb-2"
-            >
-              Welcome to the {vacation.name} vacation!
-            </Box>
-            <Button onClick={exportVacation}>Export</Button>
+        <div className="flex flex-row h-full justify-between">
+          <div id="left-bar" className="p-4 w-[50%] h-[100%]">
             <Box
               sx={{
                 backgroundColor: theme.palette.customBackground,
                 padding: 2,
               }}
+              className="h-[90%]"
             >
+              <Box
+                id="vacation-information"
+                sx={{
+                  backgroundColor: theme.palette.customBackground,
+                  padding: 2,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+                className="rounded-md mb-2"
+              >
+                Welcome to the {vacation.name} vacation!
+                <Button onClick={exportVacation}>Export</Button>
+              </Box>
+              <Divider className="!mb-2"></Divider>
               <div>Members in this vacation:</div>
               <List>
                 {members &&
@@ -147,10 +153,10 @@ export default function Discussions({ params }) {
               </List>
             </Box>
           </div>
-          <div id="right-bar" className="w-[50%] p-4">
+          <div id="right-bar" className="w-[50%] h-[100%] p-4">
             <div
               id="discussionBoard"
-              className="flex flex-col justify-center h-100 w-100"
+              className="flex flex-col h-[90%] w-100"
               style={{ backgroundColor: theme.palette.customBackground }}
             >
               <Box
@@ -158,7 +164,7 @@ export default function Discussions({ params }) {
                   backgroundColor: theme.palette.customBackground,
                   padding: 2,
                 }}
-                className="rounded-md"
+                className="rounded-md h-[80%]"
               >
                 <Typography className="pl-2 pr-2 pb-2">Discussions</Typography>
                 {discussions.map((discussion, index) => (
