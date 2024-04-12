@@ -135,11 +135,13 @@ export default function Discussions({ params }) {
                 }}
                 className="rounded-md mb-2"
               >
-                Welcome to the {vacation.name} vacation!
+                <Typography variant="h4">
+                  Welcome to the {vacation.name} vacation!
+                </Typography>
                 <Button onClick={exportVacation}>Export</Button>
               </Box>
               <Divider className="!mb-2"></Divider>
-              <div>Members in this vacation:</div>
+              <Typography>Members in this vacation:</Typography>
               <List>
                 {members &&
                   members.map((member) => {
