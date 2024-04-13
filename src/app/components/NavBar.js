@@ -79,7 +79,7 @@ export default function NavBarComponent({ logo, pos }) {
                 router.push("/");
               }}
             >
-              <Typography variant="h4" className="font-passion">
+              <Typography variant="h4" className="!font-passion">
                 TripSync
               </Typography>
             </button>

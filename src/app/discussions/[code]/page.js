@@ -152,7 +152,7 @@ export default function Discussions({ params }) {
                 }}
                 className="rounded-md mb-2"
               >
-                <Typography variant="h3" className="font-passion">
+                <Typography variant="h3" className="!font-passion">
                   Welcome to the {vacation.name} vacation!
                 </Typography>
                 <Button onClick={exportVacation}>Export</Button>
