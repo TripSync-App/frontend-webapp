@@ -32,7 +32,10 @@ const DiscussionCard = ({ discussion = false, OverwrittenDialog }) => {
         PaperProps={{
           sx: {
             width: "100%",
-            maxWidth: "50% !important",
+            maxWidth: {
+              xs: "none",
+              sm: "50%",
+            },
           },
         }}
       >

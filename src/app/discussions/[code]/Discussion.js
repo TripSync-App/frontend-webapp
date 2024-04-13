@@ -162,10 +162,10 @@ const Discussion = ({ discussion }) => {
 
   return (
     <>
-      <div className="flex flex-row mr-4 ml-4 h-auto">
+      <div className="flex flex-row mr-4 ml-4 h-auto max-sm:flex-col">
         <div
           id="mainContent"
-          className="p-2 mr-4 mt-2 mb-2 w-[75%] h-full rounded-md"
+          className="p-2 mr-4 mt-2 mb-2 w-[75%] h-full rounded-md max-sm:w-[100%]"
           style={{ backgroundColor: theme.palette.hueShift }}
         >
           <Typography variant="h5" sx={{ color: theme.palette.fontColor }}>
