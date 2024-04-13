@@ -51,6 +51,18 @@ export default function Discussions({ params }) {
         },
         typography: {
           fontFamily: ["Outfit", "sans-serif"].join(","),
+          h3: {
+            fontSize: "2.25rem", // Default font size for h3
+            "@media (max-width:600px)": {
+              fontSize: "1.5rem", // Smaller font size on small screens
+            },
+          },
+          h5: {
+            fontSize: "1.5rem",
+            "@media (max-width:600px)": {
+              fontSize: "1.25rem",
+            },
+          },
         },
       }),
     [prefersDarkMode],
@@ -114,11 +126,14 @@ export default function Discussions({ params }) {
   }, []);
 
   return (
-    <main id="discussion" className="overflow-hidden h-full">
+    <main id="discussion" className="h-full overflow-scroll">
       <ThemeProvider theme={theme}>
         <NavBarComponent logo={logo} pos="static" />
         <div className="flex flex-row h-full justify-between max-sm:flex-col">
-          <div id="left-bar" className="p-4 w-[50%] h-[100%] max-sm:w-[100%]">
+          <div
+            id="left-bar"
+            className="p-4 w-[50%] h-[100%] max-sm:w-[100%] max-sm:pb-0"
+          >
             <Box
               sx={{
                 backgroundColor: theme.palette.customBackground,
@@ -167,17 +182,17 @@ export default function Discussions({ params }) {
               </List>
             </Box>
           </div>
-          <div id="right-bar" className="w-[50%] h-[100%] p-4">
+          <div id="right-bar" className="w-[50%] h-[100%] p-4 max-sm:w-[100%]">
             <div
               id="discussionBoard"
-              className="flex flex-col h-[90%] w-100"
+              className="flex flex-col h-[90%] w-100 max-sm:h-[100%]"
               style={{ backgroundColor: theme.palette.customBackground }}
             >
               <Box
                 sx={{
                   padding: 2,
                 }}
-                className="rounded-md h-[80%]"
+                className="rounded-md h-[80%] max-sm:h-[100%]"
               >
                 <Typography className="pl-2 pr-2 pb-2 font-bold" variant="h5">
                   Discussions
