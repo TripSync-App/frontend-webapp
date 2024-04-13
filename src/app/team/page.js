@@ -53,11 +53,17 @@ const Team = () => {
   const theme = useMemo(
     () =>
       createTheme({
+        typography: {
+          fontFamily: ["Outfit", "sans-serif"].join(","),
+        },
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
-          customBackground: prefersDarkMode ? "#131414" : "#5ac465",
-          customComponentBackground: prefersDarkMode ? "inherit" : "#b5e1e6",
-          secondaryColor: prefersDarkMode ? "grey" : "rgb(30, 136, 229)",
+          primary: {
+            main: prefersDarkMode ? "#90caf9" : "#1976d2", // Adjust primary color for light and dark mode
+          },
+          background: {
+            default: prefersDarkMode ? "#121212" : "#f5f5f5", // Adjust background color for light and dark mode
+          },
           fontColor: prefersDarkMode ? "inherit" : "black",
         },
       }),
