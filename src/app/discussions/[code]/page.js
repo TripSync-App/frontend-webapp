@@ -16,6 +16,7 @@ import React, { useMemo, useEffect, useState } from "react";
 import DiscussionCard from "./DiscussionCard";
 import CreateNewDiscussionDialog from "./CreateNewDiscussionDialog";
 import MemberBlock from "./MemberBlock";
+import { AdminPanelSettings } from "@mui/icons-material";
 
 export default function Discussions({ params }) {
   let [discussions, setDiscussions] = useState([]);
@@ -147,6 +148,14 @@ export default function Discussions({ params }) {
                 Members
               </Typography>
               <List>
+                {vacation.admin_user && (
+                  <div>
+                    <MemberBlock
+                      member={vacation.admin_user}
+                      isAdmin={true}
+                    ></MemberBlock>
+                  </div>
+                )}
                 {members &&
                   members.map((member) => {
                     return (

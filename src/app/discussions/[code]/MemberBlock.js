@@ -5,9 +5,11 @@ import {
   Avatar,
   ListItemText,
   useTheme,
+  Tooltip,
 } from "@mui/material";
+import { AdminPanelSettings, Grade } from "@mui/icons-material";
 
-const MemberBlock = ({ member }) => {
+const MemberBlock = ({ member, isAdmin = false }) => {
   const [profilePic, setProfilePic] = useState("");
   const theme = useTheme();
 
@@ -57,9 +59,14 @@ const MemberBlock = ({ member }) => {
       </ListItemAvatar>
       <ListItemText
         primary={
-          <>
+          <div className="flex flex-row items-center">
             {member.first_name} {member.last_name}
-          </>
+            {isAdmin ? (
+              <Tooltip title="Admin">
+                <Grade fontSize="small" className="ml-2"></Grade>
+              </Tooltip>
+            ) : null}
+          </div>
         }
       ></ListItemText>
     </ListItem>
