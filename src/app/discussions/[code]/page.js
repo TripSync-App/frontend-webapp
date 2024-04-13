@@ -16,7 +16,6 @@ import React, { useMemo, useEffect, useState } from "react";
 import DiscussionCard from "./DiscussionCard";
 import CreateNewDiscussionDialog from "./CreateNewDiscussionDialog";
 import MemberBlock from "./MemberBlock";
-import { AdminPanelSettings } from "@mui/icons-material";
 
 export default function Discussions({ params }) {
   let [discussions, setDiscussions] = useState([]);
@@ -118,14 +117,14 @@ export default function Discussions({ params }) {
     <main id="discussion" className="overflow-hidden h-full">
       <ThemeProvider theme={theme}>
         <NavBarComponent logo={logo} pos="static" />
-        <div className="flex flex-row h-full justify-between">
-          <div id="left-bar" className="p-4 w-[50%] h-[100%]">
+        <div className="flex flex-row h-full justify-between max-sm:flex-col">
+          <div id="left-bar" className="p-4 w-[50%] h-[100%] max-sm:w-[100%]">
             <Box
               sx={{
                 backgroundColor: theme.palette.customBackground,
                 padding: 2,
               }}
-              className="h-[90%]"
+              className="h-[90%] max-sm:h-[100%]"
             >
               <Box
                 id="vacation-information"

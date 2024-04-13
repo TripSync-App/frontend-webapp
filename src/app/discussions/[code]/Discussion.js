@@ -172,7 +172,7 @@ const Discussion = ({ discussion }) => {
             {discussion.title}
           </Typography>
           <Divider sx={{ backgroundColor: theme.palette.lighten }}></Divider>
-          <div className="flex flex-row mb-2 mt-2 justify-between">
+          <div className="flex flex-row mb-2 mt-2 justify-between items-center">
             <Typography
               variant="h5"
               className="h-full"
