@@ -74,13 +74,13 @@ export default function Home() {
         <main className="h-full overflow-scroll items-center p-24 max-sm:p-4">
           <ThemeProvider theme={theme}>
             <NavBarComponent logo={logo} pos="fixed"></NavBarComponent>
-            <div>
+            <div className="max-sm:!mt-20">
               <div>
-                <Typography variant="h3" className="!font-passion">
+                <Typography variant="h3" className="!font-passion ">
                   Select a vacation
                 </Typography>
               </div>
-              <div className="flex flex-wrap h-full max-sm:mt-20">
+              <div className="flex flex-wrap h-full">
                 {thumbnails.map(function (vacation) {
                   // Set Description Default
                   if (vacation.description == null) {
