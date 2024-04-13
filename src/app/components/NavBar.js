@@ -13,7 +13,7 @@ import {
   Tooltip,
   useMediaQuery,
   createTheme,
-  ThemeProvider
+  ThemeProvider,
 } from "@mui/material";
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
@@ -23,8 +23,8 @@ export default function NavBarComponent({ logo, pos }) {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const prefersLightMode = useMediaQuery("(prefers-color-scheme: light)");
 
-    const theme = useMemo(
-      () =>
+  const theme = useMemo(
+    () =>
       createTheme({
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
@@ -36,10 +36,10 @@ export default function NavBarComponent({ logo, pos }) {
           },
           background: {
             default: prefersDarkMode ? "#131414" : "#ffffff",
-          }
+          },
         },
       }),
-    [prefersDarkMode, prefersLightMode]
+    [prefersDarkMode, prefersLightMode],
   );
 
   let [anchor, setAnchor] = useState(null);
@@ -61,7 +61,13 @@ export default function NavBarComponent({ logo, pos }) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position={pos} sx={{ backgroundColor: theme.palette.background.default, color: theme.palette.text.primary }}>
+        <AppBar
+          position={pos}
+          sx={{
+            backgroundColor: theme.palette.background.default,
+            color: theme.palette.text.primary,
+          }}
+        >
           <Toolbar sx={{ justifyItems: "right" }}>
             <Avatar
               alt="TripSync"
@@ -73,7 +79,9 @@ export default function NavBarComponent({ logo, pos }) {
                 router.push("/");
               }}
             >
-              <text className="text-2xl font-protest">TripSync</text>
+              <Typography variant="h4" className="font-passion">
+                TripSync
+              </Typography>
             </button>
             <Box sx={{ flexGrow: 1 }} />
             <Divider orientation="vertical" variant="middle" flexItem />

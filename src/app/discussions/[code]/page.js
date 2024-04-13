@@ -41,13 +41,16 @@ export default function Discussions({ params }) {
       createTheme({
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
-          customBackground: prefersDarkMode ? "#131414" : "#5ac465",
+          customBackground: prefersDarkMode ? "rgba(0, 0, 0, 0.75)" : "#5ac465",
           textColor: prefersDarkMode ? "#FFFFFF" : "#000000",
           fontColor: prefersDarkMode ? "inherit" : "#000000",
           hueShift: prefersDarkMode
             ? "rgba(0, 0, 0, 0.25)"
             : "rgba(4, 118, 208, 0.75)",
           lighten: "rgba(255, 255, 255, 0.25)",
+        },
+        typography: {
+          fontFamily: ["Outfit", "sans-serif"].join(","),
         },
       }),
     [prefersDarkMode],
@@ -81,28 +84,27 @@ export default function Discussions({ params }) {
       vacation: vacation.vacation_id,
     };
     try {
-      // Using await to wait for the fetch call to complete
       const response = await fetch(`/api/vacations/export`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Assuming token is defined elsewhere
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(body),
       });
-      // Again using await to wait for the blob
+
       const blob = await response.blob();
-      // Create a new URL pointing to the blob object
+
       const url = window.URL.createObjectURL(blob);
-      // Create a temporary anchor element
+
       const a = document.createElement("a");
       a.href = url;
-      // Set the filename
+
       a.download = "export.csv";
-      document.body.appendChild(a); // Append the anchor to body
-      a.click(); // Trigger a click on the element
-      a.remove(); // Clean up
-      window.URL.revokeObjectURL(url); // Release the object URL
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
     } catch (err) {
       console.log(err);
     }
@@ -135,13 +137,15 @@ export default function Discussions({ params }) {
                 }}
                 className="rounded-md mb-2"
               >
-                <Typography variant="h4">
+                <Typography variant="h3" className="font-passion">
                   Welcome to the {vacation.name} vacation!
                 </Typography>
                 <Button onClick={exportVacation}>Export</Button>
               </Box>
               <Divider className="!mb-2"></Divider>
-              <Typography>Members in this vacation:</Typography>
+              <Typography className="font-bold" variant="h5">
+                Members
+              </Typography>
               <List>
                 {members &&
                   members.map((member) => {
@@ -163,12 +167,13 @@ export default function Discussions({ params }) {
             >
               <Box
                 sx={{
-                  backgroundColor: theme.palette.customBackground,
                   padding: 2,
                 }}
                 className="rounded-md h-[80%]"
               >
-                <Typography className="pl-2 pr-2 pb-2">Discussions</Typography>
+                <Typography className="pl-2 pr-2 pb-2 font-bold" variant="h5">
+                  Discussions
+                </Typography>
                 {discussions.map((discussion, index) => (
                   <DiscussionCard
                     discussion={discussion}

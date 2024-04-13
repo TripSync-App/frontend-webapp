@@ -30,6 +30,14 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap"
           rel="stylesheet"
         ></link>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+          rel="stylesheet"
+        />
         <link rel="icon" href="/icon?favicon.png" type="image/" sizes="any" />
       </head>
       <body className={inter.className}>{children}</body>

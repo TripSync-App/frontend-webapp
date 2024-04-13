@@ -46,7 +46,7 @@ const MemberBlock = ({ member }) => {
 
   return (
     <ListItem
-      className="rounded-md animate-fade-right"
+      className="rounded-md animate-fade-right shadow-md "
       sx={{ backgroundColor: theme.palette.lighten, mb: 1 }}
     >
       <ListItemAvatar>

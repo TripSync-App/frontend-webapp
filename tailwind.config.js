@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         protest: ["Protest Strike", "sans"],
+        passion: ["Passion One", "sans-serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
