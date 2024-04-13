@@ -1,3 +1,4 @@
+import { Beenhere } from "@mui/icons-material";
 import {
   Card,
   CardContent,
@@ -44,14 +45,22 @@ const DiscussionCard = ({ discussion = false, OverwrittenDialog }) => {
       <Card className="mb-2 animate-fade-left">
         <CardActionArea onClick={handleClickOpen}>
           <CardContent>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="div"
-              sx={{ color: theme.palette.fontColor }}
-            >
-              {discussion ? discussion.title : "Create a new discussion"}
-            </Typography>
+            <div className="flex flex-row justify-between items-center">
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{ color: theme.palette.fontColor }}
+              >
+                {discussion ? discussion.title : "Create a new discussion"}
+              </Typography>
+              {discussion.finalized ? (
+                <div className="flex flex-row">
+                  <Beenhere style={{ color: "green" }}></Beenhere>
+                  <Typography className="ml-2">Finalized</Typography>
+                </div>
+              ) : null}
+            </div>
           </CardContent>
         </CardActionArea>
       </Card>
