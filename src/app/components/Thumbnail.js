@@ -36,7 +36,7 @@ export default function Thumbnail({
   }
 
   return (
-    <div className="pt-2 pr-2 pb-2">
+    <div className="pt-2 pr-2 pb-2 max-sm:w-[50%] h-[20%]">
       <Card sx={styling} className="animate-fade-down" raised>
         <CardActionArea onClick={onClick}>
           <CardMedia
@@ -45,7 +45,12 @@ export default function Thumbnail({
             title={title}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              className="text-nowrap"
+            >
               {title}
             </Typography>
             <Typography variant="body2" color="palette.text.secondary">

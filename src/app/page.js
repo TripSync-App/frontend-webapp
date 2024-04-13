@@ -3,7 +3,12 @@ import NavBarComponent from "./components/NavBar";
 import "./styles.css";
 import React, { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { ThemeProvider, useMediaQuery, createTheme } from "@mui/material";
+import {
+  ThemeProvider,
+  useMediaQuery,
+  createTheme,
+  Typography,
+} from "@mui/material";
 import logo from "./resources/TS_LOGO.png";
 import FilterBox from "./components/FilterBox";
 import ThumbNail from "./components/Thumbnail";
@@ -19,6 +24,9 @@ export default function Home() {
   const theme = useMemo(
     () =>
       createTheme({
+        typography: {
+          fontFamily: ["Outfit", "sans-serif"].join(","),
+        },
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
           primary: {
@@ -63,36 +71,42 @@ export default function Home() {
   return (
     <div className="main ">
       {loading ? (
-        <main className="min-h-screen items-center p-24">
+        <main className="h-full overflow-scroll items-center p-24 max-sm:p-4">
           <ThemeProvider theme={theme}>
             <NavBarComponent logo={logo} pos="fixed"></NavBarComponent>
-            <FilterBox />
-            <div className="flex flex-wrap">
-              {thumbnails.map(function (vacation) {
-                // Set Description Default
-                if (vacation.description == null) {
-                  vacation["description"] = "Description not provided";
-                }
-                // Set Style Default
-                if ("styling" in vacation) {
-                  vacation.styling["color"] = prefersDarkMode
-                    ? "inherit"
-                    : "#00000";
-                } else {
-                  vacation.styling = {};
-                }
-                return (
-                  <ThumbNail
-                    key={thumbnails.indexOf(vacation)}
-                    styling={vacation.styling}
-                    title={vacation.name}
-                    image={vacation.image}
-                    description={vacation.description}
-                    vacationId={vacation.vacation_id}
-                  />
-                );
-              })}
-              <CreateNewVacationThumbnail></CreateNewVacationThumbnail>
+            <div>
+              <div>
+                <Typography variant="h3" className="!font-passion">
+                  Select a vacation
+                </Typography>
+              </div>
+              <div className="flex flex-wrap h-full max-sm:mt-20">
+                {thumbnails.map(function (vacation) {
+                  // Set Description Default
+                  if (vacation.description == null) {
+                    vacation["description"] = "Description not provided";
+                  }
+                  // Set Style Default
+                  if ("styling" in vacation) {
+                    vacation.styling["color"] = prefersDarkMode
+                      ? "inherit"
+                      : "#00000";
+                  } else {
+                    vacation.styling = {};
+                  }
+                  return (
+                    <ThumbNail
+                      key={thumbnails.indexOf(vacation)}
+                      styling={vacation.styling}
+                      title={vacation.name}
+                      image={vacation.image}
+                      description={vacation.description}
+                      vacationId={vacation.vacation_id}
+                    />
+                  );
+                })}
+                <CreateNewVacationThumbnail></CreateNewVacationThumbnail>
+              </div>
             </div>
           </ThemeProvider>
         </main>
