@@ -105,7 +105,7 @@ const Team = () => {
         <NavBarComponent logo={logo} pos={"static"}></NavBarComponent>
         <div
           id="team-wrapper"
-          className="team flex justify-center min-h-[100vh] min-w-[100vw]"
+          className="team flex justify-center min-w-[100vw]"
           style={{ backgroundColor: theme.palette.customBackground }}
         >
           <Paper

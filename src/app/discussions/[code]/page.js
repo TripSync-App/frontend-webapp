@@ -46,7 +46,7 @@ export default function Discussions({ params }) {
           fontColor: prefersDarkMode ? "inherit" : "#000000",
           hueShift: prefersDarkMode
             ? "rgba(0, 0, 0, 0.25)"
-            : "rgba(4, 118, 208, 0.75)",
+            : "rgba(4, 118, 208, 0.5)",
           lighten: "rgba(255, 255, 255, 0.25)",
         },
         typography: {

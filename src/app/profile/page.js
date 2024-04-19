@@ -43,7 +43,7 @@ const Profile = () => {
 
   return (
     <main
-      className="h-[100%] w-[100%]"
+      className=""
       style={{
         backgroundColor: isDarkMode
           ? darkModeColors.customBackground
