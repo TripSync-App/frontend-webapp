@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Team from "../team/page";
+import MemberInfo from "../team/MemberInfo";
 
 export default function Thumbnail({
   title,
@@ -82,7 +84,20 @@ export default function Thumbnail({
         </CardActions>
       </Card>
       <Dialog open={openPreview} onClose={handlePreviewClose}>
-        <DialogTitle variant="h4">{title}</DialogTitle>
+        <DialogTitle variant="h4">
+          <div class="h-38 grid grid-cols-1 gap-4 content-start ...">
+            <div>{image}</div>
+            <div>
+              {title}
+            </div>
+            <div>
+              <p class="text-base">{description}</p>
+            </div>
+            {/* <div>
+              <p class="text-base">Team Count: {MemberInfo}</p>
+            </div> */}
+          </div>
+        </DialogTitle>
       </Dialog>
     </div>
   );
