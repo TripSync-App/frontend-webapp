@@ -14,6 +14,7 @@ import FilterBox from "./components/FilterBox";
 import ThumbNail from "./components/Thumbnail";
 import CreateNewVacationThumbnail from "./components/CreateNewVacationThumbnail";
 import { Create } from "@mui/icons-material";
+import sampleImage from "./resources/adventure_scene.webp";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -99,9 +100,12 @@ export default function Home() {
                       key={thumbnails.indexOf(vacation)}
                       styling={vacation.styling}
                       title={vacation.name}
-                      image={vacation.image}
+                      image={sampleImage}
                       description={vacation.description}
                       vacationId={vacation.vacation_id}
+                      discussions={vacation.discussions}
+                      members={vacation.members}
+                      admin={vacation.admin_user}
                     />
                   );
                 })}

@@ -1,4 +1,5 @@
 import {
+  Box,
   Card,
   CardActions,
   CardActionArea,
@@ -8,7 +9,7 @@ import {
   Button,
   useIsFocusVisible,
   Dialog,
-  DialogTitle,
+  DialogTitle
 } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -21,9 +22,11 @@ export default function Thumbnail({
   description,
   styling,
   vacationId,
+  discussions,
+  members,
+  admin
 }) {
   let [openPreview, setOpen] = useState(false);
-  const [thumbnailImage, setThumbnailImage] = "";
 
   const discussionRouter = useRouter();
   let discussionQuery = {
@@ -35,6 +38,9 @@ export default function Thumbnail({
   function onFocus() {}
   function handlePreviewClose() {
     setOpen(false);
+  }
+  if (!members.includes(admin)){
+    members.push(admin);
   }
 
   return (
@@ -76,7 +82,8 @@ export default function Thumbnail({
             variant="outlined"
             centerRipple
             onClick={() => {
-              alert("clicked");
+              navigator.clipboard.writeText(`${window.location.href}discussions/${vacationId}`);
+              alert("Link copied to clipboard!");
             }}
           >
             Share
@@ -86,16 +93,31 @@ export default function Thumbnail({
       <Dialog open={openPreview} onClose={handlePreviewClose}>
         <DialogTitle variant="h4">
           <div class="h-38 grid grid-cols-1 gap-4 content-start ...">
-            <div>{image}</div>
+            <Box
+              component="img"
+              alt={title}
+              src={image? image.src : ""}
+            />
             <div>
               {title}
             </div>
             <div>
               <p class="text-base">{description}</p>
             </div>
-            {/* <div>
-              <p class="text-base">Team Count: {MemberInfo}</p>
-            </div> */}
+            <div>
+              <p class="text-base">Discussion Count: {discussions.length}</p>
+            </div>
+            <div>
+              <p class="text-base">Member Count: {members.length}</p>
+            </div>
+            <Button
+            size="small"
+            variant="outlined"
+            centerRipple
+            onClick={onClick}
+          >
+            Go to Vacation Discussions
+          </Button>
           </div>
         </DialogTitle>
       </Dialog>
