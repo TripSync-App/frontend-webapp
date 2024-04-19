@@ -49,6 +49,9 @@ const CreateNewDiscussionDialog = ({ vacation }) => {
           vacation: vacation.vacation_id,
         }),
       });
+      if (res.ok) {
+        window.location.reload();
+      }
       if (!res.ok) {
         throw new Error("Network response was not ok");
       }
