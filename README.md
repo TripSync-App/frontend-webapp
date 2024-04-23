@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TripSync
+A collaborative travel app built to streamline travel-planning processes. 
 
-## Getting Started
+## User Management
+Users may create accounts that they can use to connect with their fellow travelers. Users can change their profile pictures, names, and can leave teams they have joined. 
+After reaching the app, if the user does not currently have an account/are not logged in, they will be redirected to the login page to create an account or login. 
 
-First, run the development server:
+### Login Page 🔒
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### User Profile Page
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Team Management
+Users may make "teams" which are a collection of users. From these teams, users will have the ability to pick members to join vacations later. Management features include: creating teams, deleting teams, sharing invite links.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Team Management Page
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Main Page
+This is where users will start their journeys. On the page, they will be greeted with a set of cards representing their vacations. By clicking on a card, a user will be transported to the respective vacation page.
+Users also have the ability to create vacations from this page, preview the vacation (which will give a small bit of information about the vacation), and share the link to the vacation page. 
 
-## Learn More
+### Main Page 
 
-To learn more about Next.js, take a look at the following resources:
+## Vacation Planning
+This page allows users to view a planned vacation. This will allow users to view the members which are going on the vacation, create and view discussions, and export information from the discussions to be used in a Calendar app. 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Vacation Page
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Discussions
+Discussions allow users to send messages between each other about a topic created by the admin of the team. Once a plan has been made, the admin can choose to finalize the discussion, which will save the location, time, and date of the event, to be exported later. 
+Finalized discussions will stop users from being able to send messages, to prevent confusion about the discussion.
 
-## Deploy on Vercel
+### Discussion Popup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
